@@ -1,0 +1,36 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.font-face {
+    font-family: Oswald;
+    src: url('fonts/Oswald-Bold.ttf')format('truetype');
+}
+
+
+.root{
+	-fx-background-color:'dimgrey';
+	-fx-border-color:'darkseagreen';
+	-fx-border-width:4;
+	
+}
+
+.button{
+	-fx-border-style:'bold';
+	-fx-border-color:'darkseagreen';
+	-fx-background-color:'lemonchiffon';
+	-fx-border-width:4;
+	-fx-font-weight:900;
+	-fx-font-size:20;
+	-fx-font-family:'Comic Sans MS';
+	-fx-text-fill:'darkseagreen';
+	
+}
+
+.label{
+	-fx-text-fill:'bisque';
+	-fx-font-family:'Impact';
+	-fx-font-size:50;
+	-fx-aligment:center;
+	//refer to
+	//https://stackoverflow.com/questions/34559370/javafx-css-center-alignment
+}
+
+

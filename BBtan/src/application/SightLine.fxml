@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onKeyPressed="#handle" prefHeight="400.0" prefWidth="600.0" stylesheets="@sightline.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SigntLineController">
+   <children>
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="304.0" layoutY="390.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
+      <Rectangle fx:id="buttomZone" arcHeight="5.0" arcWidth="5.0" fill="#0a0a0a" height="10.0" layoutX="5.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <Rectangle fx:id="topZone" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff04" height="10.0" layoutX="4.0" layoutY="-8.0" stroke="#00000008" strokeType="INSIDE" width="600.0" />
+      <AnchorPane fx:id="scene" disable="true" layoutX="7.0" layoutY="10.0" onMouseDragged="#handle" onMousePressed="#handle" onMouseReleased="#handle" prefHeight="400.0" prefWidth="600.0" />
+      <Button fx:id="startBtn" layoutX="208.0" layoutY="123.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="102.0" prefWidth="191.0" text="START">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
