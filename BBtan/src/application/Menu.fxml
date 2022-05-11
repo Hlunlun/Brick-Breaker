@@ -12,7 +12,7 @@
             <Font name="Bookshelf Symbol 7" size="12.0" />
          </font></Button>
       <Button fx:id="lineBtn" layoutX="170.0" layoutY="235.0" mnemonicParsing="false" onAction="#sightLineMode" prefHeight="64.0" prefWidth="167.0" text="Sight line" />
-      <Button fx:id="fallingBtn" layoutX="174.0" layoutY="352.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="167.0" text="Falling bricks" />
+      <Button fx:id="fallingBtn" layoutX="174.0" layoutY="352.0" mnemonicParsing="false" onAction="#Mode4" prefHeight="64.0" prefWidth="167.0" text="Falling bricks" />
       <Label fx:id="topic" layoutX="81.0" layoutY="52.0" text="COME TO FIGHT IT!">
          <font>
             <Font name="Droid Serif" size="38.0" />
