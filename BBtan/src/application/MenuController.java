@@ -30,6 +30,8 @@ public class MenuController implements Initializable {
 	@FXML
 	private AnchorPane scene;
 	
+	
+	
 	private TranslateTransition translate=new TranslateTransition();
 	
 	@Override
