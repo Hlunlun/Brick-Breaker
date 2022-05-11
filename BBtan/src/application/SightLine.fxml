@@ -6,12 +6,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handle" prefHeight="418.0" prefWidth="562.0" stylesheets="@sightline.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SigntLineController">
+<AnchorPane onKeyPressed="#handle" prefHeight="418.0" prefWidth="554.0" stylesheets="@sightline.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SigntLineController">
    <children>
+      <AnchorPane fx:id="scene" disable="true" layoutX="4.0" layoutY="2.0" onMouseDragged="#handle" onMousePressed="#handle" onMouseReleased="#handle" prefHeight="407.0" prefWidth="600.0" />
+      <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#goMenu" prefHeight="46.0" prefWidth="87.0" text="menu" />
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="304.0" layoutY="390.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
-      <Rectangle fx:id="buttomZone" arcHeight="5.0" arcWidth="5.0" fill="#0a0a0a" height="10.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Rectangle fx:id="buttomZone" arcHeight="5.0" arcWidth="5.0" fill="#f0f0f0" height="10.0" layoutY="401.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Rectangle fx:id="topZone" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff04" height="10.0" layoutX="4.0" layoutY="-8.0" stroke="#00000008" strokeType="INSIDE" width="600.0" />
-      <AnchorPane fx:id="scene" disable="true" layoutX="7.0" layoutY="10.0" onMouseDragged="#handle" onMousePressed="#handle" onMouseReleased="#handle" prefHeight="400.0" prefWidth="600.0" />
       <Button fx:id="startBtn" layoutX="208.0" layoutY="123.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="102.0" prefWidth="191.0" text="START">
          <font>
             <Font size="35.0" />

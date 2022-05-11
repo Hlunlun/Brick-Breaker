@@ -21,3 +21,10 @@
 	-fx-text-fill:'darkseagreen';
 	
 }
+
+#menuBtn{
+	-fx-font-size:20;
+	-fx-background-size:10 10;
+}
+
+

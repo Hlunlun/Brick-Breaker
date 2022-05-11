@@ -2,6 +2,7 @@ package application;
 
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,6 +42,9 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
 	private Button startBtn;
 	
 	@FXML
+	private Button menuBtn;
+	
+	@FXML
 	private AnchorPane scene;
 	
 	@FXML
@@ -57,6 +61,8 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     
     private TranslateTransition translate=new TranslateTransition();
+    
+    private SceneController sceneController=new SceneController();
 	
     private double deltaX = 0;
     private double deltaY = -1;
@@ -112,32 +118,34 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         }
     }));
     
-    
+    /////circle's Layout!!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	
-    	
-        
+    	        
         timeline.setCycleCount(Animation.INDEFINITE);
         drawLine.setCycleCount(Animation.INDEFINITE);        
         
         translate.setNode(circle);
         translate.setDuration(Duration.millis(300));
         translate.setFromY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()+8);
-        translate.setToY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()-50);;
+        translate.setToY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()-40);;
         translate.setCycleCount(TranslateTransition.INDEFINITE);
         translate.setAutoReverse(true);
         translate.play();
         
     }
 
-	
+	@FXML
+	private void goMenu(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, "Menu.fxml");
+	}
     
     
     @FXML
-    void startGameButtonAction(ActionEvent event) {
+    private void startGameButtonAction(ActionEvent event) {
         startBtn.setVisible(false);
-        
+        menuBtn.setVisible(false);
         startGame();
         
     }
@@ -148,11 +156,12 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         drawLine.stop();
         translate.stop();
         
-        //timeline.play();
-        circle.setLayoutX(scene.getBoundsInLocal().getMaxX()/2);
-        circle.setLayoutY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()+8);
         
-        System.out.println(circle.getCenterX()+" "+circle.getCenterY());
+        
+        //timeline.play();
+        
+        
+        System.out.println(scene.getLayoutBounds().getHeight());
         System.out.println(circle.getLayoutX()+" "+circle.getLayoutY());
 
     }
@@ -200,13 +209,10 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
                 
                 deltaY *= -1;
             }
-            
-//			distributeFragment.start();
-//			disappearFragment.start();
 
             scene.getChildren().remove(brick);            
             
-            makeExplosion(brick.getX(),brick.getY());
+            makeExplosion(brick.getX()+brick.getWidth()/2,brick.getY()+brick.getHeight()/2);
            
             
             return true;
@@ -247,7 +253,8 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
             bricks.forEach(brick -> scene.getChildren().remove(brick));
             
             bricks.clear();
-            startBtn.setVisible(true);            
+            startBtn.setVisible(true);    
+            menuBtn.setVisible(true);
 
             deltaX = 0;
             deltaY = -1;

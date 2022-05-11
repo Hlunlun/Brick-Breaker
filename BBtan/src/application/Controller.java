@@ -46,8 +46,8 @@ public class Controller implements Initializable {
 
     private ArrayList<Rectangle> bricks = new ArrayList<>();
 
-    double deltaX = -1;
-    double deltaY = -3;
+    double deltaX = 1;
+    double deltaY = 1;
 
     //1 Frame evey 10 millis, which means 100 FPS
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
@@ -79,11 +79,13 @@ public class Controller implements Initializable {
 
     @FXML
     void startGameButtonAction(ActionEvent event) {
-        startButton.setVisible(false);
+        
         startGame();
     }
 
     public void startGame(){
+    	startButton.setVisible(false);
+    	
         createBricks();
         timeline.play();
     }
@@ -115,7 +117,7 @@ public class Controller implements Initializable {
             if (rightBorder || leftBorder) {
                 deltaX *= -1;
             }
-            if (bottomBorder || topBorder) {
+            else if (bottomBorder || topBorder) {
                 deltaY *= -1;
             }
 
