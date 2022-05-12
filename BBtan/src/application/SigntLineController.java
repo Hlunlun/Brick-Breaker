@@ -108,7 +108,7 @@ public class SigntLineController implements Initializable{
     		   		deltaY*=-1;
     		   	}		
     	    	
-    	 	   x=circle.getLayoutX()-circle.getRadius()+2;
+    	 	   x=circle.getLayoutX();
     	 	   y=circle.getLayoutY()-circle.getRadius();
     	 	   
     	    	if(event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
@@ -201,8 +201,8 @@ public class SigntLineController implements Initializable{
                 
         translateTransition.setNode(circle);
         translateTransition.setDuration(Duration.millis(300));
-        translateTransition.setFromY(scene.getBoundsInLocal().getMaxY());
-        translateTransition.setToY(scene.getBoundsInLocal().getMaxY()-50);;
+        translateTransition.setFromY(scene.getLayoutBounds().getMaxY());
+        translateTransition.setToY(scene.getLayoutBounds().getMaxY()-50);;
         translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
         translateTransition.setAutoReverse(true);
         translateTransition.play();
@@ -222,15 +222,15 @@ public class SigntLineController implements Initializable{
         menuBtn.setVisible(false);
         startGame();
         
-        circle.setLayoutX(scene.getLayoutBounds().getCenterX());
-    	circle.setLayoutY(scene.getLayoutBounds().getMaxY()-circle.getRadius());
+        //circle.setLayoutX(scene.getLayoutBounds().getCenterX());
+    	//circle.setLayoutY(scene.getLayoutBounds().getMaxY()-circle.getRadius());
     	
     	
         
     }
 
     private void startGame(){
-    	scene.setDisable(false);
+    	
         createBricks();  
         drawLine.stop();
         translateTransition.stop();
@@ -345,7 +345,7 @@ public class SigntLineController implements Initializable{
     }
     
     private void checkCollisionScene(Node node){
-        Bounds bounds = node.getBoundsInLocal();
+        Bounds bounds = node.getLayoutBounds();
        
         boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
         boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
@@ -393,7 +393,7 @@ public class SigntLineController implements Initializable{
 
     private void checkCollisionButtomZone(){
         if(circle.getBoundsInParent().intersects(buttomZone.getBoundsInParent())){
-            timeline.stop();            
+            timeline.stop();           
             
 
             deltaX = 0;
@@ -405,6 +405,8 @@ public class SigntLineController implements Initializable{
        }
     }
 	   
+    
+    
     	
 	
 	
