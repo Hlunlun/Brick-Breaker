@@ -58,5 +58,9 @@ public class MenuController implements Initializable {
 		
 		sceneController.switchScene(event, "SightLine.fxml");
 	}
+	public void Mode4(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, "Mode4.fxml");
+	}
 
 }
