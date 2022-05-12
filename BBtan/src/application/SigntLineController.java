@@ -2,6 +2,7 @@ package application;
 
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,6 +42,9 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
 	private Button startBtn;
 	
 	@FXML
+	private Button menuBtn;
+	
+	@FXML
 	private AnchorPane scene;
 	
 	@FXML
@@ -52,93 +56,22 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
 	@FXML
 	private Rectangle buttomZone;
 	
-		
-	
-	
 	private Polyline polyline = new Polyline();
 	
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     
     private TranslateTransition translate=new TranslateTransition();
+    
+    private SceneController sceneController=new SceneController();
 	
     private double deltaX = 0;
     private double deltaY = -1;
     
     private double x;
     private double y;
-    
-    
-    private static final int CNT=80;
-	private ArrayList<Rectangle>fragments=new ArrayList<>();
-	private final double[]ang=new double[CNT];
-	private final long[] start=new long[CNT];
-	private final Random rnd=new Random();
-	private final Group group=new Group();
-	
-	private double opacity=1;
-	
-	private boolean stopExplosion=false;
-    
-	AnimationTimer distributeFragment=new AnimationTimer() {
 
-		
-		@Override
-		public void handle(long now) {
-			createFragments();
-			//width
-			final double w=0.6*scene.getWidth();
-			//height
-			final double h=0.6*scene.getHeight();
-			//radius
-			final double r=80;//Math.sqrt(2)*Math.max(w, h);
-			
-			//loop
-			for(int i=0;i<CNT;i++) {
-				//node
-				final Node nd=fragments.get(i);
-				//angle
-				final double ag=ang[i];
-				final long tm=(now-start[i])%2000000000;
-				final double dt=tm*r/2000000000.0;
-				
-				nd.setTranslateX(Math.cos(ag)*dt+w);
-				nd.setTranslateY(Math.sin(ag)*dt+h);
-			}
-		}
-	};
 	
-	AnimationTimer disappearFragment=new AnimationTimer() {			
-
-		@Override
-		public void handle(long arg0) {
-			
-			doHandle();
-			
-		}
 		
-		private void doHandle() {
-			
-			for(int i=0;i<CNT;i++) {
-				Node nd=fragments.get(i);
-				opacity-=0.0003;
-				nd.opacityProperty().set(opacity);
-				
-				if(opacity<=0) {
-					
-					distributeFragment.stop();
-					System.out.println("Animation stopped");
-					stopExplosion=true;
-				}
-				if(stopExplosion) {					
-					break;
-				}
-				
-			}
-			
-		}
-		
-	};
-	
     Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
            	
     	@Override
@@ -185,31 +118,34 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         }
     }));
     
-    
+    /////circle's Layout!!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	
-    	
-        
+    	        
         timeline.setCycleCount(Animation.INDEFINITE);
         drawLine.setCycleCount(Animation.INDEFINITE);        
         
         translate.setNode(circle);
         translate.setDuration(Duration.millis(300));
         translate.setFromY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()+8);
-        translate.setToY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()-50);;
+        translate.setToY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()-40);;
         translate.setCycleCount(TranslateTransition.INDEFINITE);
         translate.setAutoReverse(true);
         translate.play();
         
     }
 
-	
+	@FXML
+	private void goMenu(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, "Menu.fxml");
+	}
     
     
     @FXML
-    void startGameButtonAction(ActionEvent event) {
+    private void startGameButtonAction(ActionEvent event) {
         startBtn.setVisible(false);
+        menuBtn.setVisible(false);
         startGame();
         
     }
@@ -220,11 +156,12 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         drawLine.stop();
         translate.stop();
         
-        //timeline.play();
-        circle.setLayoutX(scene.getBoundsInLocal().getMaxX()/2);
-        circle.setLayoutY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()+8);
         
-        System.out.println(circle.getCenterX()+" "+circle.getCenterY());
+        
+        //timeline.play();
+        
+        
+        System.out.println(scene.getLayoutBounds().getHeight());
         System.out.println(circle.getLayoutX()+" "+circle.getLayoutY());
 
     }
@@ -252,20 +189,7 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         }
     } 
     
-    private void createFragments() {
 
-		for(int i=0;i<CNT;i++) {
-			Rectangle rectangle=new Rectangle(5,5,Color.hsb(new Random().nextInt(360), 1, 1));
-			group.getChildren().add(rectangle);
-			fragments.add(rectangle);
-			//angle
-			ang[i]=3.0*Math.PI*rnd.nextDouble();
-			//start
-			start[i]=rnd.nextInt(2000000000);
-		}
-		scene.getChildren().add(group);
-		
-    }
    
 
     public boolean checkCollisionBrick(Rectangle brick){
@@ -285,15 +209,22 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
                 
                 deltaY *= -1;
             }
+
+            scene.getChildren().remove(brick);            
             
-//			distributeFragment.start();
-//			disappearFragment.start();
-
-            scene.getChildren().remove(brick);
-
+            makeExplosion(brick.getX()+brick.getWidth()/2,brick.getY()+brick.getHeight()/2);
+           
+            
             return true;
         }
         return false;
+    }
+    
+    private void makeExplosion(double x,double y) {
+    	
+    	Explosion explosion=new Explosion();
+        scene.getChildren().add(explosion.getExplosionGroup());
+        explosion.startExplode(x,y);
     }
     
     public void checkCollisionScene(Node node){
@@ -322,13 +253,16 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
             bricks.forEach(brick -> scene.getChildren().remove(brick));
             
             bricks.clear();
-            startBtn.setVisible(true);            
+            startBtn.setVisible(true);    
+            menuBtn.setVisible(true);
 
             deltaX = 0;
             deltaY = -1;
 
             circle.setLayoutX(scene.getBoundsInLocal().getMaxX()/2);
             circle.setLayoutY(scene.getBoundsInLocal().getMaxY()-circle.getRadius());
+            
+            scene.getChildren().clear();
 
             System.out.println("Game over!");
         }
@@ -426,4 +360,6 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         } 
 	}
 
+
+    
 }
