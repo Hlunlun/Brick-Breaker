@@ -12,8 +12,7 @@
 	
 }
 
-.button{
-	-fx-border-style:'bold';
+.button{	
 	-fx-border-color:'darkseagreen';
 	-fx-background-color:'lemonchiffon';
 	-fx-border-width:4;

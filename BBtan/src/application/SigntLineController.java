@@ -34,9 +34,10 @@ import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
-public class SigntLineController implements Initializable,EventHandler<MouseEvent>{
+public class SigntLineController implements Initializable{
 	
 	@FXML
 	private Button startBtn;
@@ -60,7 +61,7 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
 	
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     
-    private TranslateTransition translate=new TranslateTransition();
+    private TranslateTransition translateTransition=new TranslateTransition();
     
     private SceneController sceneController=new SceneController();
 	
@@ -70,7 +71,76 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
     private double x;
     private double y;
 
-	
+    EventHandler<MouseEvent>eventHandler=new EventHandler<MouseEvent>(){
+    	@Override
+    	public void handle(MouseEvent event) {
+    	 	   Bounds bounds = scene.getBoundsInLocal();
+    			
+    	 		double circleX=circle.getLayoutX();
+    	 	   	double circleY=circle.getLayoutY();
+    	 	   	
+    	 	   	double mouseX=event.getSceneX();
+    	 	   	double mouseY=event.getSceneY();
+    	 	
+    	 	   	boolean vertical=mouseX==circleX;
+    	 	   	
+    	 	   	///line equation
+    	 	   	double slope1=vertical?-1:(circleY-mouseY)/(circleX-mouseX);
+    	 	   	double var1=circleY-slope1*circleX;
+    	 	   	    	
+    	 	   	///inverse line
+    	 	   	double slope2=slope1*-1;
+    	 	   	double var2=var1*-1;
+    	 	   	
+    	 	   	double scale=1.2;
+    	 	   	
+    	 	   	deltaX=vertical?0:1*scale;
+    	 		deltaY=slope1*scale;
+    	 	   	
+    	 	   	
+    	 	   	if(mouseX<circleX&&mouseY<circleY) {
+    	 	   		deltaX*=-1;
+    	 	   		deltaY*=-1;
+    	 	   	}
+    	 	   	
+    	 	   	if(mouseX>circleX&&mouseY>circleY) {
+    		   		deltaX*=-1;
+    		   		deltaY*=-1;
+    		   	}		
+    	    	
+    	 	   x=circle.getLayoutX()-circle.getRadius()+2;
+    	 	   y=circle.getLayoutY()-circle.getRadius();
+    	 	   
+    	    	if(event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
+    	    		drawLine.play(); 
+    	    		timeline.stop();    
+    	    		   		
+    	    	}
+    	    	
+    	    	if(event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+
+    	    		drawLine.stop();
+    	    		polyline.getPoints().clear();
+    	    		scene.getChildren().removeAll(polyline);
+    	    		
+    	    		drawLine.play();  	
+    	    		
+    	    		timeline.stop();   
+    	    		
+    	    		
+    	    	}
+    	    	
+    	    	if(event.getEventType()==MouseEvent.MOUSE_RELEASED){
+    	    		timeline.play();  		
+    	    		drawLine.stop();
+    	    		polyline.getPoints().clear();
+    	    		scene.getChildren().removeAll(polyline);
+    	    		
+    	    	}
+    	    	
+    			
+    		}
+    };
 		
     Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
            	
@@ -96,23 +166,26 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
     }));
     
 	
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(7), new EventHandler<ActionEvent>() {
             	
     	
     	@Override
         public void handle(ActionEvent actionEvent) {       		
     		
+    		
             circle.setLayoutX(circle.getLayoutX() + deltaX);
             circle.setLayoutY(circle.getLayoutY() + deltaY);
-
+            
             if(!bricks.isEmpty()){
-                bricks.removeIf(brick -> checkCollisionBrick(brick));
+                bricks.removeIf(brick -> checkCollisionBrick(brick));                
             } else {
+            	
                 timeline.stop();
+                
             }
 
             checkCollisionScene(scene);
-            checkCollisionTopZone();
+            //checkCollisionTopZone();
             checkCollisionButtomZone();
             
         }
@@ -121,17 +194,18 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
     /////circle's Layout!!!!!!!!!!
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	        
+    	
+    	    	        
         timeline.setCycleCount(Animation.INDEFINITE);
-        drawLine.setCycleCount(Animation.INDEFINITE);        
-        
-        translate.setNode(circle);
-        translate.setDuration(Duration.millis(300));
-        translate.setFromY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()+8);
-        translate.setToY(scene.getBoundsInLocal().getMaxY()-circle.getRadius()-40);;
-        translate.setCycleCount(TranslateTransition.INDEFINITE);
-        translate.setAutoReverse(true);
-        translate.play();
+        drawLine.setCycleCount(Animation.INDEFINITE);   
+                
+        translateTransition.setNode(circle);
+        translateTransition.setDuration(Duration.millis(300));
+        translateTransition.setFromY(scene.getBoundsInLocal().getMaxY());
+        translateTransition.setToY(scene.getBoundsInLocal().getMaxY()-50);;
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setAutoReverse(true);
+        translateTransition.play();
         
     }
 
@@ -148,25 +222,31 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         menuBtn.setVisible(false);
         startGame();
         
+        circle.setLayoutX(scene.getLayoutBounds().getCenterX());
+    	circle.setLayoutY(scene.getLayoutBounds().getMaxY()-circle.getRadius());
+    	
+    	
+        
     }
 
-    public void startGame(){
+    private void startGame(){
     	scene.setDisable(false);
         createBricks();  
         drawLine.stop();
-        translate.stop();
+        translateTransition.stop();
+               
+        
+        scene.addEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);
+        scene.addEventFilter(MouseEvent.MOUSE_RELEASED,eventHandler);
         
         
-        
-        //timeline.play();
-        
-        
-        System.out.println(scene.getLayoutBounds().getHeight());
+        System.out.println(scene.getBoundsInLocal().getHeight());
         System.out.println(circle.getLayoutX()+" "+circle.getLayoutY());
 
     }
     
-    public void createBricks(){
+    private void createBricks(){
         double width = 560;
         double height = 200;
 
@@ -176,7 +256,7 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
 
         for (double i = height; i > 0 ; i = i - 50) {
             for (double j = width; j > 0 ; j = j - 25) {
-                if(spaceCheck % 2 == 0){
+                if(spaceCheck % 2 == 0&&random.nextInt(2)==1){
                     Rectangle rectangle = new Rectangle(j,i,40,40);//x,y,width,height
                     rectangle.setFill(Color.TRANSPARENT);
                     rectangle.setStroke(Color.hsb(random.nextInt(360), 0.6, 1));//hue,saturation,brightness
@@ -189,10 +269,46 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         }
     } 
     
+    private void fallingBricks() {
+    	
+    	
+    	for(int i=0;i<bricks.size();i++) {
+    		
+    		Rectangle rectangle=bricks.get(i);
+    		
+    		rectangle.setLayoutY(rectangle.getLayoutY()+50);
+    	}  	
+    	
+    	
+    	double width = 560;
+        double height = 40;
+
+        int spaceCheck = 1;
+        
+        Random random=new Random();
+
+        
+        for (double j = width; j > 0 ; j = j - 25) {
+            if(spaceCheck % 2 == 0&&random.nextInt(2)==1){
+                Rectangle rectangle = new Rectangle(j,height,40,40);//x,y,width,height
+                rectangle.setFill(Color.TRANSPARENT);
+                rectangle.setStroke(Color.hsb(random.nextInt(360), 0.6, 1));//hue,saturation,brightness
+                rectangle.setStrokeWidth(5);
+                scene.getChildren().add(rectangle);
+                bricks.add(rectangle);
+            }
+            spaceCheck++;
+        }
+        
+    	
+    	
+    	
+    }
+    
 
    
 
-    public boolean checkCollisionBrick(Rectangle brick){
+    private boolean checkCollisionBrick(Rectangle brick){
 
     	if(circle.getBoundsInParent().intersects(brick.getBoundsInParent())){
     		boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()+brick.getStrokeWidth()) - circle.getRadius());
@@ -215,6 +331,7 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
             makeExplosion(brick.getX()+brick.getWidth()/2,brick.getY()+brick.getHeight()/2);
            
             
+            
             return true;
         }
         return false;
@@ -227,8 +344,9 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
         explosion.startExplode(x,y);
     }
     
-    public void checkCollisionScene(Node node){
+    private void checkCollisionScene(Node node){
         Bounds bounds = node.getBoundsInLocal();
+       
         boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
         boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
         boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
@@ -239,20 +357,26 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
             deltaX *= -1;
             
         }
+        if(topBorder) {
+        	deltaY*=-1;
+        }
         
         
     }
     
-    public void checkCollisionTopZone(){
+    private void checkCollisionTopZone(){
         if(circle.getBoundsInParent().intersects(topZone.getBoundsInParent())){
             timeline.stop();    
-            translate.play();
-            scene.setDisable(true); 
+            translateTransition.play();
+
+ 
             //brick is element in bricks
             //->add the code that you want to execute during iterate the array bricks 
             bricks.forEach(brick -> scene.getChildren().remove(brick));
             
             bricks.clear();
+            scene.getChildren().clear();
+            
             startBtn.setVisible(true);    
             menuBtn.setVisible(true);
 
@@ -260,97 +384,30 @@ public class SigntLineController implements Initializable,EventHandler<MouseEven
             deltaY = -1;
 
             circle.setLayoutX(scene.getBoundsInLocal().getMaxX()/2);
-            circle.setLayoutY(scene.getBoundsInLocal().getMaxY()-circle.getRadius());
+            circle.setLayoutY(scene.getLayoutBounds().getMaxY()-circle.getRadius());           
             
-            scene.getChildren().clear();
 
             System.out.println("Game over!");
         }
     }
 
-    public void checkCollisionButtomZone(){
+    private void checkCollisionButtomZone(){
         if(circle.getBoundsInParent().intersects(buttomZone.getBoundsInParent())){
             timeline.stop();            
             
 
             deltaX = 0;
             deltaY = -1;
-
             
             circle.setLayoutY(circle.getLayoutY()-2);
+            fallingBricks();
 
        }
     }
 	   
-    @FXML
-	@Override
-	public void handle(MouseEvent event) {
- 	   Bounds bounds = scene.getBoundsInLocal();
-		
- 		double circleX=circle.getLayoutX();
- 	   	double circleY=circle.getLayoutY();
- 	   	
- 	   	double mouseX=event.getSceneX();
- 	   	double mouseY=event.getSceneY();
- 	
- 	   	boolean vertical=mouseX==circleX;
- 	   	
- 	   	///line equation
- 	   	double slope1=vertical?-1:(circleY-mouseY)/(circleX-mouseX);
- 	   	double var1=circleY-slope1*circleX;
- 	   	    	
- 	   	///inverse line
- 	   	double slope2=slope1*-1;
- 	   	double var2=var1*-1;
- 	   	
- 	   	double scale=1.2;
- 	   	
- 	   	deltaX=vertical?0:1*scale;
- 		deltaY=slope1*scale;
- 	   	
- 	   	
- 	   	if(mouseX<circleX&&mouseY<circleY) {
- 	   		deltaX*=-1;
- 	   		deltaY*=-1;
- 	   	}
- 	   	
- 	   	if(mouseX>circleX&&mouseY>circleY) {
-	   		deltaX*=-1;
-	   		deltaY*=-1;
-	   	}		
     	
- 	   x=circle.getLayoutX();
- 	   y=circle.getLayoutY();
- 	   
-    	if(event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
-    		drawLine.play(); 
-    		timeline.stop();    
-    		   		
-    	}
-    	
-    	if(event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
-
-    		drawLine.stop();
-    		polyline.getPoints().clear();
-    		scene.getChildren().removeAll(polyline);
-    		
-    		drawLine.play();  	
-    		
-    		timeline.stop();   
-    		
-    		
-    	}
-    	
-    	if(event.getEventType()==MouseEvent.MOUSE_RELEASED){
-    		timeline.play();  		
-    		drawLine.stop();
-    		polyline.getPoints().clear();
-    		scene.getChildren().removeAll(polyline);
-    		
-    	}
-    	
-		
-	}
+	
+	
     
     public void handle(KeyEvent event) {		
 		if (KeyEvent.KEY_PRESSED.equals(event.getEventType())) {				

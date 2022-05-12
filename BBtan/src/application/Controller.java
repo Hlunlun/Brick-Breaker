@@ -109,15 +109,15 @@ public class Controller implements Initializable {
     public boolean checkCollisionBrick(Rectangle brick){
 
         if(circle.getBoundsInParent().intersects(brick.getBoundsInParent())){
-            boolean rightBorder = circle.getLayoutX() - circle.getRadius() <= ((brick.getX() + brick.getWidth()));
-            boolean leftBorder = (circle.getLayoutX()+ circle.getRadius()) >= brick.getX();
-            boolean bottomBorder = (circle.getLayoutY()- circle.getRadius()) <= (brick.getY() + brick.getHeight());
-            boolean topBorder = (circle.getLayoutY()+ circle.getRadius()) >= brick.getY() ;
+        	boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
+            boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
+            boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
+            boolean topBorder = circle.getLayoutY() <= (brick.getY() + circle.getRadius());
 
             if (rightBorder || leftBorder) {
                 deltaX *= -1;
             }
-            else if (bottomBorder || topBorder) {
+            if (bottomBorder || topBorder) {
                 deltaY *= -1;
             }
 
