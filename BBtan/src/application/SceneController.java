@@ -27,6 +27,7 @@ public class SceneController {
 	}
 	
 	public void switchScene(ActionEvent event,String sceneName)throws IOException{		
+		
 		root =FXMLLoader.load(getClass().getResource(sceneName));
 		Node node=(Node)event.getSource();
 		stage=(Stage)node.getScene().getWindow();

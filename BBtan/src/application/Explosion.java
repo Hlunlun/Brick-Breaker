@@ -11,6 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+//1. instantiate the class Explosion
+//2. add the fragment group to the scene
+//3. use method startExplode 
+
 public class Explosion extends Thread{
 	
 	private static final int CNT=100;
