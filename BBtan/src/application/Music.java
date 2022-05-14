@@ -7,7 +7,6 @@ public enum Music {
 	
 	ballup("src/audio/ballup.wav"),
 	brickDestroy("src/audio/brickDestroy.mp3"),
-	NoCopyRightSounds("src/audio/NoCopyRightSounds.mp3"),
 	tick("src/audio/tick.mp3");
 
 	

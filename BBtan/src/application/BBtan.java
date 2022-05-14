@@ -209,7 +209,7 @@ public abstract class BBtan implements Initializable{
 	@FXML
 	private void goMenu(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "Menu.fxml");
+		sceneController.switchScene(event,Mode.Menu.getPath());
 	}
     
     
