@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 	
+		
 	//Application是JavaFX程式的入口，任何javafx應用程式程式都要繼承該類並重寫start()方法
 	
 	@Override

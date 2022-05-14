@@ -6,15 +6,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<AnchorPane fx:id="scene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SimpleController">
    <children>
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="66.0" layoutY="368.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="startButton" layoutX="173.0" layoutY="123.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="118.0" prefWidth="255.0" text="START">
+      <Button fx:id="startBtn" layoutX="173.0" layoutY="123.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="118.0" prefWidth="255.0" text="START">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
       <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="4.0" layoutX="3.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Rectangle fx:id="bottomZone" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff05" height="4.0" layoutX="1.0" layoutY="398.0" stroke="#00000008" strokeType="INSIDE" width="600.0" />
+      <Rectangle fx:id="bottomZone" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff05" height="14.0" layoutX="1.0" layoutY="388.0" stroke="#00000008" strokeType="INSIDE" width="600.0" />
    </children>
 </AnchorPane>
