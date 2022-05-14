@@ -4,3 +4,49 @@
 	
 }
 
+#text1{
+	-fx-font-weight: bold;
+	-fx-font-size: 22px;
+}
+
+#text2{
+	-fx-font-weight: bold;
+	-fx-font-size: 22px;
+}
+
+#text3{
+	-fx-font-weight: bold;
+	-fx-font-size: 22px;
+}
+
+#text4{
+	-fx-font-weight: bold;
+	-fx-font-size: 22px;
+}
+
+#backMenuButton{
+	-fx-background-color: #4A91DB;
+	-fx-text-fill:'white';
+	-fx-background-radius: 15px;
+	-fx-cursor: hand;
+	-fx-opacity: .75;
+}
+
+#backMenuButton: hover{
+	-fx-background-color: #2064AF;
+	-fx-opacity: 1;
+}
+
+.button{
+	-fx-background-color:#2DB590;
+	-fx-text-fill:'white';
+	-fx-background-radius: 40px;
+	-fx-cursor: hand;
+	-fx-opacity: .7;
+}
+
+.button:hover{
+	-fx-background-color: #057E5D;
+	-fx-opacity: 1;
+}
+

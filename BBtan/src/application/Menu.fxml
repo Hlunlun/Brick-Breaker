@@ -28,9 +28,9 @@
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="BackButton" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToHome" prefHeight="33.0" prefWidth="71.0" text="Back">
+      <Button fx:id="BackButton" layoutX="16.0" layoutY="8.0" mnemonicParsing="false" onAction="#backToHome" prefHeight="36.0" prefWidth="60.0" text="Back">
          <font>
-            <Font name="Comic Sans MS" size="18.0" />
+            <Font name="Comic Sans MS" size="16.0" />
          </font>
       </Button>
    </children>

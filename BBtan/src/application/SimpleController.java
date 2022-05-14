@@ -2,6 +2,7 @@ package application;
 
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,11 +13,34 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.control.Button;
 import javafx.scene.robot.Robot;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class SimpleController extends BBtan{
+	
+	@FXML
+	private Button startButton;
+	
+	@FXML
+	private Button backMenuButton;
+	
+	@FXML
+	private Text text1;
+	
+	@FXML
+	private Text text2;
+	
+	@FXML
+	private Text text3;
+	
+	@FXML
+	private Text text4;
+	
+	@FXML
+	private Text text5;
 	
     private int paddleStartSize = 600;
 
@@ -56,8 +80,12 @@ public class SimpleController extends BBtan{
     }
 
     public void startGame(){
-    	startBtn.setVisible(false);
-    	
+    	startButton.setVisible(false);
+    	text1.setVisible(false);
+    	text2.setVisible(false);
+    	text3.setVisible(false);
+    	text4.setVisible(false);
+    	text5.setVisible(false);
         createBricks();
         timeline.play();
         paddleTimeline.play();
@@ -129,7 +157,12 @@ public class SimpleController extends BBtan{
         System.out.println("Game over!");
 	}
     
-    
+	private SceneController sceneController=new SceneController();
+	
+	public void backMenu(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, "Menu.fxml");
+	}
 }
 
 
