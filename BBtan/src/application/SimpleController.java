@@ -145,7 +145,7 @@ public class SimpleController extends BBtan{
 	public void Reset() {
 		
 		bricks.clear();
-        startBtn.setVisible(true);
+        startButton.setVisible(true);
         paddle.setWidth(paddleStartSize);
 
         deltaX = -1;
