@@ -11,7 +11,13 @@
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
+
+      <Button fx:id="lineBtn" layoutX="170.0" layoutY="218.0" mnemonicParsing="false" onAction="#sightLineMode" prefHeight="64.0" prefWidth="167.0" text="Sight line" />
+      <Button fx:id="CountDownBtn" layoutX="170.0" layoutY="302.0" mnemonicParsing="false" onAction="#CountDownMode" prefHeight="64.0" prefWidth="167.0" text="CountDown" />
+      <Label fx:id="topic" layoutX="81.0" layoutY="52.0" text="COME TO FIGHT IT!">
+
       <Button fx:id="lineBtn" layoutX="335.0" layoutY="99.0" mnemonicParsing="false" onAction="#sightLineMode" prefHeight="52.0" prefWidth="196.0" text="Endless Mode">
+
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
@@ -24,6 +30,9 @@
             <Font name="Cooper Black" size="50.0" />
          </font>
       </Label>
+
+      <Button fx:id="fallingBtn" layoutX="170.0" layoutY="384.0" mnemonicParsing="false" onAction="#FallingBricksMode" prefHeight="64.0" prefWidth="167.0" text="FallingBricks" />
+
       <Button fx:id="lineBtn1" layoutX="335.0" layoutY="174.0" mnemonicParsing="false" onAction="#countdownMode" prefHeight="52.0" prefWidth="196.0" text="Countdown Mode">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
@@ -33,5 +42,6 @@
             <Font name="Comic Sans MS" size="16.0" />
          </font>
       </Button>
+
    </children>
 </AnchorPane>

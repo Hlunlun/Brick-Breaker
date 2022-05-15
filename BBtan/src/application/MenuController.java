@@ -22,6 +22,9 @@ public class MenuController implements Initializable {
 	private Button lineBtn;
 	
 	@FXML
+	private Button CountDownBtn;
+	
+	@FXML
 	private Button fallingBtn;
 	
 	@FXML
@@ -60,10 +63,14 @@ public class MenuController implements Initializable {
 		
 		sceneController.switchScene(event, Mode.SightLine.getPath());
 	}
-	
-	public void countdownMode(ActionEvent event) throws IOException {
+
+	public void CountDownMode(ActionEvent event) throws IOException {
 		
 		sceneController.switchScene(event, Mode.CountDown.getPath());
+	}
+	public void FallingBricksMode(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, Mode.FallingBricks.getPath());
 	}
 
 	public void backToHome(ActionEvent event) throws IOException {
