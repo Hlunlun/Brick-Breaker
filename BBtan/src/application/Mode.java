@@ -10,6 +10,7 @@ public enum Mode {
 	SightLine("SightLine.fxml"),
 	CountDown("CountDown.fxml"),
 	FallingBricks("FallingBricks.fxml");
+
 	
 	public static Mode mode;
 	

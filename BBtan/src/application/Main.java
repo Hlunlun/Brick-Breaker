@@ -14,6 +14,8 @@ public class Main extends Application {
 		try {
 
 			Parent root=FXMLLoader.load(getClass().getResource(Mode.Homepage.getPath()));
+
+
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setResizable(false);
@@ -29,9 +31,11 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		//https://www.796t.com/content/1542293253.html
+
 		launch(args);//
+
 		
-		System.out.println("�main�瘜�");
+		System.out.println("");
 		
 		
 	}
@@ -39,11 +43,14 @@ public class Main extends Application {
 	@Override
     public void init(){
         System.out.println("");
+
      }
 	@Override    
     public void stop() throws Exception {
 		super.stop();
+
 		System.out.println("");
+
 	}
 }
 
