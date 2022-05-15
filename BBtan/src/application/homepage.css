@@ -1,0 +1,16 @@
+.root{
+	-fx-background-image: url("../Image/homepage.jpg");
+	-fx-background-size: 600px 400px;
+}
+
+.button{
+	-fx-background-color: #F9FF9A;
+	-fx-background-radius: 40px;
+	-fx-cursor: hand;
+	-fx-opacity: 1;
+}
+
+.button:hover{
+	-fx-background-color: #DCE90A;
+	-fx-opacity: 1;
+}
