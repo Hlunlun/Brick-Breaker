@@ -128,9 +128,7 @@ public abstract class BBtan implements Initializable{
     	
     	createBricks();  
     	
-    	checkGameOver.play();
-    	
-    	
+    	checkGameOver.play();    	
 
         startBtn.setVisible(false);
         menuBtn.setVisible(false);

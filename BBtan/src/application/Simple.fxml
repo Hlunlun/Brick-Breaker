@@ -10,7 +10,7 @@
 <AnchorPane fx:id="scene" prefHeight="400.0" prefWidth="600.0" stylesheets="@simple.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SimpleController">
    <children>
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="69.0" layoutY="358.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="startBtn" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" onAction="#startGame" prefHeight="57.0" prefWidth="160.0" text="Start!">
+      <Button fx:id="startBtn" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="57.0" prefWidth="160.0" text="Start!">
          <font>
             <Font name="Comic Sans MS Bold" size="28.0" />
          </font>
@@ -42,13 +42,8 @@
             <Font name="Showcard Gothic" size="36.0" />
          </font>
       </Text>
-      <Button fx:id="backMenuButton" layoutX="16.0" layoutY="8.0" mnemonicParsing="false" onAction="#backMenu" prefHeight="36.0" prefWidth="60.0" text="Back">
-         <font>
-            <Font name="Comic Sans MS" size="16.0" />
-         </font>
-      </Button>
       <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="4.0" layoutX="3.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
       <Rectangle fx:id="bottomZone" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff05" height="14.0" layoutX="1.0" layoutY="388.0" stroke="#00000008" strokeType="INSIDE" width="600.0" />
-      <Button fx:id="menuBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="46.0" prefWidth="87.0" text="menu" />
+      <Button fx:id="menuBtn" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="46.0" prefWidth="87.0" text="menu" />
    </children>
 </AnchorPane>

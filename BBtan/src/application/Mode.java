@@ -4,6 +4,7 @@ package application;
 //remember to set mode name in every modeController's method--initialize!
 public enum Mode {
 	
+	Homepage("Homepage.fxml"),
 	Menu("Menu.fxml"),
 	Simple("Simple.fxml"),
 	SightLine("SightLine.fxml"),

@@ -15,34 +15,34 @@
 	-fx-text-fill:'white';
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
-	-fx-opacity: .75;
+	-fx-opacity: 0.75;
 }
 
-.button:hover{
+.button hover{
 	-fx-background-color: #772DC3;
 	-fx-opacity: 1;
 }
 
 .label{
-	-fx-effect: dropshadow(gaussian, #9D9D9D, 10, 0.5, 7, 4);
+	-fx-effect: dropshadow(gaussian, #9D9D9D, 10, 5/10, 7, 4);
 	//refer to https://stackoverflow.com/questions/54844351/javafx-dropshadow-css-what-do-the-parameters-mean-how-to-implement-width-and-h
 	//-fx-text-fill:'bisque';
 	//-fx-font-family:'Impact';
 	//-fx-font-size:50;
-	//-fx-aligment:center;
+	//-fx-aligment:center;s
 	//refer to
 	//https://stackoverflow.com/questions/34559370/javafx-css-center-alignment
 }
 
-#BackButton{
+#_BackButton{
 	-fx-background-color: #4A91DB;
 	-fx-text-fill:'white';
 	-fx-background-radius: 15px;
 	-fx-cursor: hand;
-	-fx-opacity: .75;
+	-fx-opacity: 0.75;
 }
 
-#BackButton: hover{
+#_BackButton hover{
 	-fx-background-color: #2064AF;
 	-fx-opacity: 1;
 }

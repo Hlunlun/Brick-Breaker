@@ -24,15 +24,15 @@
 	-fx-font-size: 22px;
 }
 
-#backMenuButton{
+#_backMenuButton{
 	-fx-background-color: #4A91DB;
 	-fx-text-fill:'white';
 	-fx-background-radius: 15px;
 	-fx-cursor: hand;
-	-fx-opacity: .75;
+	-fx-opacity: 0.75;
 }
 
-#backMenuButton: hover{
+#backMenuButton hover{
 	-fx-background-color: #2064AF;
 	-fx-opacity: 1;
 }
@@ -42,10 +42,10 @@
 	-fx-text-fill:'white';
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
-	-fx-opacity: .7;
+	-fx-opacity: 0.7;
 }
 
-.button:hover{
+.button_hover{
 	-fx-background-color: #057E5D;
 	-fx-opacity: 1;
 }

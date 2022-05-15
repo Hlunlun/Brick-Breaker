@@ -2,12 +2,6 @@ package application;
 
 
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,21 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
-import javafx.scene.control.Button;
 import javafx.scene.robot.Robot;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class SimpleController extends BBtan{
-	
-
-	@FXML
-	private Button startBtn;
-	
-	@FXML
-	private Button backMenuButton;
-	
+			
+		
 	@FXML
 	private Text text1;
 	
@@ -47,7 +34,6 @@ public class SimpleController extends BBtan{
 	
 
 	//the length of the paddle
-
     private int paddleStartSize = 600;
 
     //to listen to the position of the mouse
@@ -76,27 +62,23 @@ public class SimpleController extends BBtan{
     	paddle.setWidth(paddleStartSize);
         
         paddleTimeline.setCycleCount(Animation.INDEFINITE);
+        
 		
 	}
 
     //set the scene of the game and called in startGameButtonAction
-//     @Override
-//     public void startGame(){
-// <<<<<<< master
-//     	startBtn.setVisible(false);
-//     	text1.setVisible(false);
-//     	text2.setVisible(false);
-//     	text3.setVisible(false);
-//     	text4.setVisible(false);
-//     	text5.setVisible(false);
-//         createBricks();
-//         timeline.play();
-// =======
-    	
-//     	timeline.play();    	
-// >>>>>>> master
-//         paddleTimeline.play();
-//     }
+     @Override
+     public void startGame(){
+
+     	text1.setVisible(false);
+     	text2.setVisible(false);
+     	text3.setVisible(false);
+     	text4.setVisible(false);
+     	text5.setVisible(false);        
+
+     	timeline.play();
+        paddleTimeline.play();
+     }
 
     //keep track of the mouse and move the paddle
     private void movePaddle(){
@@ -168,13 +150,7 @@ public class SimpleController extends BBtan{
         System.out.println("Game over!");
 	}
 
-    
-// 	private SceneController sceneController=new SceneController();
-	
-// 	public void backMenu(ActionEvent event) throws IOException {
-		
-// 		sceneController.switchScene(event, "Menu.fxml");
-// 	}
+   
 
 }
 
