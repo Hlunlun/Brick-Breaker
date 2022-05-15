@@ -47,9 +47,11 @@ public class CountDownController implements Initializable {
 
 	@FXML
 	private Rectangle timerBar;
-	
+
 	@FXML
 	private Label Showtime;
+
+	private AudioManager audioManager = new AudioManager();
 
 	private int paddleStartSize = 160;
 
@@ -82,7 +84,7 @@ public class CountDownController implements Initializable {
 			checkCollisionScene(scene);
 			checkCollisionBottomZone();
 			checkTimer();
-			Showtime.setText(format(min)+":"+format(sec));
+			Showtime.setText(format(min) + ":" + format(sec));
 		}
 	}));
 
@@ -109,16 +111,15 @@ public class CountDownController implements Initializable {
 		TimerTask timertask = new TimerTask() {
 			@Override
 			public void run() {
-				Platform.runLater(()->{
-						//Showtime.setText("min: "+format(min)+" sec: "+format(sec));
-						//Showtime.setText(format(min)+":"+format(sec));
-						//System.out.println("After 1 sec");
-						convertTime();
-						if(totalSec < 0)
-						{
-							Showtime.setText("00:00");
-							timer.cancel();
-						}
+				Platform.runLater(() -> {
+					// Showtime.setText("min: "+format(min)+" sec: "+format(sec));
+					// Showtime.setText(format(min)+":"+format(sec));
+					// System.out.println("After 1 sec");
+					convertTime();
+					if (totalSec < 0) {
+						Showtime.setText("00:00");
+						timer.cancel();
+					}
 				});
 			}
 		};
@@ -130,7 +131,7 @@ public class CountDownController implements Initializable {
 		boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
 		boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
 		boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
-		boolean topBorder = circle.getLayoutY() <= (bounds.getMinY()+35 + circle.getRadius());
+		boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + 35 + circle.getRadius());
 
 		if (rightBorder || leftBorder) {
 			deltaX *= -1;
@@ -155,15 +156,27 @@ public class CountDownController implements Initializable {
 				deltaY *= -1;
 			}
 
-			/*if(paddle.getWidth() > 40)
-			{
-				paddle.setWidth(paddle.getWidth() - (0.1 * paddle.getWidth()));	
-			}*/
+			/*
+			 * if(paddle.getWidth() > 40) { paddle.setWidth(paddle.getWidth() - (0.1 *
+			 * paddle.getWidth())); }
+			 */
+			audioManager.playMusic(Music.brickDestroy);
+
 			scene.getChildren().remove(brick);
+
+			//makeExplosion(brick.getX() + brick.getWidth() / 2, brick.getY() + brick.getHeight() / 2);
 
 			return true;
 		}
 		return false;
+	}
+
+	// Once the circle collide with the brick, distribute fragments
+	private void makeExplosion(double x, double y) {
+
+		Explosion explosion = new Explosion();
+		scene.getChildren().add(explosion.getExplosionGroup());
+		explosion.startExplode(x, y);
 	}
 
 	public void createBricks() {
@@ -222,9 +235,8 @@ public class CountDownController implements Initializable {
 			if (bottomBorder || topBorder) {
 				deltaY *= -1;
 			}
-			if(paddle.getWidth() > 40)
-			{
-				paddle.setWidth(paddle.getWidth() - (0.1 * paddle.getWidth()));	
+			if (paddle.getWidth() > 40) {
+				paddle.setWidth(paddle.getWidth() - (0.1 * paddle.getWidth()));
 			}
 		}
 	}
@@ -249,20 +261,14 @@ public class CountDownController implements Initializable {
 		}
 	}
 
-	/*TimerTask timertask = new TimerTask() {
-		@Override
-		public void run() {
-			//System.out.println("After 1 sec");
-			convertTime();
-			if(totalSec < 0)
-			{
-				timer.cancel();
-			}
-		}
-	};*/
+	/*
+	 * TimerTask timertask = new TimerTask() {
+	 * 
+	 * @Override public void run() { //System.out.println("After 1 sec");
+	 * convertTime(); if(totalSec < 0) { timer.cancel(); } } };
+	 */
 	public void checkTimer() {
-		if(totalSec < 0)
-		{
+		if (totalSec < 0) {
 			timeline.stop();
 			bricks.forEach(brick -> scene.getChildren().remove(brick));
 			bricks.clear();
@@ -275,22 +281,21 @@ public class CountDownController implements Initializable {
 
 			circle.setLayoutX(300);
 			circle.setLayoutY(300);
-			System.out.println("Game over!");				
+			System.out.println("Game over!");
 		}
 	}
-	public static void convertTime()
-	{
+
+	public static void convertTime() {
 		min = TimeUnit.SECONDS.toMinutes(totalSec);
-		sec = totalSec - (min*60);
+		sec = totalSec - (min * 60);
 		totalSec--;
-		//System.out.println("min: "+format(min)+" sec: "+format(sec));
+		// System.out.println("min: "+format(min)+" sec: "+format(sec));
 	}
-	private static String format(long value)
-	{
-		if(value < 10)
-		{
-			return 0+""+value;
+
+	private static String format(long value) {
+		if (value < 10) {
+			return 0 + "" + value;
 		}
-		return value+"";
+		return value + "";
 	}
 }
