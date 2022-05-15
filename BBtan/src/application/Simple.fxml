@@ -10,7 +10,7 @@
 <AnchorPane fx:id="scene" prefHeight="400.0" prefWidth="600.0" stylesheets="@simple.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SimpleController">
    <children>
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="69.0" layoutY="358.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="startButton" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" onAction="#startGame" prefHeight="57.0" prefWidth="160.0" text="Start!">
+      <Button fx:id="startBtn" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" onAction="#startGame" prefHeight="57.0" prefWidth="160.0" text="Start!">
          <font>
             <Font name="Comic Sans MS Bold" size="28.0" />
          </font>

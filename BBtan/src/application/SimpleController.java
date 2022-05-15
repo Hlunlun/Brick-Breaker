@@ -22,7 +22,7 @@ import javafx.util.Duration;
 public class SimpleController extends BBtan{
 	
 	@FXML
-	private Button startButton;
+	private Button startBtn;
 	
 	@FXML
 	private Button backMenuButton;
@@ -80,7 +80,7 @@ public class SimpleController extends BBtan{
     }
 
     public void startGame(){
-    	startButton.setVisible(false);
+    	startBtn.setVisible(false);
     	text1.setVisible(false);
     	text2.setVisible(false);
     	text3.setVisible(false);
@@ -145,7 +145,7 @@ public class SimpleController extends BBtan{
 	public void Reset() {
 		
 		bricks.clear();
-        startButton.setVisible(true);
+        startBtn.setVisible(true);
         paddle.setWidth(paddleStartSize);
 
         deltaX = -1;
