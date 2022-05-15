@@ -51,6 +51,6 @@ public class LoadingpageController implements Initializable{
 	
 	public void intogame(ActionEvent event) throws IOException {
 		SceneController sceneController = new SceneController();
-		sceneController.switchScene(event, "Menu.fxml");
+		sceneController.switchScene(event, Mode.Menu.getPath());
 	}
 }
