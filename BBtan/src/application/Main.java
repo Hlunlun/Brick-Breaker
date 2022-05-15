@@ -31,7 +31,7 @@ public class Main extends Application {
 		//https://www.796t.com/content/1542293253.html
 		launch(args);//
 		
-		System.out.println("�main�瘜�");
+		System.out.println("");
 		
 		
 	}

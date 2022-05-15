@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.util.Duration;
 import java.util.ResourceBundle;
-import java.util.jar.Attributes.Name;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -29,6 +26,32 @@ public class LoadingpageController implements Initializable{
 	
 	@FXML
 	private ProgressBar loadingBar = new ProgressBar(0);
+	
+	Timeline goMenuLine=new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {				
+			
+			try {
+				
+				Parent root = FXMLLoader.load(getClass().getResource(Mode.Menu.getPath()));
+				
+				Stage stage = (Stage)scene.getScene().getWindow();
+				stage.setScene(new Scene(root));
+				stage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+	}));
+		
+	
+	
+       	
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -45,12 +68,7 @@ public class LoadingpageController implements Initializable{
 			e.printStackTrace();
 		}
 		*/
+		goMenuLine.play();
     }
 	
-
-	
-	public void intogame(ActionEvent event) throws IOException {
-		SceneController sceneController = new SceneController();
-		sceneController.switchScene(event, Mode.Menu.getPath());
-	}
 }
