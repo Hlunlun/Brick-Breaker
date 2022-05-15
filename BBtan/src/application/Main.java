@@ -9,12 +9,16 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	
 		
-	//Application¬OJavaFXµ{¦¡ªº¤J¤f¡A¥ô¦ójavafxÀ³¥Îµ{¦¡µ{¦¡³£­nÄ~©Ó¸ÓÃş¨Ã­«¼gstart()¤èªk
+	//Applicationæ˜¯JavaFXç¨‹å¼çš„å…¥å£ï¼Œä»»ä½•javafxæ‡‰ç”¨ç¨‹å¼ç¨‹å¼éƒ½è¦ç¹¼æ‰¿è©²é¡ä¸¦é‡å¯«start()æ–¹æ³•
 	
 	@Override
 	public void start(Stage stage) {
 		try {
-			Parent root=FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+
+			//Parent root=FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+      //ä½ å¯ä»¥åˆ°Modeå®¶Homepage,å‘ä¸‹é¢é‚£æ¨£åœ¨å¯«é“é€™ï¼Œé€™æ¨£å¯«æ¯”è¼ƒå¥½
+			Parent root=FXMLLoader.load(getClass().getResource(Mode.Menu.getPath()));
+
 			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("menu.css").toExternalForm());
 			stage.setScene(scene);
@@ -33,21 +37,21 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		//https://www.796t.com/content/1542293253.html
-		launch(args);//¤]¥i¥H¼g§@launch()
+		launch(args);//ä¹Ÿå¯ä»¥å¯«ä½œlaunch()
 		
-		System.out.println("³o¬Omain¤èªk");
+		System.out.println("é€™æ˜¯mainæ–¹æ³•");
 		
 		
 	}
 	
 	@Override
     public void init(){
-        System.out.println("³o¬Oªì©l¤Æ¤èªk");
+        System.out.println("é€™æ˜¯åˆå§‹åŒ–æ–¹æ³•");
      }
 	@Override    
     public void stop() throws Exception {
 		super.stop();
-		System.out.println("³o­Ó¬Ostop()¤èªk");
+		System.out.println("é€™å€‹æ˜¯stop()æ–¹æ³•");
 	}
 }
 

@@ -53,17 +53,17 @@ public class MenuController implements Initializable {
 	
 	public void simpleMode(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "Simple.fxml");
+		sceneController.switchScene(event, Mode.Simple.getPath());
 	}
 	
 	public void sightLineMode(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "SightLine.fxml");
+		sceneController.switchScene(event, Mode.SightLine.getPath());
 	}
 	
 	public void countdownMode(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "Mode4.fxml");
+		sceneController.switchScene(event, Mode.CountDown.getPath());
 	}
 
 	public void backToHome(ActionEvent event) throws IOException {

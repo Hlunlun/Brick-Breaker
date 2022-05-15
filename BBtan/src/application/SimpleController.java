@@ -2,9 +2,11 @@ package application;
 
 
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -21,6 +23,7 @@ import javafx.util.Duration;
 
 public class SimpleController extends BBtan{
 	
+
 	@FXML
 	private Button startBtn;
 	
@@ -42,11 +45,15 @@ public class SimpleController extends BBtan{
 	@FXML
 	private Text text5;
 	
+
+	//the length of the paddle
+
     private int paddleStartSize = 600;
 
+    //to listen to the position of the mouse
     Robot robot = new Robot();
 
-    //1 Frame evey 10 millis, which means 100 FPS
+    //1 Frame every 10 millisecond, which means 100 FPS
     Timeline paddleTimeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
@@ -60,39 +67,38 @@ public class SimpleController extends BBtan{
     }));
 
 
+    
+    //initialize the timeline, paddleTimeline, mode:Simple
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    	deltaX = 1;
-        deltaY = -1;
-        
-        Mode.mode=Mode.Simple;
+	public void initialize() {
+		Mode.mode=Mode.Simple;
     	
     	paddle.setWidth(paddleStartSize);
-        timeline.setCycleCount(Animation.INDEFINITE);
-        paddleTimeline.setCycleCount(Animation.INDEFINITE);
-    }
-
-    @Override
-    @FXML
-    public void startGameButtonAction(ActionEvent event) {
         
-        startGame();
-    }
+        paddleTimeline.setCycleCount(Animation.INDEFINITE);
+		
+	}
 
-    public void startGame(){
-    	startBtn.setVisible(false);
-    	text1.setVisible(false);
-    	text2.setVisible(false);
-    	text3.setVisible(false);
-    	text4.setVisible(false);
-    	text5.setVisible(false);
-        createBricks();
-        timeline.play();
-        paddleTimeline.play();
-    }
+    //set the scene of the game and called in startGameButtonAction
+//     @Override
+//     public void startGame(){
+// <<<<<<< master
+//     	startBtn.setVisible(false);
+//     	text1.setVisible(false);
+//     	text2.setVisible(false);
+//     	text3.setVisible(false);
+//     	text4.setVisible(false);
+//     	text5.setVisible(false);
+//         createBricks();
+//         timeline.play();
+// =======
+    	
+//     	timeline.play();    	
+// >>>>>>> master
+//         paddleTimeline.play();
+//     }
 
-
-
+    //keep track of the mouse and move the paddle
     private void movePaddle(){
         Bounds bounds = scene.localToScreen(scene.getBoundsInLocal());
         double sceneXPos = bounds.getMinX();
@@ -109,6 +115,7 @@ public class SimpleController extends BBtan{
         }
     }
 
+    //check if the circle collide with the paddle
     private void checkCollisionPaddle(Rectangle paddle){
 
         if(circle.getBoundsInParent().intersects(paddle.getBoundsInParent())){
@@ -127,10 +134,10 @@ public class SimpleController extends BBtan{
         }
     }
     
-    
-    
+    //check if the circle collide with the bottomZone
+    @Override
     public void checkCollisionBottomZone(){
-        if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())&&circle.getLayoutY()>paddle.getLayoutY()+paddle.getHeight()){
+        if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())&&circle.getLayoutY()>paddle.getLayoutY()){
             timeline.stop();
             
             //brick is element in bricks
@@ -140,12 +147,16 @@ public class SimpleController extends BBtan{
             Reset();
         }
     }
-
+  
+    //after game over, reset the game
 	@Override
 	public void Reset() {
 		
 		bricks.clear();
+		
         startBtn.setVisible(true);
+        menuBtn.setVisible(true);
+        
         paddle.setWidth(paddleStartSize);
 
         deltaX = -1;
@@ -156,13 +167,15 @@ public class SimpleController extends BBtan{
 
         System.out.println("Game over!");
 	}
+
     
-	private SceneController sceneController=new SceneController();
+// 	private SceneController sceneController=new SceneController();
 	
-	public void backMenu(ActionEvent event) throws IOException {
+// 	public void backMenu(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "Menu.fxml");
-	}
+// 		sceneController.switchScene(event, "Menu.fxml");
+// 	}
+
 }
 
 
