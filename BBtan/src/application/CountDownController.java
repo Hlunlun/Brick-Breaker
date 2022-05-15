@@ -90,20 +90,20 @@ public class CountDownController implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		paddle.setWidth(paddleStartSize);
 		timeline.setCycleCount(Animation.INDEFINITE);
-		Showtime.setText("03:00");
+		Showtime.setText("01:30");
 	}
 
 	@FXML
 	void startGameButtonAction(ActionEvent event) {
 		startButton.setVisible(false);
 		startGame();
-		Showtime.setText("03:00");
+		Showtime.setText("01:30");
 	}
 
 	public void startGame() {
 		createBricks();
 		timeline.play();
-		totalSec = 180;
+		totalSec = 90;
 		timer.purge();
 		timer = new Timer();
 		TimerTask timertask = new TimerTask() {
