@@ -30,6 +30,9 @@ public abstract class BBtan implements Initializable{
 
 	//widgets on scene
 	@FXML
+	public Button pauseBtn;
+	
+	@FXML
 	public Button startBtn;
 	
 	@FXML
@@ -132,6 +135,7 @@ public abstract class BBtan implements Initializable{
 
         startBtn.setVisible(false);
         menuBtn.setVisible(false);
+        pauseBtn.setVisible(true);
     	
         startGame();        
     }
