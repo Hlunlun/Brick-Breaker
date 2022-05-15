@@ -37,6 +37,7 @@ public class MenuController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 	        
+		/*
 		translate.setNode(topic);
 		translate.setDuration(Duration.seconds(5));
 		translate.setFromX(scene.getBoundsInLocal().getMinX()-300);
@@ -44,6 +45,7 @@ public class MenuController implements Initializable {
 		translate.setCycleCount(TranslateTransition.INDEFINITE);
 		translate.setAutoReverse(true);
 		translate.play();
+		*/
 	        
 	}
 	
@@ -58,9 +60,14 @@ public class MenuController implements Initializable {
 		
 		sceneController.switchScene(event, Mode.SightLine.getPath());
 	}
-	public void Mode4(ActionEvent event) throws IOException {
+	
+	public void countdownMode(ActionEvent event) throws IOException {
 		
 		sceneController.switchScene(event, Mode.CountDown.getPath());
 	}
 
+	public void backToHome(ActionEvent event) throws IOException {
+		
+		sceneController.switchScene(event, "Homepage.fxml");
+	}
 }

@@ -1,0 +1,13 @@
+.root{
+	-fx-background-image: url("../Image/loadingpage.jpg");
+	-fx-background-size: 600px 400px;
+}
+
+.progress-bar > .track {
+  
+  -fx-control-inner-background: #A0B7E3;
+}
+
+#loadingBar{
+	-fx-accent: #406892; 
+}

@@ -5,18 +5,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scene" prefHeight="500.0" prefWidth="500.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
+<AnchorPane fx:id="scene" prefHeight="400.0" prefWidth="600.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
    <children>
-      <Button fx:id="simpleBtn" layoutX="170.0" layoutY="134.0" mnemonicParsing="false" onAction="#simpleMode" prefHeight="64.0" prefWidth="167.0" text="Simple">
+      <Button fx:id="simpleBtn" layoutX="79.0" layoutY="99.0" mnemonicParsing="false" onAction="#simpleMode" prefHeight="52.0" prefWidth="196.0" text="Simple Mode">
          <font>
-            <Font name="Bookshelf Symbol 7" size="12.0" />
+            <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="lineBtn" layoutX="170.0" layoutY="235.0" mnemonicParsing="false" onAction="#sightLineMode" prefHeight="64.0" prefWidth="167.0" text="Sight line" />
-      <Button fx:id="fallingBtn" layoutX="174.0" layoutY="352.0" mnemonicParsing="false" onAction="#Mode4" prefHeight="64.0" prefWidth="167.0" text="Mode 4" />
-      <Label fx:id="topic" layoutX="81.0" layoutY="52.0" text="COME TO FIGHT IT!">
+      <Button fx:id="lineBtn" layoutX="335.0" layoutY="99.0" mnemonicParsing="false" onAction="#sightLineMode" prefHeight="52.0" prefWidth="196.0" text="Endless Mode">
          <font>
-            <Font name="Droid Serif" size="38.0" />
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font></Button>
+      <Button fx:id="fallingBtn" layoutX="79.0" layoutY="174.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="196.0" text="Falling bricks">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font></Button>
+      <Label fx:id="topic" layoutX="233.0" layoutY="23.0" text="Menu" textFill="#4157e0ed">
+         <font>
+            <Font name="Cooper Black" size="50.0" />
          </font>
       </Label>
+      <Button fx:id="lineBtn1" layoutX="335.0" layoutY="174.0" mnemonicParsing="false" onAction="#countdownMode" prefHeight="52.0" prefWidth="196.0" text="Countdown Mode">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font></Button>
+      <Button fx:id="BackButton" layoutX="16.0" layoutY="8.0" mnemonicParsing="false" onAction="#backToHome" prefHeight="36.0" prefWidth="60.0" text="Back">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
