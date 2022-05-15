@@ -68,6 +68,6 @@ public class MenuController implements Initializable {
 
 	public void backToHome(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, "Homepage.fxml");
+		sceneController.switchScene(event, Mode.Homepage.getPath());
 	}
 }

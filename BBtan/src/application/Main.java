@@ -9,15 +9,15 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	
 		
-	//Application是JavaFX程式的入口，任何javafx應用程式程式都要繼承該類並重寫start()方法
+	//Application�JavaFX蝔���嚗遙雿avafx��蝔���閬匱�閰脤�蒂��神start()�瘜�
 	
 	@Override
 	public void start(Stage stage) {
 		try {
 
 			//Parent root=FXMLLoader.load(getClass().getResource("Homepage.fxml"));
-      //你可以到Mode家Homepage,向下面那樣在寫道這，這樣寫比較好
-			Parent root=FXMLLoader.load(getClass().getResource(Mode.Menu.getPath()));
+      //雿隞亙Mode摰象omepage,����璅��撖恍����見撖急��末
+			Parent root=FXMLLoader.load(getClass().getResource(Mode.Homepage.getPath()));
 
 			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("menu.css").toExternalForm());
@@ -37,21 +37,21 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		//https://www.796t.com/content/1542293253.html
-		launch(args);//也可以寫作launch()
+		launch(args);//銋隞亙神雿aunch()
 		
-		System.out.println("這是main方法");
+		System.out.println("�main�瘜�");
 		
 		
 	}
 	
 	@Override
     public void init(){
-        System.out.println("這是初始化方法");
+        System.out.println("�����瘜�");
      }
 	@Override    
     public void stop() throws Exception {
 		super.stop();
-		System.out.println("這個是stop()方法");
+		System.out.println("��stop()�瘜�");
 	}
 }
 

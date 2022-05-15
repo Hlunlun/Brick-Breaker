@@ -7,7 +7,8 @@ public enum Mode {
 	Menu("Menu.fxml"),
 	Simple("Simple.fxml"),
 	SightLine("SightLine.fxml"),
-	CountDown("CountDown.fxml");
+	CountDown("CountDown.fxml"),
+	Homepage("Homepage.fxml");
 	
 	public static Mode mode;
 	
