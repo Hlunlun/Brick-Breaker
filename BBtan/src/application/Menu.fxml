@@ -17,7 +17,7 @@
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="fallingBtn" layoutX="79.0" layoutY="174.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="196.0" text="Falling bricks">
+      <Button fx:id="fallingBtn" layoutX="79.0" layoutY="174.0" mnemonicParsing="false" onAction="#fallingBricksMode" prefHeight="52.0" prefWidth="196.0" text="Falling bricks">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>
@@ -27,7 +27,7 @@
          </font>
       </Label>
 
-      <Button fx:id="lineBtn1" layoutX="335.0" layoutY="174.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="196.0" text="Countdown Mode">
+      <Button fx:id="countDownBtn" layoutX="335.0" layoutY="174.0" mnemonicParsing="false" onAction="#countDownMode" prefHeight="52.0" prefWidth="196.0" text="Countdown Mode">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font></Button>

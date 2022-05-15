@@ -27,6 +27,8 @@ public class LoadingpageController implements Initializable{
 	@FXML
 	private ProgressBar loadingBar = new ProgressBar(0);
 	
+	//reference
+	//https://stackoverflow.com/questions/13246211/how-to-get-stage-from-controller-during-initialization
 	Timeline goMenuLine=new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
 
 		@Override

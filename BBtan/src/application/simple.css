@@ -24,7 +24,7 @@
 	-fx-font-size: 22px;
 }
 
-#_backMenuButton{
+#backMenuButton{
 	-fx-background-color: #4A91DB;
 	-fx-text-fill:'white';
 	-fx-background-radius: 15px;
