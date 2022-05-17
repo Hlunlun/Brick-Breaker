@@ -166,12 +166,7 @@ public abstract class BBtan implements Initializable{
     public abstract void startGame();
         
     
-    @FXML
-	public void pauseButtonAction(ActionEvent event) {  
-    	
-    	         	     
-    }
-    
+        
     
     private void createBricks(double x,double y){
         

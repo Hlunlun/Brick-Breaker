@@ -105,7 +105,6 @@ public class Explosion extends Thread{
 					if(opacity<=0) {
 						
 						explode.stop();
-						System.out.println("Animation stopped");
 						stopExplosion=true;
 					}
 					if(stopExplosion) {
