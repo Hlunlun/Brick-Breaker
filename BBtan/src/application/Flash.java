@@ -24,7 +24,7 @@ public class Flash extends Rectangle{
 		
         setWidth(width);
         setHeight(height);
-        setOpacity(0.3);
+        setOpacity(0.6);
         setFill(color);     
         setStroke(Color.TRANSPARENT);
         

@@ -12,7 +12,7 @@ public class Brick extends Rectangle{
 		setHeight(40);
 		setWidth(40);
         setFill(Color.TRANSPARENT);
-        setStroke(Color.hsb(random.nextInt(360), 0.6, 1));//hue,saturation,brightness
+        setStroke(Color.hsb(random.nextInt(360), 1, 1));//hue,saturation,brightness
         setStrokeWidth(5);
 	}
 }

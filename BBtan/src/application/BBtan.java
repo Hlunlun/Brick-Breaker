@@ -52,6 +52,7 @@ public abstract class BBtan implements Initializable{
 //	@FXML
 //	public Button muteBtn;
 	
+	private boolean pause=false;
 	
 	//control the audio
 	private AudioManager audioManager=new AudioManager();
@@ -164,6 +165,14 @@ public abstract class BBtan implements Initializable{
 
     public abstract void startGame();
         
+    
+    @FXML
+	public void pauseButtonAction(ActionEvent event) {  
+    	
+    	         	     
+    }
+    
+    
     private void createBricks(double x,double y){
         
     	Brick brick=new Brick(); 

@@ -150,8 +150,8 @@ public class SimpleController extends BBtan{
         deltaX = -1;
         deltaY = -3;
 
-        circle.setLayoutX(300);
-        circle.setLayoutY(300);
+        circle.setLayoutX(scene.getBoundsInLocal().getCenterX());
+        circle.setLayoutY(paddle.getLayoutY()-circle.getRadius());
 
         System.out.println("Game over!");
 	}

@@ -34,7 +34,7 @@ public class Explosion extends Thread{
     private void createFragments() {
 
 		for(int i=0;i<CNT;i++) {
-			Rectangle rectangle=new Rectangle(5,5,Color.hsb(new Random().nextInt(360), 0.6, 1));
+			Rectangle rectangle=new Rectangle(5,5,Color.hsb(new Random().nextInt(360), 1, 1));
 			group.getChildren().add(rectangle);
 			fragments.add(rectangle);
 			//angle
