@@ -1,10 +1,5 @@
 package application;
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -12,7 +7,6 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
@@ -130,7 +124,7 @@ public class FallingBricksController extends BBtan{
     @Override
     public void initialize() {
     	
-    	Mode.mode=Mode.SightLine;
+    	Mode.mode=Mode.Endless;
         
         drawLine.setCycleCount(Animation.INDEFINITE);   
         checkGameOver.setCycleCount(Animation.INDEFINITE); 

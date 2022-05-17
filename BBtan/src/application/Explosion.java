@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -112,6 +110,7 @@ public class Explosion extends Thread{
 					}
 					if(stopExplosion) {
 						stop();
+						Reset();
 						break;
 					}
 					

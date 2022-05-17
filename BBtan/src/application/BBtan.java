@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,9 +46,13 @@ public abstract class BBtan implements Initializable{
 	@FXML
 	public Rectangle paddle;
 	
+//	@FXML
+//	public Button muteBtn;
+	
+	
 	//control the audio
 	private AudioManager audioManager=new AudioManager();
-
+	
     //control the direction of the circle
     public double deltaX = 0;
     public double deltaY = -1;
@@ -57,17 +60,17 @@ public abstract class BBtan implements Initializable{
 	//bricks
     public ArrayList<Rectangle> bricks = new ArrayList<>();   
     
+    //bombs
+    public ArrayList<Bomb>bombs=new ArrayList<>();    
+    
     //go back to menu
     private SceneController sceneController=new SceneController();
     
-    //control the size of the brick
+    //control the interval of the brick
     private double width = 560;
     private double height = 200;
-    private double intervalOfBricksWidth=25;
+    private double intervalOfBricksWidth=30;
     private double intervalOfBricksHeight=50;
-    private double widthOfBrick=40;
-    private double heightOfBrick=40;
-    
     
     ///public class
     
@@ -86,12 +89,23 @@ public abstract class BBtan implements Initializable{
             } else {            	
                 timeline.stop();                
             }
+            if(!bombs.isEmpty()) {
+            	bombs.removeIf(bomb->checkCollisionBomb(bomb));
+            }
+            
+            //how about deltaX!=0 and deltaY=0
+            //also deltaX=0 and deltaY!=0
+            
             checkCollisionScene(scene);
 			checkCollisionBottomZone();
 			
     	}    		
     }));
     
+    
+        
+    
+
         
     //call checkGameOver to know if the game is over
     public Timeline checkGameOver=new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
@@ -100,9 +114,16 @@ public abstract class BBtan implements Initializable{
 		public void handle(ActionEvent arg0) {
 			        	
             bricks.forEach(brick->checkGameOver(brick)); 
+            
+            
 		}    	
     	
     }));
+    
+    public void muteBtn(ActionEvent event) {
+    	
+    	
+    }
     
     
     @Override
@@ -113,12 +134,13 @@ public abstract class BBtan implements Initializable{
         deltaY = -1;
         
         timeline.setCycleCount(Animation.INDEFINITE);
-            
+        
+        
         initialize();        
         
     }
     
-    //initialize the timeline or other things in derived class
+    //initialize other things in derived class
     public abstract void initialize();
     
     
@@ -126,7 +148,7 @@ public abstract class BBtan implements Initializable{
     @FXML
 	public void startGameButtonAction(ActionEvent event) {   
     	
-    	createBricks();  
+    	ArrangeBricksBombs();  
     	
     	checkGameOver.play();    	
 
@@ -138,28 +160,47 @@ public abstract class BBtan implements Initializable{
 
     public abstract void startGame();
         
-    //create bricks on the scene
-    public void createBricks(){
-        int spaceCheck = 1;
+    private void createBricks(double x,double y){
+        
+    	Brick brick=new Brick(); 
+        brick.setX(x);
+        brick.setY(y);
+        
+        scene.getChildren().add(brick);
+        
+        bricks.add(brick);
+    } 
+    private void createBombs(double x,double y) {
+    	Bomb bomb=new Bomb();
+        bomb.setLayoutX(x+bomb.getRadius());
+    	bomb.setLayoutY(y+bomb.getRadius());
+    	
+    	scene.getChildren().add(bomb);
+    	
+    	bombs.add(bomb);
+    }
+    
+    public void ArrangeBricksBombs() {
+    	int spaceCheck = 1;
         
         Random random=new Random();
 
         for (double i = height; i > 0 ; i = i - intervalOfBricksHeight) {
             for (double j = width; j > 0 ; j = j - intervalOfBricksWidth) {
                 if(spaceCheck % 2 == 0&&random.nextInt(2)==1){
-                    Rectangle rectangle = new Rectangle(j,i,widthOfBrick,heightOfBrick);//x,y,width,height
-                    rectangle.setFill(Color.TRANSPARENT);
-                    rectangle.setStroke(Color.hsb(random.nextInt(360), 0.6, 1));//hue,saturation,brightness
-                    rectangle.setStrokeWidth(5);
-                    scene.getChildren().add(rectangle);
-                    bricks.add(rectangle);
+                    createBricks(j,i);
                 }
+                else if(random.nextInt(100)==1){
+                	if(Mode.mode!=Mode.Simple&&Mode.mode!=Mode.CountDown)createBombs(j,i);
+                }
+                
+                
                 spaceCheck++;
             }
         }
         
-        System.out.println(width+" "+height);
-    } 
+    }
+    
       
     //check if the circle collide with the brick
     public boolean checkCollisionBrick(Rectangle brick){
@@ -180,6 +221,8 @@ public abstract class BBtan implements Initializable{
                 deltaY *= -1;
             }
 					
+			
+			
 			if(Mode.mode.equals(Mode.Simple))
 				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
 			
@@ -195,6 +238,44 @@ public abstract class BBtan implements Initializable{
         }    	
     	
         return false;
+    }
+    
+    public boolean checkCollisionBomb(Bomb bomb){
+
+    	if(circle.getBoundsInParent().intersects(bomb.getBoundsInParent())){
+    		
+    		
+    		
+    		Random random=new Random();
+    					
+    		for(int i=0;i<bricks.size();i++) {
+    			if(bricks.get(i).getY()==bomb.getLayoutY()-bomb.getRadius()) {
+    				scene.getChildren().remove(bricks.get(i));    				
+    			}
+    				
+    		}
+    		
+    		bricks.removeIf(brick->brick.getY()==bomb.getLayoutY()-bomb.getRadius());
+			
+				
+			//else bricks.removeIf(brick->brick.getLayoutX()==bomb.getLayoutX()-bomb.getRadius());
+			makeRowFlash(bomb.getLayoutY()-bomb.getRadius(),(Color) bomb.getStroke());
+            scene.getChildren().remove(bomb); 
+            
+            return true;
+        }    	
+    	
+        return false;
+    }
+    
+    private void makeRowFlash(double y,Color color) {
+
+    	Flash flash=new Flash();
+    	scene.getChildren().add(flash);
+    	flash.setSize(scene.getWidth(),20,color);
+    	flash.makeFlash(y);
+        
+        
     }
     
     //reset the game after game over in derived class
@@ -218,7 +299,7 @@ public abstract class BBtan implements Initializable{
             
     		Reset();            
 		}
-    	if(brick.getY()>=bottomZone.getLayoutY()-heightOfBrick-10) {
+    	if(brick.getY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
     		Reset();
     	}
     }
@@ -278,25 +359,27 @@ public abstract class BBtan implements Initializable{
     		
     		Rectangle rectangle=bricks.get(i);
     		
-    		//rectangle.setLayoutY(rectangle.getLayoutY()+heightOfBrick);
-    		rectangle.setY(rectangle.getY()+heightOfBrick);
+    		rectangle.setY(rectangle.getY()+intervalOfBricksHeight);
     	}  	 
         int spaceCheck = 1;
         
         Random random=new Random();
 
         
-        for (double j = width; j > 0 ; j = j -intervalOfBricksWidth) {
+        double i=50;
+        for (double j = width; j > 0 ; j = j - intervalOfBricksWidth) {
             if(spaceCheck % 2 == 0&&random.nextInt(2)==1){
-                Rectangle rectangle = new Rectangle(j,intervalOfBricksHeight-10,widthOfBrick,heightOfBrick);//x,y,width,height
-                rectangle.setFill(Color.TRANSPARENT);
-                rectangle.setStroke(Color.hsb(random.nextInt(360), 0.6, 1));//hue,saturation,brightness
-                rectangle.setStrokeWidth(5);
-                scene.getChildren().add(rectangle);
-                bricks.add(rectangle);
+                createBricks(j,i);
             }
+            else if(random.nextInt(10)==1){
+            	createBombs(j,i);
+            }
+            
+            
             spaceCheck++;
         }
+        
+                
     	
     }
 	    
