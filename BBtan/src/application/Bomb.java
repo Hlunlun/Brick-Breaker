@@ -18,7 +18,7 @@ public class Bomb extends Circle{
 		
 		//bomb picture
 		//https://www.flaticon.com/search/2?word=bomb
-		Image rowBomb =new Image("file:src/Image/bomb/dynamite.png");
+		Image rowBomb =new Image("file:src/application/dynamite.png");
 		
 		//bomb path
 		//https://www.codegrepper.com/code-examples/java/javafx+image+path

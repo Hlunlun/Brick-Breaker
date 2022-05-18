@@ -1,5 +1,6 @@
 package application;
 
+
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -44,11 +45,21 @@ public class EndlessController extends BBtan{
 	 	   	///line equation
 	 	   	double slope=vertical?-1:(circleY-mouseY)/(circleX-mouseX);
  	   	
-	 	   	double scale=1.2;
+	 	   	
+	 	   	
+	 	   	double scale=1;
 	 	   	
 	 	   	deltaX=vertical?0:1*scale;
 	 		deltaY=slope*scale;
-	 	   	
+
+	 		///check if the ball is out of the scene
+	 		double k=Math.log10(Math.abs(deltaY));
+	 		k=-1*Math.floor(k);
+ 			double shrink=Math.pow(10, k);
+ 			deltaX*=shrink;
+ 			deltaY*=shrink;
+	 		
+	 		
 	 	   	
 	 	   	if(mouseX<circleX&&mouseY<circleY) {
 	 	   		deltaX*=-1;
@@ -110,8 +121,8 @@ public class EndlessController extends BBtan{
     	    polyline.getStrokeDashArray().add(10d);
     		polyline.getPoints().addAll(x,y);    		
             
-    		x+=300*deltaX;
-            y+=300*deltaY;   
+    		x+=1000*deltaX;
+            y+=1000*deltaY;   
                        
             scene.getChildren().add(polyline);
             
@@ -163,10 +174,13 @@ public class EndlessController extends BBtan{
         
         deltaX = 0;
         deltaY = -1;
-         
+       
+        
         scene.getChildren().removeAll(bricks);
+        scene.getChildren().removeAll(bombs);
         
         bricks.clear();
+        bombs.clear();
         
         scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
         scene.removeEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);
