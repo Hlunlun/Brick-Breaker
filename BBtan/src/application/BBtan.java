@@ -192,7 +192,7 @@ public abstract class BBtan implements Initializable {
 						Label label = new Label(BricksHitCount.toString());
 						Font font = Font.font("Impact", FontWeight.NORMAL, FontPosture.REGULAR, 20);
 						label.setFont(font);
-						label.setTextFill(Color.SALMON);
+						label.setTextFill(Color.GRAY);
 						label.setPrefHeight(heightOfBrick);
 						label.setPrefWidth(widthOfBrick);
 						label.setAlignment(Pos.CENTER);
@@ -480,7 +480,7 @@ public abstract class BBtan implements Initializable {
 					Label label = new Label(BricksHitCount.toString());
 					Font font = Font.font("Impact", FontWeight.NORMAL, FontPosture.REGULAR, 20);
 					label.setFont(font);
-					label.setTextFill(Color.SALMON);
+					label.setTextFill(Color.GRAY);
 					label.setPrefHeight(heightOfBrick);
 					label.setPrefWidth(widthOfBrick);
 					label.setAlignment(Pos.CENTER);
