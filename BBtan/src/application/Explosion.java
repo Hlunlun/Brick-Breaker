@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -36,7 +34,7 @@ public class Explosion extends Thread{
     private void createFragments() {
 
 		for(int i=0;i<CNT;i++) {
-			Rectangle rectangle=new Rectangle(5,5,Color.hsb(new Random().nextInt(360), 0.6, 1));
+			Rectangle rectangle=new Rectangle(5,5,Color.hsb(new Random().nextInt(360), 1, 1));
 			group.getChildren().add(rectangle);
 			fragments.add(rectangle);
 			//angle
@@ -107,11 +105,11 @@ public class Explosion extends Thread{
 					if(opacity<=0) {
 						
 						explode.stop();
-						System.out.println("Animation stopped");
 						stopExplosion=true;
 					}
 					if(stopExplosion) {
 						stop();
+						Reset();
 						break;
 					}
 					

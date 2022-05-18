@@ -24,17 +24,12 @@
 	-fx-font-size: 22px;
 }
 
-#backMenuButton{
-	-fx-background-color: #4A91DB;
-	-fx-text-fill:'white';
-	-fx-background-radius: 15px;
-	-fx-cursor: hand;
-	-fx-opacity: 0.75;
+#menuBtn{
+	-fx-font-size: 20px;
 }
 
-#backMenuButton hover{
-	-fx-background-color: #2064AF;
-	-fx-opacity: 1;
+#startBtn{
+	-fx-font-size: 24px;
 }
 
 .button{
@@ -43,10 +38,23 @@
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
 	-fx-opacity: 0.7;
+	-fx-font-family: "Comic Sans MS";
+    -fx-font-weight: bold;
 }
 
-.button_hover{
+.button: hover{
 	-fx-background-color: #057E5D;
 	-fx-opacity: 1;
 }
 
+#paddle{
+	-fx-fill:#20088d;
+}
+
+#circle{
+	-fx-fill:#FF0A85;
+}
+
+#pauseBtn{
+	-fx-background-radius: 60px;
+}

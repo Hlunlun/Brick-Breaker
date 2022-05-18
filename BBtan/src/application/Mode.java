@@ -7,7 +7,7 @@ public enum Mode {
 	Homepage("Homepage.fxml"),
 	Menu("Menu.fxml"),
 	Simple("Simple.fxml"),
-	SightLine("SightLine.fxml"),
+	Endless("Endless.fxml"),
 	CountDown("CountDown.fxml"),
 	FallingBricks("FallingBricks.fxml");
 
