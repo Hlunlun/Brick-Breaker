@@ -6,7 +6,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="scene" prefHeight="530.0" prefWidth="410.0" stylesheets="@falling.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FallingBricksController">
+=======
+<AnchorPane fx:id="scene" prefHeight="530.0" prefWidth="410.0" stylesheets="@sightline.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FallingBricksController">
+>>>>>>> upstream/master
    <children>
       <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#goMenu" prefHeight="46.0" prefWidth="87.0" text="menu" />
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="304.0" layoutY="390.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />

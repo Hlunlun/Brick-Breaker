@@ -1,8 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .root{
-	-fx-background-color:'dimgrey';
-	-fx-border-color:'darkseagreen';
-	-fx-border-width:4;
+	-fx-background-image: url("../Image/countdown.jpg");
+	-fx-background-size: 600px 400px;
 }
 
 .circle{

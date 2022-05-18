@@ -1,5 +1,6 @@
 package application;
 
+<<<<<<< HEAD
 import java.awt.Insets;
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +9,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 
+=======
+>>>>>>> upstream/master
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -15,9 +18,12 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+<<<<<<< HEAD
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+=======
+>>>>>>> upstream/master
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -119,6 +125,7 @@ public class FallingBricksController extends BBtan {
 			}
 
 		}
+<<<<<<< HEAD
 	};
 
 	// draw the sight line
@@ -205,5 +212,50 @@ public class FallingBricksController extends BBtan {
 		menuBtn.setVisible(true);
 
 	}
+=======
+    };
+		
+    //draw the sight line
+    Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
+           	
+    	@Override
+        public void handle(ActionEvent actionEvent) {    
+    		
+    		//refer to 
+    		//https://stackoverflow.com/questions/36589770/customize-the-stroke-of-a-javafx-polyline
+    		polyline.setStroke(Color.KHAKI);
+    		polyline.setStrokeWidth(3);
+    	    polyline.getStrokeDashArray().add(10d);
+    		polyline.getPoints().addAll(x,y);    		
+            
+    		x+=300*deltaX;
+            y+=300*deltaY;   
+                       
+            scene.getChildren().add(polyline);
+            
+            
+        }
+    }));
+    
+	   
+    //initialize the timeline, checkGameOver, mode: SightLine
+    @Override
+    public void initialize() {
+    	
+    	Mode.mode=Mode.Endless;
+        
+        drawLine.setCycleCount(Animation.INDEFINITE);   
+        checkGameOver.setCycleCount(Animation.INDEFINITE); 
+        
+        translateTransition.setNode(circle);
+        translateTransition.setDuration(Duration.millis(300));
+        translateTransition.setFromY(scene.getLayoutBounds().getMaxY());
+        translateTransition.setToY(scene.getLayoutBounds().getMaxY()-50);;
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setAutoReverse(true);
+        //translateTransition.play();
+        
+    }
+>>>>>>> upstream/master
 
 }

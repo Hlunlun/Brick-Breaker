@@ -18,7 +18,7 @@
 	-fx-opacity: 0.75;
 }
 
-.button hover{
+.button: hover{
 	-fx-background-color: #772DC3;
 	-fx-opacity: 1;
 }
@@ -42,7 +42,7 @@
 	-fx-opacity: 0.75;
 }
 
-#BackButton hover{
+#BackButton: hover{
 	-fx-background-color: #2064AF;
 	-fx-opacity: 1;
 }

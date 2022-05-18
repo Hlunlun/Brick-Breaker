@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 
 public class MenuController implements Initializable {
 	
@@ -35,7 +34,7 @@ public class MenuController implements Initializable {
 	
 	
 	
-	private TranslateTransition translate=new TranslateTransition();
+//	private TranslateTransition translate=new TranslateTransition();
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,7 +60,7 @@ public class MenuController implements Initializable {
 	
 	public void sightLineMode(ActionEvent event) throws IOException {
 		
-		sceneController.switchScene(event, Mode.SightLine.getPath());
+		sceneController.switchScene(event, Mode.Endless.getPath());
 	}
 
 	public void countDownMode(ActionEvent event) throws IOException {

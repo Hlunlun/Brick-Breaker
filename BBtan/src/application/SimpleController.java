@@ -63,7 +63,7 @@ public class SimpleController extends BBtan{
         
         paddleTimeline.setCycleCount(Animation.INDEFINITE);
         
-		
+		pauseBtn.setVisible(false);
 	}
 
     //set the scene of the game and called in startGameButtonAction
@@ -138,14 +138,20 @@ public class SimpleController extends BBtan{
 		
         startBtn.setVisible(true);
         menuBtn.setVisible(true);
+        pauseBtn.setVisible(false);
+        text1.setVisible(true);
+        text2.setVisible(true);
+        text3.setVisible(true);
+        text4.setVisible(true);
+        text5.setVisible(true);
         
         paddle.setWidth(paddleStartSize);
 
         deltaX = -1;
         deltaY = -3;
 
-        circle.setLayoutX(300);
-        circle.setLayoutY(300);
+        circle.setLayoutX(scene.getBoundsInLocal().getCenterX());
+        circle.setLayoutY(paddle.getLayoutY()-circle.getRadius());
 
         System.out.println("Game over!");
 	}
