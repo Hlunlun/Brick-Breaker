@@ -1,12 +1,5 @@
 package application;
 
-import java.awt.Insets;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
-
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
@@ -15,20 +8,9 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 import javafx.util.Duration;
 
 public class FallingBricksController extends BBtan {
@@ -69,6 +51,14 @@ public class FallingBricksController extends BBtan {
 
 			deltaX = vertical ? 0 : 1 * scale;
 			deltaY = slope * scale;
+			
+			
+			///check if the ball is out of the scene
+	 		double k=Math.log10(Math.abs(deltaY));
+	 		k=-1*Math.floor(k);
+ 			double shrink=Math.pow(10, k);
+ 			deltaX*=shrink;
+ 			deltaY*=shrink;
 
 			if (mouseX < circleX && mouseY < circleY) {
 				deltaX *= -1;
