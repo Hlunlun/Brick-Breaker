@@ -102,10 +102,10 @@ public class SimpleController extends BBtan{
 
         if(circle.getBoundsInParent().intersects(paddle.getBoundsInParent())){
 
-        	boolean rightBorder = circle.getLayoutX() - circle.getRadius() <= ((paddle.getX() + paddle.getWidth()));
-            boolean leftBorder = (circle.getLayoutX()+ circle.getRadius()) >= paddle.getX();
-            boolean bottomBorder = (circle.getLayoutY()- circle.getRadius()) <= (paddle.getY() + paddle.getHeight());
-            boolean topBorder = (circle.getLayoutY()+ circle.getRadius()) >= paddle.getY() ;
+        	boolean rightBorder = circle.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - circle.getRadius());
+			boolean leftBorder = circle.getLayoutX() <= (paddle.getLayoutX() + circle.getRadius());
+			boolean bottomBorder = circle.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - circle.getRadius());
+			boolean topBorder = circle.getLayoutY() <= (paddle.getLayoutY() + circle.getRadius());
 
             if (rightBorder || leftBorder) {
                 deltaX *= -1;

@@ -55,11 +55,9 @@ public abstract class BBtan implements Initializable {
 
 	@FXML
 	public Rectangle paddle;
+//<<<<<<< master
 
-//	@FXML
-//	public Button muteBtn;
 
-	private boolean pause = false;
 
 	// control the audio
 	private AudioManager audioManager = new AudioManager();
@@ -87,8 +85,12 @@ public abstract class BBtan implements Initializable {
 	private double height = 200;
 	private double intervalOfBricksWidth = 30;
 	private double intervalOfBricksHeight = 50;
-	private double widthOfBrick = 40;
-	private double heightOfBrick = 40;
+
+  	 
+    
+    
+    private int rateOfBomb=100;
+    private int rateOfBrick=2;
 
 	/// public class
 
@@ -281,9 +283,13 @@ public abstract class BBtan implements Initializable {
 			}
 
 			if (Mode.mode.equals(Mode.Simple))
+//=======
+
+//>>>>>>> master
 				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
 
 			audioManager.playMusic(Music.brickDestroy);
+//<<<<<<< master
 
 			if (Mode.mode.equals(Mode.FallingBricks)) {
 				// System.out.println(brick.getId());
@@ -357,6 +363,9 @@ public abstract class BBtan implements Initializable {
 	/// private class
 
 	// go back to menu
+//=======
+		
+//>>>>>>> master
 	@FXML
 	private void goMenu(ActionEvent event) throws IOException {
 
@@ -370,84 +379,103 @@ public abstract class BBtan implements Initializable {
 
 			Reset();
 		}
+//<<<<<<< master
 		if (brick.getY() >= bottomZone.getLayoutY() - brick.getHeight() - 10) {
 			Reset();
 		}
 	}
 
-	// Once the circle collide with the brick, distribute fragments
-	private void makeExplosion(double x, double y) {
+//=======
+    	if(brick.getY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
+    		Reset();
+    	}
+    }
+    
+    //Once the circle collide with the brick, distribute fragments
+    private void makeExplosion(double x,double y) {
+    	
+    	Explosion explosion=new Explosion();
+        scene.getChildren().add(explosion.getExplosionGroup());
+        explosion.startExplode(x,y);
+    }
+    
+    
+    //check if the circle collide with the bounds of the scene
+    private void checkCollisionScene(Node node){
+        Bounds bounds = node.getLayoutBounds();
+                   
+    	boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
+        boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
+        boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
+        boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
+        
 
-		Explosion explosion = new Explosion();
-		scene.getChildren().add(explosion.getExplosionGroup());
-		explosion.startExplode(x, y);
-	}
+        if (rightBorder || leftBorder) {
+            deltaX *= -1;
+            
+        }
+        if(topBorder) {
+        	deltaY*=-1;
+        } 
 
-	// check if the circle collide with the bounds of the scene
-	private void checkCollisionScene(Node node) {
-		Bounds bounds = node.getLayoutBounds();
+        
+    }
+    
+    //check if the circle collide with the bottomZone
+    public void checkCollisionBottomZone(){
+        
+    	
+    	if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())){
+            
+        	timeline.stop();           
+            
+            deltaX = 0;
+            deltaY = -1;
+            
+            circle.setLayoutY(bottomZone.getLayoutY()-circle.getRadius()-2);  
+            
+            bricksBombsDown();
+       }
+        
+        
+        
+		
+    }
+	   
+    //after circle go back to bottomZone, bricks fall down
+    private void bricksBombsDown() {
+    	
+    	
+    	for(int i=0;i<bricks.size();i++) {
+    		
+    		Brick brick=bricks.get(i);
+    		brick.setY(brick.getY()+intervalOfBricksHeight);
+    	}  
+    	for(int i=0;i<bombs.size();i++) {
+    		
+    		Bomb bomb=bombs.get(i);
+    		bomb.setLayoutY(bomb.getLayoutY()+intervalOfBricksHeight);
+    	}
+        Random random=new Random();
 
-		boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
-		boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
-		// boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() -
-		// circle.getRadius());
-		boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
+        
+        double i=50;
+        for (double j = width; j > 0 ; j = j - intervalOfBricksWidth) {
+            if(random.nextInt(rateOfBrick)==1){
+                createBricks(j,i);
+            }
+            else if(random.nextInt(rateOfBomb)==1){
+            	createBombs(j,i);
+            }
+            
+        }
+       
+    	
+    }
+	    
+}
+//>>>>>>> master
 
-		if (rightBorder || leftBorder) {
-			deltaX *= -1;
-
-		}
-		if (topBorder) {
-			deltaY *= -1;
-		}
-
-	}
-
-	// check if the circle collide with the bottomZone
-	public void checkCollisionBottomZone() {
-		if (circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())) {
-
-			timeline.stop();
-
-			deltaX = 0;
-			deltaY = -1;
-
-			circle.setLayoutY(circle.getLayoutY() - 2);
-
-			if (Mode.mode.equals(Mode.FallingBricks)) {
-				FallingBricksFall();
-			} else {
-				fallingBricks();
-			}
-		}
-
-	}
-
-	// after circle go back to bottomZone, bricks fall down
-	private void fallingBricks() {
-
-		for (int i = 0; i < bricks.size(); i++) {
-
-			Rectangle rectangle = bricks.get(i);
-
-			rectangle.setY(rectangle.getY() + intervalOfBricksHeight);
-		}
-		int spaceCheck = 1;
-
-		Random random = new Random();
-
-		double i = 50;
-		for (double j = width; j > 0; j = j - intervalOfBricksWidth) {
-			if (spaceCheck % 2 == 0 && random.nextInt(2) == 1) {
-				createBricks(j, i);
-			} else if (random.nextInt(10) == 1) {
-				createBombs(j, i);
-			}
-
-			spaceCheck++;
-		}
-
-	}
 
 	public void FallingBricksFall() {
 		for (int i = 0; i < bricks.size(); i++) {

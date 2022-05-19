@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,20 +33,11 @@ public class MenuController implements Initializable {
 	
 	
 	
-//	private TranslateTransition translate=new TranslateTransition();
+	//	private TranslateTransition translate=new TranslateTransition();
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-	        
-		/*
-		translate.setNode(topic);
-		translate.setDuration(Duration.seconds(5));
-		translate.setFromX(scene.getBoundsInLocal().getMinX()-300);
-		translate.setToX(scene.getBoundsInLocal().getMaxX()+5);;
-		translate.setCycleCount(TranslateTransition.INDEFINITE);
-		translate.setAutoReverse(true);
-		translate.play();
-		*/
+	    
 	        
 	}
 	

@@ -1,15 +1,10 @@
 package application;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.animation.Animation;
-import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
