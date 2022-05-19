@@ -8,12 +8,42 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class FallingBricksController extends BBtan {
+	
+	//game rule
+	@FXML
+	private Text text1;
+		
+	@FXML
+	private Text text2;
+		
+	@FXML
+	private Text text3;
+		
+	@FXML
+	private Text text4;
+		
+	@FXML
+	private Text text5;
+		
+	@FXML
+	private Text text6;
+		
+	@FXML
+	private Text text7;
+	
+	@FXML
+	private Text text8;
+	
+	@FXML
+	private Text text9;
 
 	// the line to point to target
 	private Polyline polyline = new Polyline();
@@ -113,7 +143,7 @@ public class FallingBricksController extends BBtan {
 
 			// refer to
 			// https://stackoverflow.com/questions/36589770/customize-the-stroke-of-a-javafx-polyline
-			polyline.setStroke(Color.KHAKI);
+			polyline.setStroke(Color.SEAGREEN);
 			polyline.setStrokeWidth(3);
 			polyline.getStrokeDashArray().add(10d);
 			polyline.getPoints().addAll(x, y);
@@ -129,6 +159,7 @@ public class FallingBricksController extends BBtan {
 	// initialize the timeline, checkGameOver, mode: SightLine
 	@Override
 	public void initialize() {
+		pauseBtn.setVisible(false);
 
 		Mode.mode = Mode.FallingBricks;
 
@@ -148,6 +179,16 @@ public class FallingBricksController extends BBtan {
 
 	// set the scene of the game and called in startGameButtonAction
 	public void startGame() {
+		//game rule disappear
+    	text1.setVisible(false);
+     	text2.setVisible(false);
+     	text3.setVisible(false);
+     	text4.setVisible(false);
+     	text5.setVisible(false);
+     	text6.setVisible(false);
+     	text7.setVisible(false);
+     	text8.setVisible(false);
+     	text9.setVisible(false);
 
 		drawLine.stop();
 		translateTransition.stop();
@@ -178,6 +219,18 @@ public class FallingBricksController extends BBtan {
 
 		startBtn.setVisible(true);
 		menuBtn.setVisible(true);
+		pauseBtn.setVisible(false);
+        
+        //game rule appear
+        text1.setVisible(true);
+        text2.setVisible(true);
+        text3.setVisible(true);
+        text4.setVisible(true);
+        text5.setVisible(true);
+        text6.setVisible(true);
+        text7.setVisible(true);
+        text8.setVisible(true);
+        text9.setVisible(true);
 
 	}
 

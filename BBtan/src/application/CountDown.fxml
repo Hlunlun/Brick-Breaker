@@ -3,25 +3,55 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@countDown.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CountDownController">
     <children>
-        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="300.0" layoutY="300.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="256.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+        <Circle fx:id="circle" fill="#834604" layoutX="300.0" layoutY="353.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="224.0" layoutY="369.0" stroke="BLACK" strokeType="INSIDE" width="88.0">
+         <fill>
+            <LinearGradient endX="0.368421052631579" endY="0.08133971291866031" startX="0.368421052631579" startY="0.7703349282296651">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6447368264198303" green="0.19337131083011627" blue="0.01492446381598711" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9210526347160339" green="0.7462232112884521" blue="0.046905457973480225" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
       <Rectangle fx:id="bottomZone" arcHeight="2.0" arcWidth="5.0" fill="TRANSPARENT" height="10.0" layoutY="395.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-      <Button fx:id="startButton" layoutX="188.0" layoutY="145.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="111.0" prefWidth="225.0" text="START">
+      <Button fx:id="startButton" layoutX="220.0" layoutY="282.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="57.0" prefWidth="160.0" text="Start!">
          <font>
-            <Font size="44.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <Rectangle fx:id="timerBar" arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="35.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Label fx:id="Showtime" layoutX="14.0" layoutY="4.0" text="03:00">
+      <Rectangle fx:id="timerBar" arcHeight="20.0" arcWidth="20.0" fill="#10c7eb" height="39.0" layoutX="515.0" layoutY="9.0" opacity="0.7" stroke="TRANSPARENT" strokeType="INSIDE" width="71.0" />
+      <Label fx:id="Showtime" layoutX="525.0" layoutY="15.0" text="03:00" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="menuButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Menu" />
+      <Text fx:id="text1" fill="#20088d" layoutX="209.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Rule">
+         <font>
+            <Font name="Showcard Gothic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="text2" layoutX="26.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move the mouse to catch the ball with the paddle." />
+      <Text fx:id="text3" layoutX="30.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The paddle will become shorter and shorter after the ball hit the paddle again." textAlignment="CENTER" wrappingWidth="540.8447265625" />
+      <Text fx:id="text4" layoutX="56.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the ball falls to the bottom, you will lose." />
+      <Text fx:id="text5" layoutX="55.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to break all the bricks before time's up!" />
     </children>
 </AnchorPane>

@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class MenuController implements Initializable {
 	
+	private AudioManager audioManager = new AudioManager();
+	
 	@FXML
 	private Button simpleBtn;
 	
@@ -45,25 +47,30 @@ public class MenuController implements Initializable {
 	
 	public void simpleMode(ActionEvent event) throws IOException {
 		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.Simple.getPath());
 	}
 	
 	public void sightLineMode(ActionEvent event) throws IOException {
 		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.Endless.getPath());
 	}
 
 	public void countDownMode(ActionEvent event) throws IOException {
 		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.CountDown.getPath());
 	}
 	public void fallingBricksMode(ActionEvent event) throws IOException {
 		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.FallingBricks.getPath());
 	}
 
 	public void backToHome(ActionEvent event) throws IOException {
 		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.Homepage.getPath());
 	}
 }

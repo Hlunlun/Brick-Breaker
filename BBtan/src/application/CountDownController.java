@@ -17,8 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,6 +30,27 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class CountDownController implements Initializable {
+	
+	//game rule
+	@FXML
+	private Text text1;
+		
+	@FXML
+	private Text text2;
+		
+	@FXML
+	private Text text3;
+		
+	@FXML
+	private Text text4;
+		
+	@FXML
+	private Text text5;
+	
+	private SceneController sceneController = new SceneController();
+	
+	@FXML
+	private Button menuButton;
 
 	@FXML
 	private AnchorPane scene;
@@ -102,6 +125,13 @@ public class CountDownController implements Initializable {
 	}
 
 	public void startGame() {
+		//game rule disappear
+		text1.setVisible(false);
+     	text2.setVisible(false);
+     	text3.setVisible(false);
+     	text4.setVisible(false);
+     	text5.setVisible(false);
+     	
 		createBricks();
 		timeline.play();
 		totalSec = 90;
@@ -234,6 +264,13 @@ public class CountDownController implements Initializable {
 			bricks.forEach(brick -> scene.getChildren().remove(brick));
 			bricks.clear();
 			startButton.setVisible(true);
+			
+			//game rule appear
+			text1.setVisible(true);
+	        text2.setVisible(true);
+	        text3.setVisible(true);
+	        text4.setVisible(true);
+	        text5.setVisible(true);
 
 			paddle.setWidth(paddleStartSize);
 
@@ -290,5 +327,10 @@ public class CountDownController implements Initializable {
 			return 0+""+value;
 		}
 		return value+"";
+	}
+	
+	private void goMenu(ActionEvent event) throws IOException {
+
+		sceneController.switchScene(event, Mode.Menu.getPath());
 	}
 }

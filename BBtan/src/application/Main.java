@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 public class Main extends Application {
 	
@@ -19,7 +20,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setResizable(false);
-			stage.setTitle("BBTAN");
+			stage.setTitle("BRICK BREAKER");
+			Image iconImage = new Image("file:src/Image/icon.jpg");
+			stage.getIcons().add(iconImage);
 			stage.show();			
 			
 		} catch(Exception e) {

@@ -48,11 +48,11 @@
 }
 
 #paddle{
-	-fx-fill:#20088d;
+	//-fx-fill:#20088d;
 }
 
 #circle{
-	-fx-fill:#FF0A85;
+	//-fx-fill:#FF0A85;
 }
 
 #pauseBtn{
