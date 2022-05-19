@@ -28,9 +28,6 @@ public class Brick extends Label{
         Border border = new Border(borderStroke);
 		setBorder(border);
 		
-		
-		
-		
 		setPrefHeight(40);
 		setPrefWidth(40);
 		

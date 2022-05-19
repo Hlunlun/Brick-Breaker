@@ -169,12 +169,8 @@ public class FallingBricksController extends BBtan {
 		deltaY = -1;
 
 		scene.getChildren().removeAll(bricks);
-		scene.getChildren().removeAll(LabelArr);
 		
 		bricks.clear();
-		brickscount.clear();
-		LabelArr.clear();
-		BricksIdx = 0;
 		
 		scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
 		scene.removeEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);
