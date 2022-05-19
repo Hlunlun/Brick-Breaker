@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -61,11 +60,6 @@ public abstract class BBtan implements Initializable {
 
 	// bricks
 	public ArrayList<Brick> bricks = new ArrayList<>();
-
-	// FallingBricks
-	public ArrayList<Integer> brickscount = new ArrayList<>();
-	public ArrayList<Label> LabelArr = new ArrayList<>();
-	public Integer BricksIdx = 0;
 
 	// bombs
 	public ArrayList<Bomb> bombs = new ArrayList<>();
@@ -329,9 +323,6 @@ public abstract class BBtan implements Initializable {
 	/// private class
 
 	// go back to menu
-//=======
-		
-//>>>>>>> master
 	@FXML
 	private void goMenu(ActionEvent event) throws IOException {
 
