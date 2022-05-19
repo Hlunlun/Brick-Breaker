@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scene" prefHeight="530.0" prefWidth="410.0" stylesheets="@sightline.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FallingBricksController">
+<AnchorPane fx:id="scene" prefHeight="530.0" prefWidth="410.0" stylesheets="@falling.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FallingBricksController">
    <children>
       <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#goMenu" prefHeight="46.0" prefWidth="87.0" text="menu" />
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="304.0" layoutY="390.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
@@ -14,6 +14,11 @@
       <Button fx:id="startBtn" layoutX="208.0" layoutY="123.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="102.0" prefWidth="191.0" text="START">
          <font>
             <Font size="35.0" />
+         </font>
+      </Button>
+            <Button fx:id="pauseBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="||">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Button>
    </children>

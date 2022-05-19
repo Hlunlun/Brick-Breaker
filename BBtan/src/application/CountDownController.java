@@ -58,6 +58,8 @@ public class CountDownController implements Initializable {
 	static long min, sec, totalSec;
 
 	private ArrayList<Rectangle> bricks = new ArrayList<>();
+	
+	private AudioManager audioManager = new AudioManager();
 
 	double deltaX = -1;
 	double deltaY = -3;
@@ -154,10 +156,7 @@ public class CountDownController implements Initializable {
 				deltaY *= -1;
 			}
 
-			/*if(paddle.getWidth() > 40)
-			{
-				paddle.setWidth(paddle.getWidth() - (0.1 * paddle.getWidth()));	
-			}*/
+			audioManager.playMusic(Music.brickDestroy);
 			scene.getChildren().remove(brick);
 
 			return true;
