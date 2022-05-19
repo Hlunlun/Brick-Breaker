@@ -7,7 +7,8 @@ public enum Music {
 	
 	ballup("src/audio/ballup.wav"),
 	brickDestroy("src/audio/brickDestroy.mp3"),
-	tick("src/audio/tick.mp3");
+	tick("src/audio/tick.mp3"),
+	click("src/audio/click.mp3");
 
 	
 	private String path;

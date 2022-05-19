@@ -1,22 +1,42 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .root{
-	-fx-background-image: url("../Image/countdown.jpg");
+	-fx-background-image: url("../Image/countdown2.jpg");
 	-fx-background-size: 600px 400px;
 }
 
-.circle{
-	-fx-fill:'blanchedalmond';
-	-fx-stroke:#0000;	
+.button{
+	-fx-background-color:#07B3D5;
+	-fx-text-fill:'white';
+	-fx-background-radius: 40px;
+	-fx-cursor: hand;
+	-fx-opacity: 0.8;
+	-fx-font-family: "Comic Sans MS";
+    -fx-font-weight: bold;
 }
 
-.button{
-	//-fx-border-style:'bold';
-	-fx-border-color:'darkseagreen';
-	-fx-background-color:'lemonchiffon';
-	-fx-border-width:4;
-	-fx-font-weight:900;
-	-fx-font-size:38;
-	-fx-font-family:'Comic Sans MS';
-	-fx-text-fill:'darkseagreen';
-	
+.button: hover{
+	-fx-background-color: #036DBB;
+	-fx-opacity: 1;
+}
+
+#menuButton{
+	-fx-font-size: 20px;
+}
+
+#startButton{
+	-fx-font-size: 24px;
+}
+
+#pauseBtn{
+	-fx-font-size: 21px;
+}
+
+#timerBar{
+	-fx-fill: #036DBB;
+}
+
+#text2, #text3, #text4, #text5{
+	-fx-font-weight: bold;
+	-fx-font-size: 22px;
+	-fx-font-family: "Comic Sans MS";
 }

@@ -18,14 +18,14 @@ public class Bomb extends Circle{
 		
 		//bomb picture
 		//https://www.flaticon.com/search/2?word=bomb
-		Image rowBomb =new Image("file:src/application/dynamite.png");
+		Image rowBomb =new Image("file:src/Image/bomb/bomb.png");
 		
 		//bomb path
 		//https://www.codegrepper.com/code-examples/java/javafx+image+path
 		
 		setRadius(20);
-		setStroke(Color.hsb(random.nextInt(360), 0.8, 1));
-		setStrokeWidth(5);
+		setStroke(Color.hsb(random.nextInt(360), 1, 0.9));
+		setStrokeWidth(4);
 		setFill(new ImagePattern(rowBomb));
 		
         //setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKSEAGREEN));

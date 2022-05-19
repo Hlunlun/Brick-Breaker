@@ -1,27 +1,26 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .root{
-	-fx-background-image: url("../Image/endless.jpg");
-	-fx-background-size: 600px 400px;
+	-fx-background-image: url("../Image/endless2.jpg");
+	-fx-background-size: 620px 600px;
 	
 }
 
 .circle{
-	-fx-fill:'black';
-	-fx-stroke:#0000;	
+	//-fx-fill:#3830c9;
+	//-fx-stroke:#0000;	
 }
 
 .button{
-	-fx-background-color:#2DB590;
+	-fx-background-color:#EB79DE;
 	-fx-text-fill:'white';
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
-	-fx-opacity: 0.7;
+	-fx-opacity: 0.8;
 	-fx-font-family: "Comic Sans MS";
     -fx-font-weight: bold;
 }
 
 .button: hover{
-	-fx-background-color: #057E5D;
+	-fx-background-color: #ED4ADB;
 	-fx-opacity: 1;
 }
 
@@ -32,6 +31,18 @@
 #startBtn{
 	-fx-font-size: 24px;
 }
+
+#pauseBtn{
+	-fx-font-size: 21px;
+}
+
+#text2, #text3, #text4, #text5, #text6{
+	-fx-font-weight: bold;
+	-fx-font-size: 24px;
+	-fx-font-family: "Comic Sans MS";
+}
+
+
 
 
 

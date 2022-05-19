@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class HomepageController implements Initializable{
 	
+	private AudioManager audioManager = new AudioManager();
+	
 	@FXML
 	private AnchorPane scene;
 	
@@ -27,7 +29,8 @@ public class HomepageController implements Initializable{
 	private SceneController sceneController = new SceneController();
 	
 	public void intomenu(ActionEvent event) throws IOException {
-
+		
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, "Loadingpage.fxml");
 		//AudioClip buzzer = new AudioClip(getClass().getResource("../sound/click.mp3").toExternalForm());
 		//buzzer.play();
