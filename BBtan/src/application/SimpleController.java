@@ -16,7 +16,8 @@ import javafx.util.Duration;
 
 public class SimpleController extends BBtan{
 			
-		
+	private AudioManager audioManager = new AudioManager();
+	
 	@FXML
 	private Text text1;
 	
@@ -69,7 +70,8 @@ public class SimpleController extends BBtan{
     //set the scene of the game and called in startGameButtonAction
      @Override
      public void startGame(){
-
+    	
+		audioManager.playMusic(Music.startgame);
      	text1.setVisible(false);
      	text2.setVisible(false);
      	text3.setVisible(false);

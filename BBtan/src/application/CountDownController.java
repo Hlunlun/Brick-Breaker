@@ -119,6 +119,7 @@ public class CountDownController implements Initializable {
 
 	@FXML
 	void startGameButtonAction(ActionEvent event) {
+		audioManager.playMusic(Music.startgame);
 		startButton.setVisible(false);
 		startGame();
 		Showtime.setText("01:30");

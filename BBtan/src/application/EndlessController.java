@@ -17,6 +17,8 @@ import javafx.util.Duration;
 
 public class EndlessController extends BBtan{
 	
+	private AudioManager audioManager = new AudioManager();
+	
 	//game rule
 	@FXML
 	private Text text1;
@@ -178,6 +180,7 @@ public class EndlessController extends BBtan{
     
     //set the scene of the game and called in startGameButtonAction
     public void startGame(){
+    	audioManager.playMusic(Music.startgame);
     	//game rule disappear
     	text1.setVisible(false);
      	text2.setVisible(false);
