@@ -63,8 +63,8 @@ public class FallingBricksController extends BBtan {
 
 			// reference
 			// https://www.tabnine.com/code/java/methods/javafx.animation.Timeline/getStatus
-			if (timeline.getStatus() == Status.RUNNING)
-				return;
+			if (timeline.getStatus() == Status.RUNNING)return;
+			if(pauseBtn.isPressed()||pauseBtn.isHover())return; 
 
 			double circleX = circle.getLayoutX();
 			double circleY = circle.getLayoutY();
@@ -84,7 +84,7 @@ public class FallingBricksController extends BBtan {
 			
 			
 			///check if the ball is out of the scene
-	 		double k=Math.log10(Math.abs(deltaY));
+			double k=Math.max(Math.log10(Math.abs(deltaY)),Math.log10(Math.abs(deltaX)));
 	 		k=-1*Math.floor(k);
  			double shrink=Math.pow(10, k);
  			deltaX*=shrink;
@@ -170,7 +170,6 @@ public class FallingBricksController extends BBtan {
 		translateTransition.setDuration(Duration.millis(300));
 		translateTransition.setFromY(scene.getLayoutBounds().getMaxY());
 		translateTransition.setToY(scene.getLayoutBounds().getMaxY() - 50);
-		;
 		translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
 		translateTransition.setAutoReverse(true);
 		// translateTransition.play();
@@ -209,9 +208,12 @@ public class FallingBricksController extends BBtan {
 		deltaX = 0;
 		deltaY = -1;
 
-		scene.getChildren().removeAll(bricks);
-		
-		bricks.clear();
+
+        scene.getChildren().removeAll(bricks);
+        scene.getChildren().removeAll(bombs);
+        
+        bricks.clear();
+        bombs.clear();
 		
 		scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
 		scene.removeEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);

@@ -32,7 +32,7 @@
             </LinearGradient>
          </fill></Rectangle>
       <Rectangle fx:id="bottomZone" arcHeight="2.0" arcWidth="5.0" fill="TRANSPARENT" height="10.0" layoutY="395.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-      <Button fx:id="startButton" layoutX="220.0" layoutY="282.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="57.0" prefWidth="160.0" text="Start!">
+      <Button fx:id="startBtn" layoutX="220.0" layoutY="282.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="57.0" prefWidth="160.0" text="Start!">
          <font>
             <Font size="24.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="menuButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Menu" />
+      <Button fx:id="menuBtn" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goMenu" text="Menu" />
       <Text fx:id="text1" fill="#20088d" layoutX="209.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Rule">
          <font>
             <Font name="Showcard Gothic" size="36.0" />

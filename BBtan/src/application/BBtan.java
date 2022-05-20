@@ -11,14 +11,18 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 //must Override : initialize, startGame, Reset
@@ -93,9 +97,9 @@ public abstract class BBtan implements Initializable {
 			if (!bricks.isEmpty()) {
 				bricks.removeIf(brick -> checkCollisionBrick(brick));
 
-			} else {
-				timeline.stop();
-			}
+			}else{
+            	Reset();
+            }
 			if (!bombs.isEmpty()) {
 				bombs.removeIf(bomb -> checkCollisionBomb(bomb));
 			}
@@ -121,8 +125,59 @@ public abstract class BBtan implements Initializable {
 
 	}));
 
-	public void muteBtn(ActionEvent event) {
+	public void muteButtonAction(ActionEvent event) {
 
+	}
+	
+	public void pauseButtonAction(ActionEvent event) throws IOException {
+		
+		timeline.pause();
+		scene.setDisable(true);
+		
+		FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Pause.getPath()));
+		Parent root=loader.load();				
+		Scene pause=new Scene(root);
+		Stage stage=new Stage();
+		stage.setScene(pause);
+		stage.show();
+		
+		PauseController pauseController=loader.getController();		
+		pauseController.menuBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+	        
+	        if (pressed) {
+	        	try {
+	        		scene.setDisable(false);
+					sceneController.switchScene(scene,Mode.Menu.getPath());
+					stage.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        } 
+	    });
+		pauseController.restartBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+	        
+	        if (pressed) {
+	        	try {
+	        		scene.setDisable(false);
+	        		sceneController.switchScene(scene,Mode.mode.getPath());
+	    			stage.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        } 
+	    });
+		pauseController.continueBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+	        
+	        if (pressed) {
+	        	scene.setDisable(false);
+	        	if(Mode.mode.equals(Mode.Simple))timeline.play();
+				stage.close();
+	        } 
+	    });
+		
+	
 	}
 
 	@Override
@@ -146,15 +201,24 @@ public abstract class BBtan implements Initializable {
 	public void startGameButtonAction(ActionEvent event) {
 
 		if (Mode.mode.equals(Mode.FallingBricks)) {
+			
 			ArrangeFallingBricks();
-		} else {
-			ArrangeBricksBombs();
+			checkGameOver.play();
+			
+		} else if(Mode.mode.equals(Mode.Endless)) {
+			
+			ArrangeEndlessBricks();
+			checkGameOver.play();
+			
+		}else {
+			ArrangeSimpleBricks();
 		}
-		checkGameOver.play();
+		
 
 		startBtn.setVisible(false);
 		menuBtn.setVisible(false);
-		pauseBtn.setVisible(true);
+		
+		if(!Mode.mode.equals(Mode.CountDown))pauseBtn.setVisible(true);
 
 		startGame();
 	}
@@ -211,7 +275,7 @@ public abstract class BBtan implements Initializable {
 		bombs.add(bomb);
 	}
 
-	public void ArrangeBricksBombs() {
+	public void ArrangeEndlessBricks() {
 		Random random = new Random();
 
 		for (double i = height; i > 0; i = i - intervalOfBricksHeight) {
@@ -226,16 +290,27 @@ public abstract class BBtan implements Initializable {
 		}
 
 	}
+	
+	public void ArrangeSimpleBricks() {
+		Random random = new Random();
+
+		for (double i = height; i > 0; i = i - intervalOfBricksHeight) {
+			for (double j = width; j > 0; j = j - intervalOfBricksWidth) {
+				if (random.nextInt(2) == 1) {
+					createBricks(j, i);
+				} 
+			}
+		}
+
+	}
 
 	// check if the circle collide with the brick
 	public boolean checkCollisionBrick(Brick brick) {
 
 		if (circle.getBoundsInParent().intersects(brick.getBoundsInParent())) {
-			boolean rightBorder = circle
-					.getLayoutX() >= ((brick.getLayoutX() + brick.getWidth() + brick.getBorderWidth()) - circle.getRadius());
+			boolean rightBorder = circle.getLayoutX() >= ((brick.getLayoutX() + brick.getWidth() + brick.getBorderWidth()) - circle.getRadius());
 			boolean leftBorder = circle.getLayoutX() <= (brick.getLayoutX() - brick.getBorderWidth() + circle.getRadius());
-			boolean bottomBorder = circle
-					.getLayoutY() >= ((brick.getLayoutY() + brick.getHeight()) + brick.getBorderWidth() - circle.getRadius());
+			boolean bottomBorder = circle.getLayoutY() >= ((brick.getLayoutY() + brick.getHeight()) + brick.getBorderWidth() - circle.getRadius());
 			boolean topBorder = circle.getLayoutY() <= (brick.getLayoutY() - brick.getBorderWidth() + circle.getRadius());
 
 			if (leftBorder || rightBorder) {
@@ -243,32 +318,36 @@ public abstract class BBtan implements Initializable {
 				deltaX *= -1;
 			}
 
-			else if (bottomBorder || topBorder) {
+			if (bottomBorder || topBorder) {
 
 				deltaY *= -1;
 			}
 
-			if (Mode.mode.equals(Mode.Simple))paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
-
 			audioManager.playMusic(Music.brickDestroy);
-
+			
+			if (Mode.mode.equals(Mode.Simple)) {
+				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
+			}
 
 			if (Mode.mode.equals(Mode.FallingBricks)) {
 				
 				Integer count=Integer.parseInt(brick.getText());
+				System.out.println(count);
+				
 				count--;
-				if(count==0) {
+				if(count<=0) {
 					scene.getChildren().remove(brick);
 
 					makeExplosion(brick.getLayoutX() + brick.getWidth() / 2, brick.getLayoutY() + brick.getHeight() / 2);
+					
+					
 					return true;
 				}
 				else {
 					brick.setText(count.toString());
 				}
 				
-			}
-			else {
+			}else {
 				scene.getChildren().remove(brick);
 
 				makeExplosion(brick.getLayoutX() + brick.getWidth() / 2, brick.getLayoutY() + brick.getHeight() / 2);
@@ -437,6 +516,11 @@ public abstract class BBtan implements Initializable {
 			Brick brick = bricks.get(i);
 			brick.setLayoutY(brick.getLayoutY()+intervalOfBricksHeight);
 		}
+		for(int i=0;i<bombs.size();i++) {
+    		
+    		Bomb bomb=bombs.get(i);
+    		bomb.setLayoutY(bomb.getLayoutY()+intervalOfBricksHeight);
+    	}
 
 		Random random = new Random();
 		double i=50;
