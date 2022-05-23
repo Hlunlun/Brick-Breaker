@@ -408,6 +408,7 @@ public abstract class BBtan implements Initializable {
 	@FXML
 	private void goMenu(ActionEvent event) throws IOException {
 
+		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.Menu.getPath());
 	}
 
