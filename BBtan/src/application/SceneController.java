@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class SceneController {
@@ -54,6 +55,15 @@ public class SceneController {
 		scene=new Scene(root);
 		
 		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchScene(AnchorPane scene,String sceneName)throws IOException{		
+		
+		root = FXMLLoader.load(getClass().getResource(sceneName));
+		
+		stage = (Stage)scene.getScene().getWindow();
+		stage.setScene(new Scene(root));
 		stage.show();
 	}
 		

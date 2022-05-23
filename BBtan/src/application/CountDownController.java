@@ -29,7 +29,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-public class CountDownController implements Initializable {
+public class CountDownController extends BBtan {
 	
 	//game rule
 	@FXML
@@ -46,26 +46,7 @@ public class CountDownController implements Initializable {
 		
 	@FXML
 	private Text text5;
-	
-	private SceneController sceneController = new SceneController();
-	
-	@FXML
-	private Button menuButton;
-
-	@FXML
-	private AnchorPane scene;
-
-	@FXML
-	private Circle circle;
-
-	@FXML
-	private Rectangle paddle;
-
-	@FXML
-	private Rectangle bottomZone;
-
-	@FXML
-	private Button startButton;
+		
 
 	@FXML
 	private Rectangle timerBar;
@@ -73,59 +54,52 @@ public class CountDownController implements Initializable {
 	@FXML
 	private Label Showtime;
 
-	private int paddleStartSize = 160;
+	private double paddleStartSize = 160;
 
 	Robot robot = new Robot();
 
 	Timer timer = new Timer();
-	static long min, sec, totalSec;
+	long min, sec, totalSec;
 
-	private ArrayList<Rectangle> bricks = new ArrayList<>();
-	
-	private AudioManager audioManager = new AudioManager();
-
-	double deltaX = -1;
-	double deltaY = -3;
 
 	// 1 Frame evey 10 millis, which means 100 FPS
-	Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+	private Timeline paddleTimeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent actionEvent) {
 			movePaddle();
 
 			checkCollisionPaddle(paddle);
-			circle.setLayoutX(circle.getLayoutX() + deltaX);
-			circle.setLayoutY(circle.getLayoutY() + deltaY);
-
-			if (!bricks.isEmpty()) {
-				bricks.removeIf(brick -> checkCollisionBrick(brick));
-			} else {
-				timeline.stop();
-			}
-
-			checkCollisionScene(scene);
-			checkCollisionBottomZone();
+			
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
 		}
 	}));
 
 	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		paddle.setWidth(paddleStartSize);
-		timeline.setCycleCount(Animation.INDEFINITE);
-		Showtime.setText("01:30");
+	public void initialize() {
+		
+		Mode.mode=Mode.CountDown;
+		
+		deltaX = -1;
+		deltaY = -3;
+		
+		paddleTimeline.setCycleCount(Animation.INDEFINITE);
+		
+		
 	}
 
-	@FXML
-	void startGameButtonAction(ActionEvent event) {
-		audioManager.playMusic(Music.startgame);
-		startButton.setVisible(false);
-		startGame();
-		Showtime.setText("01:30");
-	}
-
+	@Override
 	public void startGame() {
+		
+		Showtime.setText("01:30");
+		
+		timeline.play();
+		
+		paddleTimeline.play();
+		paddle.setWidth(paddleStartSize);
+		
+		Showtime.setText("01:30");
+		
 		//game rule disappear
 		text1.setVisible(false);
      	text2.setVisible(false);
@@ -133,8 +107,7 @@ public class CountDownController implements Initializable {
      	text4.setVisible(false);
      	text5.setVisible(false);
      	
-		createBricks();
-		timeline.play();
+		
 		totalSec = 90;
 		timer.purge();
 		timer = new Timer();
@@ -157,66 +130,8 @@ public class CountDownController implements Initializable {
 		timer.schedule(timertask, 0, 1000);
 	}
 
-	public void checkCollisionScene(Node node) {
-		Bounds bounds = node.getBoundsInLocal();
-		boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
-		boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
-		boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
-		boolean topBorder = circle.getLayoutY() <= (bounds.getMinY()+35 + circle.getRadius());
-
-		if (rightBorder || leftBorder) {
-			deltaX *= -1;
-		}
-		if (bottomBorder || topBorder) {
-			deltaY *= -1;
-		}
-	}
-
-	public boolean checkCollisionBrick(Rectangle brick) {
-
-		if (circle.getBoundsInParent().intersects(brick.getBoundsInParent())) {
-			boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
-			boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
-			boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
-			boolean topBorder = circle.getLayoutY() <= (brick.getY() + circle.getRadius());
-
-			if (rightBorder || leftBorder) {
-				deltaX *= -1;
-			}
-			if (bottomBorder || topBorder) {
-				deltaY *= -1;
-			}
-
-			audioManager.playMusic(Music.brickDestroy);
-			scene.getChildren().remove(brick);
-
-			return true;
-		}
-		return false;
-	}
-
-	public void createBricks() {
-		double width = 560;
-		double height = 160;
-
-		int spaceCheck = 1;
-
-		Random random = new Random();
-
-		for (double i = height; i > 50; i = i - 50) {
-			for (double j = width; j > 0; j = j - 25) {
-				if (spaceCheck % 2 == 0) {
-					Rectangle rectangle = new Rectangle(j, i, 40, 40);// x,y,width,height
-					rectangle.setFill(Color.TRANSPARENT);
-					rectangle.setStroke(Color.hsb(random.nextInt(360), 0.6, 1));// hue,saturation,brightness
-					rectangle.setStrokeWidth(5);
-					scene.getChildren().add(rectangle);
-					bricks.add(rectangle);
-				}
-				spaceCheck++;
-			}
-		}
-	}
+	
+	
 
 	public void movePaddle() {
 		Bounds bounds = scene.localToScreen(scene.getBoundsInLocal());
@@ -238,11 +153,9 @@ public class CountDownController implements Initializable {
 
 		if (circle.getBoundsInParent().intersects(paddle.getBoundsInParent())) {
 
-			boolean rightBorder = circle
-					.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - circle.getRadius());
+			boolean rightBorder = circle.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - circle.getRadius());
 			boolean leftBorder = circle.getLayoutX() <= (paddle.getLayoutX() + circle.getRadius());
-			boolean bottomBorder = circle
-					.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - circle.getRadius());
+			boolean bottomBorder = circle.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - circle.getRadius());
 			boolean topBorder = circle.getLayoutY() <= (paddle.getLayoutY() + circle.getRadius());
 
 			if (rightBorder || leftBorder) {
@@ -258,70 +171,45 @@ public class CountDownController implements Initializable {
 		}
 	}
 
-	public void checkCollisionBottomZone() {
-		if (circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())) {
-			timeline.stop();
-			timer.cancel();
-			bricks.forEach(brick -> scene.getChildren().remove(brick));
-			bricks.clear();
-			startButton.setVisible(true);
-			
-			//game rule appear
-			text1.setVisible(true);
-	        text2.setVisible(true);
-	        text3.setVisible(true);
-	        text4.setVisible(true);
-	        text5.setVisible(true);
+	@Override
+    public void checkCollisionBottomZone(){
+        if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())){
+        	timeline.stop();
+    		paddleTimeline.stop();
+            timer.cancel();
+            
+            bricks.forEach(brick -> scene.getChildren().remove(brick));
+            
+            Reset();
+        }
+    }
 
-			paddle.setWidth(paddleStartSize);
 
-			deltaX = -1;
-			deltaY = -3;
-
-			circle.setLayoutX(300);
-			circle.setLayoutY(300);
-
-			System.out.println("Game over!");
-		}
-	}
-
-	/*TimerTask timertask = new TimerTask() {
-		@Override
-		public void run() {
-			//System.out.println("After 1 sec");
-			convertTime();
-			if(totalSec < 0)
-			{
-				timer.cancel();
-			}
-		}
-	};*/
 	public void checkTimer() {
 		if(totalSec < 0)
 		{
 			timeline.stop();
 			bricks.forEach(brick -> scene.getChildren().remove(brick));
 			bricks.clear();
-			startButton.setVisible(true);
+			startBtn.setVisible(true);
 
 			paddle.setWidth(paddleStartSize);
 
 			deltaX = -1;
 			deltaY = -3;
 
-			circle.setLayoutX(300);
-			circle.setLayoutY(300);
+			
 			System.out.println("Game over!");				
 		}
 	}
-	public static void convertTime()
+	public void convertTime()
 	{
 		min = TimeUnit.SECONDS.toMinutes(totalSec);
 		sec = totalSec - (min*60);
 		totalSec--;
 		//System.out.println("min: "+format(min)+" sec: "+format(sec));
 	}
-	private static String format(long value)
+	private String format(long value)
 	{
 		if(value < 10)
 		{
@@ -329,9 +217,28 @@ public class CountDownController implements Initializable {
 		}
 		return value+"";
 	}
-	
-	private void goMenu(ActionEvent event) throws IOException {
 
-		sceneController.switchScene(event, Mode.Menu.getPath());
+	@Override
+	public void Reset() {
+        bricks.clear();
+		
+		//game rule appear
+		text1.setVisible(true);
+        text2.setVisible(true);
+        text3.setVisible(true);
+        text4.setVisible(true);
+        text5.setVisible(true);
+        
+        startBtn.setVisible(true);
+        menuBtn.setVisible(true);
+
+		paddle.setWidth(paddleStartSize);
+
+		deltaX = -1;
+		deltaY = -3;
+		
+		circle.setLayoutX(scene.getLayoutBounds().getCenterX());
+        circle.setLayoutY(paddle.getLayoutY()-circle.getRadius()-10);
+		
 	}
 }

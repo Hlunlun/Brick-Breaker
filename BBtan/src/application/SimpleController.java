@@ -16,8 +16,7 @@ import javafx.util.Duration;
 
 public class SimpleController extends BBtan{
 			
-	private AudioManager audioManager = new AudioManager();
-	
+		
 	@FXML
 	private Text text1;
 	
@@ -49,7 +48,7 @@ public class SimpleController extends BBtan{
 
             checkCollisionPaddle(paddle);
                         
-            checkCollisionBottomZone();
+            
         }
     }));
 
@@ -58,21 +57,25 @@ public class SimpleController extends BBtan{
     //initialize the timeline, paddleTimeline, mode:Simple
     @Override
 	public void initialize() {
+    	
+    	pauseBtn.setVisible(false);
+    	
 		Mode.mode=Mode.Simple;
     	
     	paddle.setWidth(paddleStartSize);
         
         paddleTimeline.setCycleCount(Animation.INDEFINITE);
         
-		pauseBtn.setVisible(false);
+		
 	}
 
     //set the scene of the game and called in startGameButtonAction
      @Override
      public void startGame(){
-    	
-		audioManager.playMusic(Music.startgame);
-     	text1.setVisible(false);
+
+    	pauseBtn.setVisible(true);
+     	
+    	text1.setVisible(false);
      	text2.setVisible(false);
      	text3.setVisible(false);
      	text4.setVisible(false);
@@ -101,20 +104,23 @@ public class SimpleController extends BBtan{
 
     //check if the circle collide with the paddle
     private void checkCollisionPaddle(Rectangle paddle){
+    	
+    	boolean rightBorder = circle.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - circle.getRadius());
+		boolean leftBorder = circle.getLayoutX() <= (paddle.getLayoutX() + circle.getRadius());
+		boolean bottomBorder = circle.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - circle.getRadius());
+		boolean topBorder = circle.getLayoutY() <= (paddle.getLayoutY() + circle.getRadius());
 
         if(circle.getBoundsInParent().intersects(paddle.getBoundsInParent())){
-
-        	boolean rightBorder = circle.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - circle.getRadius());
-			boolean leftBorder = circle.getLayoutX() <= (paddle.getLayoutX() + circle.getRadius());
-			boolean bottomBorder = circle.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - circle.getRadius());
-			boolean topBorder = circle.getLayoutY() <= (paddle.getLayoutY() + circle.getRadius());
-
             if (rightBorder || leftBorder) {
                 deltaX *= -1;
             }
-            if (bottomBorder || topBorder) {
+            if (topBorder) {
                 deltaY *= -1;
             }
+        }
+        
+        if(bottomBorder&&!(rightBorder||leftBorder)) {        	
+            circle.setLayoutY(paddle.getLayoutY()-circle.getRadius()-10);
         }
     }
     
@@ -122,10 +128,10 @@ public class SimpleController extends BBtan{
     @Override
     public void checkCollisionBottomZone(){
         if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())&&circle.getLayoutY()>paddle.getLayoutY()){
-            timeline.stop();
             
-            //brick is element in bricks
-            //->add the code that you want to execute during iterate the array bricks 
+        	timeline.stop();
+            paddleTimeline.stop();
+            
             bricks.forEach(brick -> scene.getChildren().remove(brick));
             
             Reset();
@@ -141,6 +147,7 @@ public class SimpleController extends BBtan{
         startBtn.setVisible(true);
         menuBtn.setVisible(true);
         pauseBtn.setVisible(false);
+        
         text1.setVisible(true);
         text2.setVisible(true);
         text3.setVisible(true);
@@ -148,6 +155,7 @@ public class SimpleController extends BBtan{
         text5.setVisible(true);
         
         paddle.setWidth(paddleStartSize);
+        paddleTimeline.stop();
 
         deltaX = -1;
         deltaY = -3;
@@ -165,7 +173,6 @@ public class SimpleController extends BBtan{
 
 //timeline
 //https://vimsky.com/zh-tw/examples/detail/java-class-javafx.animation.Timeline.html
-
 
 
 

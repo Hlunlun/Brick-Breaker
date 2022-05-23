@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="scene" prefHeight="600.0" prefWidth="600.0" stylesheets="@endless.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EndlessController">
    <children>
-      <Button fx:id="menuBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="43.0" prefWidth="76.0" text="Menu">
+      <Button fx:id="menuBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="43.0" prefWidth="78.0" text="Menu">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font></Button>
@@ -56,7 +56,7 @@
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="pauseBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="||">
+      <Button fx:id="pauseBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#pauseButtonAction" prefHeight="42.0" prefWidth="42.0" text="||">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>

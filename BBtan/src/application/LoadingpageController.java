@@ -36,11 +36,8 @@ public class LoadingpageController implements Initializable{
 			
 			try {
 				
-				Parent root = FXMLLoader.load(getClass().getResource(Mode.Menu.getPath()));
+				new SceneController().switchScene(scene, Mode.Menu.getPath());
 				
-				Stage stage = (Stage)scene.getScene().getWindow();
-				stage.setScene(new Scene(root));
-				stage.show();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

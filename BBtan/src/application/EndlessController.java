@@ -49,7 +49,6 @@ public class EndlessController extends BBtan{
 	
 	//circle will go up and down while waiting for the user to start the game
     private TranslateTransition translateTransition=new TranslateTransition();
-    
     	
     //MouseEvent : Pressed, Dragged, Released
     EventHandler<MouseEvent>eventHandler=new EventHandler<MouseEvent>(){
@@ -58,7 +57,8 @@ public class EndlessController extends BBtan{
     		
     		//reference
     		//https://www.tabnine.com/code/java/methods/javafx.animation.Timeline/getStatus
-    		if(timeline.getStatus() == Status.RUNNING)return ;
+    		if(timeline.getStatus() == Status.RUNNING)return;
+    		if(pauseBtn.isPressed()||pauseBtn.isHover())return; 
     		
 	 		double circleX=circle.getLayoutX();
 	 	   	double circleY=circle.getLayoutY();
@@ -79,7 +79,7 @@ public class EndlessController extends BBtan{
 	 		deltaY=slope*scale;
 
 	 		///check if the ball is out of the scene
-	 		double k=Math.log10(Math.abs(deltaY));
+	 		double k=Math.max(Math.log10(Math.abs(deltaY)),Math.log10(Math.abs(deltaX)));
 	 		k=-1*Math.floor(k);
  			double shrink=Math.pow(10, k);
  			deltaX*=shrink;
@@ -155,6 +155,7 @@ public class EndlessController extends BBtan{
             
         }
     }));
+    
     
 	   
     //initialize the timeline, checkGameOver, mode: SightLine
