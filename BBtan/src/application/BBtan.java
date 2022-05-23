@@ -173,6 +173,9 @@ public abstract class BBtan implements Initializable {
 	        if (pressed) {
 	        	scene.setDisable(false);
 	        	if(Mode.mode.equals(Mode.Simple))timeline.play();
+	        	if(Mode.mode.equals(Mode.Endless)||Mode.mode.equals(Mode.FallingBricks)) {
+	        		if(circle.getLayoutY()!=bottomZone.getLayoutY()-circle.getRadius()-2)timeline.play();
+	        	}
 				stage.close();
 	        } 
 	    });
