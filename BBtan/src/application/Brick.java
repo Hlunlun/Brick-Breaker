@@ -23,7 +23,7 @@ public class Brick extends Label{
 		
 		//reference
 		//https://www.demo2s.com/java/javafx-vbox-setborder-border-value.html
-		BorderStroke borderStroke = new BorderStroke(Color.hsb(random.nextInt(360), 1, 0.9), BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
+		BorderStroke borderStroke = new BorderStroke(Color.hsb(random.nextInt(360), 0.8, 1), BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
                 new BorderWidths(borderWidth));
         Border border = new Border(borderStroke);
 		setBorder(border);
@@ -31,13 +31,13 @@ public class Brick extends Label{
 		setPrefHeight(40);
 		setPrefWidth(40);
 		
-		setStyle("-fx-background-color: 0");
+		setStyle("-fx-background-color: transparent");
         
 	}
 	
 	public Brick(String text) {
 		
-		BorderStroke borderStroke = new BorderStroke(Color.hsb(random.nextInt(360), 1, 0.9), BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
+		BorderStroke borderStroke = new BorderStroke(Color.hsb(random.nextInt(360), 0.8, 1), BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
                 new BorderWidths(borderWidth));
         Border border = new Border(borderStroke);
 		setBorder(border);
@@ -46,7 +46,7 @@ public class Brick extends Label{
 		setPrefHeight(40);
 		setPrefWidth(40);
 		
-		setStyle("-fx-background-color: 0");
+		setStyle("-fx-background-color: transparent");
 		
 		Font font = Font.font("Impact", FontWeight.NORMAL, FontPosture.REGULAR, 20);
 		setFont(font);

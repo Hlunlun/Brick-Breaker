@@ -78,6 +78,8 @@ public class CountDownController extends BBtan {
 	@Override
 	public void initialize() {
 		
+		pauseBtn.setVisible(false);
+		
 		Mode.mode=Mode.CountDown;
 		
 		deltaX = -1;
@@ -90,6 +92,8 @@ public class CountDownController extends BBtan {
 
 	@Override
 	public void startGame() {
+		
+		pauseBtn.setVisible(true);
 		
 		Showtime.setText("01:30");
 		
@@ -231,6 +235,7 @@ public class CountDownController extends BBtan {
         
         startBtn.setVisible(true);
         menuBtn.setVisible(true);
+        pauseBtn.setVisible(false);
 
 		paddle.setWidth(paddleStartSize);
 

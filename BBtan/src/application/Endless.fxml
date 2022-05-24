@@ -56,7 +56,7 @@
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="pauseBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#pauseButtonAction" prefHeight="42.0" prefWidth="42.0" text="||">
+      <Button fx:id="pauseBtn" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#pauseButtonAction" prefHeight="42.0" prefWidth="42.0" text="||">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
