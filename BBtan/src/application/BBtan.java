@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -139,6 +140,10 @@ public abstract class BBtan implements Initializable {
 		Scene pause=new Scene(root);
 		Stage stage=new Stage();
 		stage.setScene(pause);
+		stage.setResizable(false);
+		stage.setTitle("PAUSED");
+		Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
+		stage.getIcons().add(iconImage);
 		stage.show();
 		
 		PauseController pauseController=loader.getController();		
@@ -146,6 +151,7 @@ public abstract class BBtan implements Initializable {
 	        
 	        if (pressed) {
 	        	try {
+	        		audioManager.playMusic(Music.click);
 	        		scene.setDisable(false);
 					sceneController.switchScene(scene,Mode.Menu.getPath());
 					stage.close();
@@ -159,6 +165,7 @@ public abstract class BBtan implements Initializable {
 	        
 	        if (pressed) {
 	        	try {
+	        		audioManager.playMusic(Music.click);
 	        		scene.setDisable(false);
 	        		sceneController.switchScene(scene,Mode.mode.getPath());
 	    			stage.close();
@@ -171,6 +178,7 @@ public abstract class BBtan implements Initializable {
 		pauseController.continueBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
 	        
 	        if (pressed) {
+	        	audioManager.playMusic(Music.click);
 	        	scene.setDisable(false);
 	        	if(Mode.mode.equals(Mode.Simple))timeline.play();
 	        	if(Mode.mode.equals(Mode.Endless)||Mode.mode.equals(Mode.FallingBricks)) {

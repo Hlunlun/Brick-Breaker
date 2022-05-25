@@ -1,0 +1,28 @@
+#scene{
+	-fx-background-image: url("../Image/pause.jpg");
+	-fx-background-size: 600px 600px;
+	
+}
+
+.button{
+	-fx-background-color:#E92D6F;
+	-fx-text-fill:'white';
+	-fx-background-radius: 40px;
+	-fx-cursor: hand;
+	-fx-opacity: 0.8;
+	-fx-font-family: "Comic Sans MS";
+    -fx-font-weight: bold;
+}
+
+.button: hover{
+	-fx-background-color: #DD0A54;
+	-fx-opacity: 1;
+}
+
+#continueBtn, #restartBtn{
+	-fx-font-size: 24px;
+}
+
+#menuBtn{
+	-fx-font-size: 21px;
+}
