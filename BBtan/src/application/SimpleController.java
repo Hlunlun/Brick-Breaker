@@ -157,8 +157,8 @@ public class SimpleController extends BBtan{
         paddle.setWidth(paddleStartSize);
         paddleTimeline.stop();
 
-        deltaX = -1;
-        deltaY = -3;
+        deltaX = 1;
+        deltaY = -1;
 
         circle.setLayoutX(scene.getBoundsInLocal().getCenterX());
         circle.setLayoutY(paddle.getLayoutY()-circle.getRadius());

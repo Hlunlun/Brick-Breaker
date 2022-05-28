@@ -31,7 +31,7 @@ public class Brick extends Label{
 		setPrefHeight(40);
 		setPrefWidth(40);
 		
-		setStyle("-fx-background-color: 0");
+		setStyle("-fx-background-color: 00FFFFFF");
         
 	}
 	
@@ -46,7 +46,7 @@ public class Brick extends Label{
 		setPrefHeight(40);
 		setPrefWidth(40);
 		
-		setStyle("-fx-background-color: 0");
+		setStyle("-fx-background-color: 00FFFFFF");
 		
 		Font font = Font.font("Impact", FontWeight.NORMAL, FontPosture.REGULAR, 20);
 		setFont(font);
