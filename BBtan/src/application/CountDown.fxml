@@ -50,8 +50,13 @@
          </font>
       </Text>
       <Text fx:id="text2" layoutX="26.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move the mouse to catch the ball with the paddle." />
-      <Text fx:id="text3" layoutX="30.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The paddle will become shorter and shorter after the ball hit the paddle again." textAlignment="CENTER" wrappingWidth="540.8447265625" />
+      <Text fx:id="text3" layoutX="30.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The paddle will become shorter and shorter after the ball hits the paddle again." textAlignment="CENTER" wrappingWidth="540.8447265625" />
       <Text fx:id="text4" layoutX="56.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the ball falls to the bottom, you will lose." />
       <Text fx:id="text5" layoutX="55.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to break all the bricks before time's up!" />
+      <Button fx:id="pauseBtn" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="||">
+         <font>
+            <Font name="Comic Sans MS Bold" size="21.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

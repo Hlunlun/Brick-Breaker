@@ -37,7 +37,7 @@
 	-fx-text-fill:'white';
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
-	-fx-opacity: 0.7;
+	-fx-opacity: 0.8;
 	-fx-font-family: "Comic Sans MS";
     -fx-font-weight: bold;
 }
@@ -47,14 +47,8 @@
 	-fx-opacity: 1;
 }
 
-#paddle{
-	//-fx-fill:#20088d;
-}
-
-#circle{
-	//-fx-fill:#FF0A85;
-}
-
 #pauseBtn{
 	-fx-background-radius: 60px;
+	-fx-font-size: 21px;
+	-fx-font-weight: bold;
 }
