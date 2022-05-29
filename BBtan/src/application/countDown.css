@@ -28,7 +28,9 @@
 }
 
 #pauseBtn{
+	-fx-background-radius: 60px;
 	-fx-font-size: 21px;
+	-fx-font-weight: bold;
 }
 
 #timerBar{

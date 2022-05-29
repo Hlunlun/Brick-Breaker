@@ -54,6 +54,7 @@
          </font>
       </Button>
             <Button fx:id="pauseBtn" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#pauseButtonAction" prefHeight="42.0" prefWidth="42.0" text="||">
+
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
@@ -65,7 +66,7 @@
       </Text>
       <Text fx:id="text2" layoutX="45.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hold down the mouse and use the sight line to aim for the bricks." textAlignment="CENTER" wrappingWidth="519.3671875" />
       <Text fx:id="text3" layoutX="89.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The bricks will drop one row each time." />
-      <Text fx:id="text4" layoutX="39.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The number on the brick will minus 1 once the ball hit the brick." textAlignment="CENTER" wrappingWidth="529.65625" />
+      <Text fx:id="text4" layoutX="39.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The number on the brick will minus 1 once the ball hits the brick." textAlignment="CENTER" wrappingWidth="529.65625" />
       <Text fx:id="text5" layoutX="120.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The brick will be cleared when the number goes to zero." textAlignment="CENTER" wrappingWidth="368.48828125" />
       <Text fx:id="text9" fill="#20088d" layoutX="264.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tips" wrappingWidth="81.0">
          <font>
