@@ -68,7 +68,8 @@ public abstract class BBtan implements Initializable {
 
 	// bricks
 	public ArrayList<Brick> bricks = new ArrayList<>();
-
+	int BallCount = 1;
+	
 	// bombs
 	public ArrayList<Bomb> bombs = new ArrayList<>();
 
@@ -362,7 +363,7 @@ public abstract class BBtan implements Initializable {
 				
 				Integer count=Integer.parseInt(brick.getText());
 							
-				count--;
+				count = count - BallCount;
 				if(count<=0) {
 					scene.getChildren().remove(brick);
 
@@ -506,7 +507,8 @@ public abstract class BBtan implements Initializable {
             
             if(Mode.mode.equals(Mode.FallingBricks)) {
             	FallingBricksDown();
-            	
+            	BallCount++;
+            	System.out.println("BallCount: "+BallCount);
             }else {
             	bricksBombsDown();
             }
