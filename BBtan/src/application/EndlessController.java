@@ -71,8 +71,6 @@ public class EndlessController extends BBtan{
 	 	   	///line equation
 	 	   	double slope=vertical?-1:(circleY-mouseY)/(circleX-mouseX);
  	   	
-	 	   	
-	 	   	
 	 	   	double scale=1;
 	 	   	
 	 	   	deltaX=vertical?0:1*scale;
@@ -85,18 +83,26 @@ public class EndlessController extends BBtan{
  			deltaX*=shrink;
  			deltaY*=shrink;
 	 		
-	 		
-	 	   	
-	 	   	if(mouseX<circleX&&mouseY<circleY) {
-	 	   		deltaX*=-1;
-	 	   		deltaY*=-1;
-	 	   	}
-	 	   	
-	 	   	if(mouseX>circleX&&mouseY>circleY) {
-		   		deltaX*=-1;
-		   		deltaY*=-1;
-		   	}		
-	    	
+ 			checkSpeed();
+ 			double degree=Math.atan(deltaY/deltaX);
+	   		if (mouseX < circleX && mouseY <circleY) {
+				deltaX *= -1;
+				deltaY *= -1;
+				
+				if(Math.abs(degree)<Math.PI/18) {
+		   			deltaX=-speed*Math.cos(Math.PI/18);
+		   			deltaY=-speed*Math.sin(Math.PI/18);
+				}
+			}
+
+			if (mouseX > circleX &&(Math.abs(degree)<Math.PI/18)||mouseY>=circleY) {
+		   			deltaX=speed*Math.cos(Math.PI/18);
+		   			deltaY=-speed*Math.sin(Math.PI/18);
+			}
+			
+			
+	   		
+	   		
 	 	   x=circle.getLayoutX();
 	 	   y=circle.getLayoutY();
 	 	   
@@ -133,7 +139,20 @@ public class EndlessController extends BBtan{
 			
 		}
     };
-		
+    
+    private void checkSpeed() {
+    	
+    	double length=Math.pow(deltaX,2)+Math.pow(deltaY,2);
+    	    	
+		if(length!=Math.pow(speed, 2)) {
+    		double scale=Math.sqrt(Math.pow(speed, 2)/length);   		
+    		    		
+    		deltaX*=scale;
+    		deltaY*=scale;
+    		
+    	}
+    }
+    
     //draw the sight line
     Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
            	

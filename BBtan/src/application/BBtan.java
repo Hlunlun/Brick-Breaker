@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 //must Override : initialize, startGame, Reset
@@ -62,6 +63,8 @@ public abstract class BBtan implements Initializable {
 	// control the direction of the circle
 	public double deltaX = 0;
 	public double deltaY = -1;
+	
+	public double speed=2;
 
 	// bricks
 	public ArrayList<Brick> bricks = new ArrayList<>();
@@ -69,6 +72,9 @@ public abstract class BBtan implements Initializable {
 	// bombs
 	public ArrayList<Bomb> bombs = new ArrayList<>();
 
+	
+	private Score score=new Score();
+	
 	// go back to menu
 	private SceneController sceneController = new SceneController();
 
@@ -90,7 +96,7 @@ public abstract class BBtan implements Initializable {
 	public Timeline timeline = new Timeline(new KeyFrame(Duration.millis(7), new EventHandler<ActionEvent>() {
 
 		@Override
-		public void handle(ActionEvent actionEvent) {
+		public void handle(ActionEvent event) {
 
 			circle.setLayoutX(circle.getLayoutX() + deltaX);
 			circle.setLayoutY(circle.getLayoutY() + deltaY);
@@ -98,8 +104,17 @@ public abstract class BBtan implements Initializable {
 			if (!bricks.isEmpty()) {
 				bricks.removeIf(brick -> checkCollisionBrick(brick));
 
-			}else{
-            	Reset();
+			}else{            	
+				
+				if(Mode.mode.equals(Mode.Simple)||Mode.mode.equals(Mode.CountDown)) {
+					
+					try {
+						sceneController.switchScene(scene,Mode.Win.getPath());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}				
+				
             }
 			if (!bombs.isEmpty()) {
 				bombs.removeIf(bomb -> checkCollisionBomb(bomb));
@@ -135,10 +150,12 @@ public abstract class BBtan implements Initializable {
 		timeline.pause();
 		scene.setDisable(true);
 		
+		
 		FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Pause.getPath()));
 		Parent root=loader.load();				
 		Scene pause=new Scene(root);
 		Stage stage=new Stage();
+		stage.initStyle(StageStyle.TRANSPARENT);
 		stage.setScene(pause);
 		stage.setResizable(false);
 		stage.setTitle("PAUSED");
@@ -156,7 +173,6 @@ public abstract class BBtan implements Initializable {
 					sceneController.switchScene(scene,Mode.Menu.getPath());
 					stage.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        } 
@@ -170,7 +186,6 @@ public abstract class BBtan implements Initializable {
 	        		sceneController.switchScene(scene,Mode.mode.getPath());
 	    			stage.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        } 
@@ -211,13 +226,16 @@ public abstract class BBtan implements Initializable {
 	@FXML
 	public void startGameButtonAction(ActionEvent event) {
 
+		score.Reset();
 		if (Mode.mode.equals(Mode.FallingBricks)) {
 			
+			scene.getChildren().add(score);
 			ArrangeFallingBricks();
 			checkGameOver.play();
 			
 		} else if(Mode.mode.equals(Mode.Endless)) {
 			
+			scene.getChildren().add(score);			
 			ArrangeEndlessBricks();
 			checkGameOver.play();
 			
@@ -343,15 +361,14 @@ public abstract class BBtan implements Initializable {
 			if (Mode.mode.equals(Mode.FallingBricks)) {
 				
 				Integer count=Integer.parseInt(brick.getText());
-				System.out.println(count);
-				
+							
 				count--;
 				if(count<=0) {
 					scene.getChildren().remove(brick);
 
 					makeExplosion(brick.getLayoutX() + brick.getWidth() / 2, brick.getLayoutY() + brick.getHeight() / 2);
-					
-					
+							
+					score.plus();					
 					return true;
 				}
 				else {
@@ -363,6 +380,7 @@ public abstract class BBtan implements Initializable {
 
 				makeExplosion(brick.getLayoutX() + brick.getWidth() / 2, brick.getLayoutY() + brick.getHeight() / 2);
 
+				score.plus();
 				return true;
 			}
 				
@@ -376,19 +394,15 @@ public abstract class BBtan implements Initializable {
 
 		if (circle.getBoundsInParent().intersects(bomb.getBoundsInParent())) {
 
-			Random random = new Random();
-
 			for (int i = 0; i < bricks.size(); i++) {
 				if (bricks.get(i).getLayoutY() == bomb.getLayoutY() - bomb.getRadius()) {
 					scene.getChildren().remove(bricks.get(i));
+					score.plus();
 				}
 
 			}
 
 			bricks.removeIf(brick -> brick.getLayoutY() == bomb.getLayoutY() - bomb.getRadius());
-
-			// else
-			// bricks.removeIf(brick->brick.getLayoutX()==bomb.getLayoutX()-bomb.getRadius());
 			makeRowFlash(bomb.getLayoutY() - bomb.getRadius(), (Color) bomb.getStroke());
 			scene.getChildren().remove(bomb);
 
@@ -421,14 +435,29 @@ public abstract class BBtan implements Initializable {
 	}
 
 	// check if the bricks collide with the bottomZone
-	private void checkGameOver(Brick brick) {
+	private void checkGameOver(Brick brick){	
 
-		if (brick.getBoundsInParent().intersects(bottomZone.getBoundsInParent())) {
-
-			Reset();
-		}
-
-    	if(brick.getLayoutY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
+		if(brick.getLayoutY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
+    		
+    		FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Gameover.getPath()));
+			try {
+				Parent root = loader.load();
+				Scene pause=new Scene(root);
+				Stage stage=new Stage();
+				Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
+				stage.getIcons().add(iconImage);
+				stage.setResizable(false);
+				stage.setTitle("BRICK BREAKER");
+				stage.setScene(pause);
+				stage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}				
+			
+			GameoverController gameoverController=loader.getController();
+			gameoverController.setScore(score.getScore());			
+			Stage stage = (Stage)scene.getScene().getWindow();
+			stage.close();
     		Reset();
     	}
     }

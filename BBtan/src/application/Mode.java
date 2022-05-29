@@ -10,7 +10,9 @@ public enum Mode {
 	Endless("Endless.fxml"),
 	CountDown("CountDown.fxml"),
 	FallingBricks("FallingBricks.fxml"),
-	Pause("Pause.fxml");
+	Pause("Pause.fxml"),
+	Win("Win.fxml"),
+	Gameover("Gameover.fxml");
 
 	
 	public static Mode mode;
