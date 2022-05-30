@@ -159,9 +159,9 @@ public abstract class BBtan implements Initializable {
 		stage.initStyle(StageStyle.TRANSPARENT);
 		stage.setScene(pause);
 		stage.setResizable(false);
-		stage.setTitle("PAUSED");
-		Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
-		stage.getIcons().add(iconImage);
+		//stage.setTitle("PAUSED");
+		//Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
+		//stage.getIcons().add(iconImage);
 		stage.show();
 		
 		PauseController pauseController=loader.getController();		

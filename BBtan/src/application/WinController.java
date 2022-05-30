@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 
 public class WinController {
 	
+	private AudioManager audioManager = new AudioManager();
+	
 	@FXML
 	private Button menuBtn;
 	
@@ -18,14 +20,14 @@ public class WinController {
 	
    @FXML
     private void again(ActionEvent event) throws IOException {
+	   audioManager.playMusic(Music.click);
 	   sceneController.switchScene(event,Mode.mode.getPath());
     }
 
     @FXML
-    private void goMenu(ActionEvent event) throws IOException {    	
-    	
+    private void goMenu(ActionEvent event) throws IOException {
+    	audioManager.playMusic(Music.click);
     	sceneController.switchScene(event,Mode.Menu.getPath());
-
     }
 	
 

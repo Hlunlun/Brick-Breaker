@@ -1,0 +1,21 @@
+.root{
+	-fx-background-image: url("../Image/win.jpg");
+	-fx-background-size: 600px 400px;
+}
+
+.button{
+	-fx-background-color:#5DB793;
+	-fx-text-fill:'white';
+	-fx-background-radius: 40px;
+	-fx-cursor: hand;
+	-fx-opacity: 0.8;
+	-fx-font-family: "Comic Sans MS";
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.button: hover{
+	-fx-background-color: #169C67;
+	-fx-opacity: 1;
+	-fx-font-size: 24px;
+}

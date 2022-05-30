@@ -46,6 +46,9 @@ public class FallingBricksController extends BBtan {
 	
 	@FXML
 	private Text text9;
+	
+	@FXML
+	private Text text10;
 
 	// the line to point to target
 	private Polyline polyline = new Polyline();
@@ -216,6 +219,7 @@ public class FallingBricksController extends BBtan {
      	text7.setVisible(false);
      	text8.setVisible(false);
      	text9.setVisible(false);
+     	text10.setVisible(false);
 
 		drawLine.stop();
 		translateTransition.stop();
@@ -261,7 +265,7 @@ public class FallingBricksController extends BBtan {
         text7.setVisible(true);
         text8.setVisible(true);
         text9.setVisible(true);
-
+        text10.setVisible(true);
 	}
 
 }
