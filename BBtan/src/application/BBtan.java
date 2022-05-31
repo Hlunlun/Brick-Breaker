@@ -150,7 +150,7 @@ public abstract class BBtan implements Initializable {
 	
 	public void pauseButtonAction(ActionEvent event) throws IOException {
 		
-		timeline.pause();
+		timeline.stop();
 		scene.setDisable(true);
 		
 		
@@ -473,8 +473,9 @@ public abstract class BBtan implements Initializable {
     
     //check if the circle collide with the bounds of the scene
     private void checkCollisionScene(){
-        Bounds bounds = scene.getLayoutBounds();
-                   
+    	Bounds bounds= scene.getLayoutBounds();
+    	
+            
     	boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
         boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
         boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
@@ -487,6 +488,7 @@ public abstract class BBtan implements Initializable {
         if(topBorder) {
         	deltaY*=-1;
         } 
+               
 
         
     }

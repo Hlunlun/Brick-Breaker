@@ -3,6 +3,7 @@ package application;
 
 
 import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -45,9 +46,14 @@ public class SimpleController extends BBtan{
         public void handle(ActionEvent actionEvent) {
             
         	movePaddle();
-
             checkCollisionPaddle(paddle);
-                        
+            
+            if(timeline.getStatus().equals(Status.STOPPED)) {
+            	paddleTimeline.stop();
+            }
+            else {
+            	paddleTimeline.play();
+            }
             
         }
     }));
@@ -57,6 +63,7 @@ public class SimpleController extends BBtan{
     //initialize the timeline, paddleTimeline, mode:Simple
     @Override
 	public void initialize() {
+    	paddleTimeline.stop();
     	
     	pauseBtn.setVisible(false);
     	
