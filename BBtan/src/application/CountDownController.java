@@ -3,6 +3,7 @@ package application;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,6 +73,13 @@ public class CountDownController extends BBtan {
 			
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
+			
+			if(timeline.getStatus().equals(Status.STOPPED)||bricks.isEmpty()) {
+            	paddleTimeline.stop();
+            }
+            else {
+            	paddleTimeline.play();
+            }
 		}
 	}));
 
