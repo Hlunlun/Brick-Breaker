@@ -101,7 +101,7 @@ public class CountDownController extends BBtan {
 	@Override
 	public void startGame() {
 		
-		pauseBtn.setVisible(true);
+		pauseBtn.setVisible(false);
 		
 		Showtime.setText("01:30");
 		

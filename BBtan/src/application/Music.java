@@ -10,7 +10,8 @@ public enum Music {
 	tick("src/audio/tick.mp3"),
 	click("src/audio/click.mp3"),
 	startgame("src/audio/startgame.mp3"),
-	background("src/audio/BGM.mp3");
+	background("src/audio/BGM.mp3"),
+	boom("src/audio/boom.mp3");
 
 	
 	private String path;
