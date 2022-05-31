@@ -1,6 +1,8 @@
 package application;
 
 
+import java.util.Iterator;
+
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -107,7 +109,8 @@ public class EndlessController extends BBtan{
 	 	   y=circle.getLayoutY();
 	 	   
 	 	  if(event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
-	    		drawLine.play(); 
+	    		drawLine.play();            
+	            scene.getChildren().add(polyline);
 	    		timeline.stop();    
 	    		   		
 	    	}
@@ -119,7 +122,8 @@ public class EndlessController extends BBtan{
 	    		scene.getChildren().removeAll(polyline);
 	    		
 	    		drawLine.play();  	
-	    		
+	            
+	            scene.getChildren().add(polyline);
 	    		timeline.stop();   
 	    		
 	    		
@@ -168,9 +172,10 @@ public class EndlessController extends BBtan{
             
     		x+=1000*deltaX;
             y+=1000*deltaY;   
-                       
-            scene.getChildren().add(polyline);
             
+            
+            //reference
+            //https://stackoverflow.com/questions/36406408/exception-in-thread-javafx-application-thread-duplicate-children-added
             
         }
     }));
@@ -247,8 +252,17 @@ public class EndlessController extends BBtan{
         scene.getChildren().removeAll(bricks);
         scene.getChildren().removeAll(bombs);
         
-        bricks.clear();
-        bombs.clear();
+        //reference
+        //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
+        //use iterator to clear arraylist instead of arrylist.clear()
+        Iterator<Brick> br = bricks.iterator();        
+        while (br.hasNext()) {           
+        	br.remove();              
+        }
+        Iterator<Bomb>bo = bombs.iterator(); 
+        while (bo.hasNext()) {           
+        	bo.remove();              
+        }
         
         scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
         scene.removeEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);

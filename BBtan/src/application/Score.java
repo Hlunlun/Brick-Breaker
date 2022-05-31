@@ -56,8 +56,7 @@ public class Score extends Label {
 	
 	public void plus() {
 		
-		score++;
-		
+		score++;		
 		setText("score: "+String.valueOf(score));
 	}
 	

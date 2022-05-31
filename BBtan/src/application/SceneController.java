@@ -15,15 +15,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SceneController implements Initializable{
+public class SceneController{
 
-	private Stage stage;
+	private Stage stage=new Stage();
 	private Scene scene;
 	private Parent root;	
 	private Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	
+	public void initialize() {
 		
 		stage.getIcons().add(iconImage);
 		stage.setResizable(false);
@@ -36,17 +36,7 @@ public class SceneController implements Initializable{
 		Node node=(Node)event.getSource();
 		stage=(Stage)node.getScene().getWindow();
 		scene=new Scene(root);
-		stage.getIcons().add(iconImage);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchScene(KeyEvent event,String sceneName,String styleName)throws IOException{		
-		root =FXMLLoader.load(getClass().getResource(sceneName));
-		Node node=(Node)event.getSource();
-		stage=(Stage)node.getScene().getWindow();
-		scene=new Scene(root);
-		scene.getStylesheets().add(getClass().getResource(styleName).toExternalForm());
+		initialize();
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -56,17 +46,20 @@ public class SceneController implements Initializable{
 		Node node=(Node)event.getSource();
 		stage=(Stage)node.getScene().getWindow();
 		scene=new Scene(root);
-		
+		initialize();
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	public void switchScene(AnchorPane scene,String sceneName)throws IOException{		
 		
-		root = FXMLLoader.load(getClass().getResource(sceneName));
-		
+		root = FXMLLoader.load(getClass().getResource(sceneName));		
+		Stage stage=new Stage();
 		stage = (Stage)scene.getScene().getWindow();
 		stage.setScene(new Scene(root));
+		stage.getIcons().add(iconImage);
+		stage.setResizable(false);
+		stage.setTitle("BRICK BREAKER");
 		stage.show();
 	}
 

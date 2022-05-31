@@ -53,7 +53,7 @@ public abstract class BBtan implements Initializable {
 
 	@FXML
 	public Rectangle paddle;
-//<<<<<<< master
+
 
 
 
@@ -109,11 +109,15 @@ public abstract class BBtan implements Initializable {
 				
 				if(Mode.mode.equals(Mode.Simple)||Mode.mode.equals(Mode.CountDown)) {
 					
+					timeline.stop();					
 					try {
+						
 						sceneController.switchScene(scene,Mode.Win.getPath());
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}				
+					
+					
 				}				
 				
             }
@@ -121,10 +125,8 @@ public abstract class BBtan implements Initializable {
 				bombs.removeIf(bomb -> checkCollisionBomb(bomb));
 			}
 
-			// how about deltaX!=0 and deltaY=0
-			// also deltaX=0 and deltaY!=0
 
-			checkCollisionScene(scene);
+			checkCollisionScene();
 			checkCollisionBottomZone();
 
 		}
@@ -159,9 +161,6 @@ public abstract class BBtan implements Initializable {
 		stage.initStyle(StageStyle.TRANSPARENT);
 		stage.setScene(pause);
 		stage.setResizable(false);
-		//stage.setTitle("PAUSED");
-		//Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
-		//stage.getIcons().add(iconImage);
 		stage.show();
 		
 		PauseController pauseController=loader.getController();		
@@ -473,8 +472,8 @@ public abstract class BBtan implements Initializable {
     
     
     //check if the circle collide with the bounds of the scene
-    private void checkCollisionScene(Node node){
-        Bounds bounds = node.getLayoutBounds();
+    private void checkCollisionScene(){
+        Bounds bounds = scene.getLayoutBounds();
                    
     	boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
         boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());

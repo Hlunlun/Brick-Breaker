@@ -1,6 +1,8 @@
 package application;
 
 
+import java.util.Iterator;
+
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -118,7 +120,8 @@ public class FallingBricksController extends BBtan {
 	 	   y=circle.getLayoutY();
 	 	   
 	 	  if(event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
-	    		drawLine.play(); 
+	    		drawLine.play();            
+	            scene.getChildren().add(polyline);
 	    		timeline.stop();    
 	    		   		
 	    	}
@@ -130,7 +133,8 @@ public class FallingBricksController extends BBtan {
 	    		scene.getChildren().removeAll(polyline);
 	    		
 	    		drawLine.play();  	
-	    		
+	            
+	            scene.getChildren().add(polyline);
 	    		timeline.stop();   
 	    		
 	    		
@@ -179,8 +183,6 @@ public class FallingBricksController extends BBtan {
 
 			x += 300 * deltaX;
 			y += 300 * deltaY;
-
-			scene.getChildren().add(polyline);
 
 		}
 	}));
@@ -244,9 +246,18 @@ public class FallingBricksController extends BBtan {
         scene.getChildren().removeAll(bricks);
         scene.getChildren().removeAll(bombs);
         
-        bricks.clear();
-        bombs.clear();
-		
+        //reference
+        //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
+        //use iterator to clear arraylist instead of arrylist.clear()
+        Iterator<Brick> br = bricks.iterator();        
+        while (br.hasNext()) {           
+        	br.remove();              
+        }
+        Iterator<Bomb>bo = bombs.iterator(); 
+        while (bo.hasNext()) {           
+        	bo.remove();              
+        }
+        
 		scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
 		scene.removeEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);
 		scene.removeEventFilter(MouseEvent.MOUSE_RELEASED, eventHandler);

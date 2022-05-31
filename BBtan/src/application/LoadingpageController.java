@@ -39,11 +39,8 @@ public class LoadingpageController implements Initializable{
 				new SceneController().switchScene(scene, Mode.Menu.getPath());
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 		}
 	}));
 		
@@ -59,14 +56,7 @@ public class LoadingpageController implements Initializable{
 		KeyFrame frame = new KeyFrame(Duration.seconds(2), startKeyValue, endKeyValue);
 		Timeline taskTimeline = new Timeline(frame);
 		taskTimeline.playFromStart();
-		/*
-		SceneController sceneController = new SceneController();
-		try {
-			sceneController.switchScene("Menu.fxml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
+		
 		goMenuLine.play();
     }
 	
