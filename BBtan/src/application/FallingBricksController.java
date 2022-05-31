@@ -238,7 +238,8 @@ public class FallingBricksController extends BBtan {
 
 		timeline.stop();
 		checkGameOver.stop();
-
+		drawLine.stop();
+		
 		deltaX = 0;
 		deltaY = -1;
 

@@ -144,10 +144,7 @@ public abstract class BBtan implements Initializable {
 
 	}));
 
-	public void muteButtonAction(ActionEvent event) {
-
-	}
-	
+		
 	public void pauseButtonAction(ActionEvent event) throws IOException {
 		
 		timeline.stop();
@@ -360,6 +357,8 @@ public abstract class BBtan implements Initializable {
 
 			if (Mode.mode.equals(Mode.FallingBricks)) {
 				
+				ballCountAnimation(brick.getLayoutX()+brick.getWidth() / 2, brick.getLayoutY(),BallCount);
+				
 				Integer count=Integer.parseInt(brick.getText());
 							
 				count = count - BallCount;
@@ -468,6 +467,17 @@ public abstract class BBtan implements Initializable {
     	Explosion explosion=new Explosion();
         scene.getChildren().add(explosion.getExplosionGroup());
         explosion.startExplode(x,y);
+    }
+    
+  
+    private void ballCountAnimation(double x,double y,Integer num){
+    	
+    	BallCount ballCount=new BallCount(num);
+    	ballCount.setLayoutX(x);
+    	ballCount.setLayoutY(y);
+        scene.getChildren().add(ballCount);
+        ballCount.parallelAnimation();
+        
     }
     
     

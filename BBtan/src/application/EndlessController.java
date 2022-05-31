@@ -49,9 +49,7 @@ public class EndlessController extends BBtan{
     private double x;
     private double y;
 	
-	//circle will go up and down while waiting for the user to start the game
-    private TranslateTransition translateTransition=new TranslateTransition();
-    	
+	
     //MouseEvent : Pressed, Dragged, Released
     EventHandler<MouseEvent>eventHandler=new EventHandler<MouseEvent>(){
     	@Override
@@ -191,14 +189,7 @@ public class EndlessController extends BBtan{
         
         drawLine.setCycleCount(Animation.INDEFINITE);   
         checkGameOver.setCycleCount(Animation.INDEFINITE); 
-        
-        translateTransition.setNode(circle);
-        translateTransition.setDuration(Duration.millis(300));
-        translateTransition.setFromY(scene.getLayoutBounds().getMaxY());
-        translateTransition.setToY(scene.getLayoutBounds().getMaxY()-50);;
-        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
-        translateTransition.setAutoReverse(true);
-        //translateTransition.play();
+                
         
     }
 
@@ -215,9 +206,7 @@ public class EndlessController extends BBtan{
      	text6.setVisible(false);
      	text7.setVisible(false);
     	
-        drawLine.stop();
-        translateTransition.stop();   
-        
+        drawLine.stop();      
                 
         scene.addEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);
@@ -244,6 +233,7 @@ public class EndlessController extends BBtan{
     	
     	timeline.stop();    
     	checkGameOver.stop();
+    	drawLine.stop();
         
         deltaX = 0;
         deltaY = -1;

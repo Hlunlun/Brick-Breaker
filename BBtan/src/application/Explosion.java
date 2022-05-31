@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -132,7 +133,7 @@ public class Explosion{
 	
 	private void Reset() {
 		
-		fragments.clear();	
+	    fragments.clear();
 		group.getChildren().clear();
 		
 	}

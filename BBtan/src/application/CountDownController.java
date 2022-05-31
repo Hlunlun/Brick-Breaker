@@ -74,7 +74,7 @@ public class CountDownController extends BBtan {
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
 			
-			if(timeline.getStatus().equals(Status.STOPPED)||bricks.isEmpty()) {
+			if(bricks.isEmpty()) {
             	paddleTimeline.stop();
             }
             else {
