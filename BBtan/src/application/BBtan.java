@@ -311,7 +311,7 @@ public abstract class BBtan implements Initializable {
 			for (double j = width; j > 0; j = j - intervalOfBricksWidth) {
 				if (random.nextInt(2) == 1) {
 					createBricks(j, i);
-				} else if (random.nextInt(100) == 1) {
+				} else if (random.nextInt(50) == 1) {
 					if (Mode.mode != Mode.Simple && Mode.mode != Mode.CountDown)
 						createBombs(j, i);
 				}
@@ -393,6 +393,8 @@ public abstract class BBtan implements Initializable {
 	public boolean checkCollisionBomb(Bomb bomb) {
 
 		if (circle.getBoundsInParent().intersects(bomb.getBoundsInParent())) {
+			
+			audioManager.playMusic(Music.boom);
 
 			for (int i = 0; i < bricks.size(); i++) {
 				if (bricks.get(i).getLayoutY() == bomb.getLayoutY() - bomb.getRadius()) {
