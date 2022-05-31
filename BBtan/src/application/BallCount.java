@@ -57,10 +57,10 @@ public class BallCount extends Label{
 	
 	private TranslateTransition up() {
 		
-	    TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(3),this);
-	    translateTransition.setToY(getLayoutY()-300);
+	    TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(3));
+	    translateTransition.setToY(getLayoutY()-600);
         translateTransition.setAutoReverse(false);
-                
+        translateTransition.play();   
         return translateTransition;
 	}
 	
