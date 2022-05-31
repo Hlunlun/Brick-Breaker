@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 
 public class GameoverController {
 	
+	private AudioManager audioManager = new AudioManager();
+	
 	@FXML
 	private Label score;
 	
@@ -22,14 +24,14 @@ public class GameoverController {
 	
    @FXML
     private void again(ActionEvent event) throws IOException {
+	   audioManager.playMusic(Music.click);
 	   sceneController.switchScene(event,Mode.mode.getPath());
     }
 
     @FXML
     private void goMenu(ActionEvent event) throws IOException {    	
-    	
+    	audioManager.playMusic(Music.click);
     	sceneController.switchScene(event,Mode.Menu.getPath());
-
     }
     
     public void setScore(String text) {

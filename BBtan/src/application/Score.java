@@ -33,7 +33,7 @@ public class Score extends Label {
 		setLayoutX(posX);
 		setLayoutY(posY);
 		
-		setStyle("-fx-background-color: 00FFFFFF");
+		setStyle("-fx-background-color: transparent");
 		
 		Font font = Font.font("Impact", FontWeight.NORMAL, FontPosture.REGULAR, 20);
 		setFont(font);

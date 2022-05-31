@@ -172,6 +172,9 @@ public class CountDownController extends BBtan {
 			{
 				paddle.setWidth(paddle.getWidth() - (0.1 * paddle.getWidth()));	
 			}
+			if(bottomBorder&&!(rightBorder||leftBorder)) {         
+	             circle.setLayoutY(paddle.getLayoutY()-circle.getRadius()-10);
+	         }
 		}
 	}
 
