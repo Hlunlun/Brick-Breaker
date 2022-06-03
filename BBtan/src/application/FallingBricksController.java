@@ -2,6 +2,7 @@ package application;
 
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
@@ -252,11 +253,18 @@ public class FallingBricksController extends BBtan {
         //use iterator to clear arraylist instead of arrylist.clear()
         Iterator<Brick> br = bricks.iterator();        
         while (br.hasNext()) {           
-        	br.remove();              
+        	try {
+         	   br.next();
+        	} catch (NoSuchElementException expected) {
+        	}             
         }
+                
         Iterator<Bomb>bo = bombs.iterator(); 
         while (bo.hasNext()) {           
-        	bo.remove();              
+            try {
+          	   bo.next();
+             } catch (NoSuchElementException expected) {
+             }              
         }
         
 		scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);

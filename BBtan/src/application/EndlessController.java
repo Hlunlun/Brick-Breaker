@@ -2,12 +2,12 @@ package application;
 
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -242,17 +242,28 @@ public class EndlessController extends BBtan{
         scene.getChildren().removeAll(bricks);
         scene.getChildren().removeAll(bombs);
         
+        scene.getChildren().removeIf(node->node.getClass().getName().equals("javafx.scene.Group"));
+        
         //reference
         //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
         //use iterator to clear arraylist instead of arrylist.clear()
         Iterator<Brick> br = bricks.iterator();        
         while (br.hasNext()) {           
-        	br.remove();              
+        	try {
+         	   br.next();
+        	} catch (NoSuchElementException expected) {
+        	}             
         }
+        
+        
         Iterator<Bomb>bo = bombs.iterator(); 
         while (bo.hasNext()) {           
-        	bo.remove();              
+            try {
+          	   bo.next();
+             } catch (NoSuchElementException expected) {
+             }              
         }
+
         
         scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
         scene.removeEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);

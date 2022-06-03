@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -439,7 +438,8 @@ public abstract class BBtan implements Initializable {
 	private void checkGameOver(Brick brick){	
 
 		if(brick.getLayoutY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
-    		
+			Reset();
+			
     		FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Gameover.getPath()));
 			try {
 				Parent root = loader.load();
@@ -459,7 +459,7 @@ public abstract class BBtan implements Initializable {
 			gameoverController.setScore(score.getScore());			
 			Stage stage = (Stage)scene.getScene().getWindow();
 			stage.close();
-    		Reset();
+    		
     	}
     }
     
