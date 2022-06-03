@@ -137,7 +137,7 @@ public abstract class BBtan implements Initializable {
 		@Override
 		public void handle(ActionEvent arg0) {
 
-			bricks.forEach(brick -> checkGameOver(brick));
+			checkGameover();
 
 		}
 
@@ -435,9 +435,18 @@ public abstract class BBtan implements Initializable {
 	}
 
 	// check if the bricks collide with the bottomZone
-	private void checkGameOver(Brick brick){	
-
+	
+	private void checkGameover() {
+		
+		for(int i=0;i<bricks.size();i++) {
+			if(checkBrickHeight(bricks.get(i)))break;
+		}
+	}
+	private boolean checkBrickHeight(Brick brick){	
+		
+		
 		if(brick.getLayoutY()>=bottomZone.getLayoutY()-brick.getHeight()-10) {
+			
 			Reset();
 			
     		FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Gameover.getPath()));
@@ -459,8 +468,12 @@ public abstract class BBtan implements Initializable {
 			gameoverController.setScore(score.getScore());			
 			Stage stage = (Stage)scene.getScene().getWindow();
 			stage.close();
+			
+			return true;
     		
     	}
+		
+		return false;
     }
     
     //Once the circle collide with the brick, distribute fragments

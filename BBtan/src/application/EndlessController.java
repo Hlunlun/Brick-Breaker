@@ -2,7 +2,6 @@ package application;
 
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
@@ -248,20 +247,12 @@ public class EndlessController extends BBtan{
         //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
         //use iterator to clear arraylist instead of arrylist.clear()
         Iterator<Brick> br = bricks.iterator();        
-        while (br.hasNext()) {           
-        	try {
-         	   br.next();
-        	} catch (NoSuchElementException expected) {
-        	}             
-        }
-        
-        
+        while (br.hasNext()) {  
+        	br.next();
+        }         
         Iterator<Bomb>bo = bombs.iterator(); 
-        while (bo.hasNext()) {           
-            try {
-          	   bo.next();
-             } catch (NoSuchElementException expected) {
-             }              
+        while (bo.hasNext()) {  
+        	bo.next(); 
         }
 
         
