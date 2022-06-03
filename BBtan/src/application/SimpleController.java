@@ -3,7 +3,6 @@ package application;
 
 
 import javafx.animation.Animation;
-import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -48,7 +47,7 @@ public class SimpleController extends BBtan{
         	movePaddle();
             checkCollisionPaddle(paddle);
             
-            if(bricks.isEmpty()) {
+            if(bricks.isEmpty()||pauseBtn.isPressed()||Mode.mode.equals(Mode.Win)) {
             	paddleTimeline.stop();
             }
             else {
@@ -63,6 +62,10 @@ public class SimpleController extends BBtan{
     //initialize the timeline, paddleTimeline, mode:Simple
     @Override
 	public void initialize() {
+    	
+    	deltaX = 1;
+        deltaY = -1;    	
+    	
     	paddleTimeline.stop();
     	
     	pauseBtn.setVisible(false);
@@ -136,11 +139,11 @@ public class SimpleController extends BBtan{
     //check if the circle collide with the bottomZone
     @Override
     public void checkCollisionBottomZone(){
-        if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())&&circle.getLayoutY()>paddle.getLayoutY()){
+        if(circle.getBoundsInParent().intersects(bottomZone.getBoundsInParent())){
             
         	timeline.stop();
-            paddleTimeline.stop();
-            
+            paddleTimeline.stop();            
+                  
             bricks.forEach(brick -> scene.getChildren().remove(brick));
             
             Reset();

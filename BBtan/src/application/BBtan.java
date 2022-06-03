@@ -59,7 +59,7 @@ public abstract class BBtan implements Initializable {
 	// control the audio
 	private AudioManager audioManager = new AudioManager();
 
-	// control the direction of the circle
+	// control the direction of the circles
 	public double deltaX = 0;
 	public double deltaY = -1;
 	
@@ -192,7 +192,7 @@ public abstract class BBtan implements Initializable {
 	        	audioManager.playMusic(Music.click);
 	        	scene.setDisable(false);
 	        	if(Mode.mode.equals(Mode.Simple))timeline.play();
-	        	if(Mode.mode.equals(Mode.Endless)||Mode.mode.equals(Mode.FallingBricks)) {
+	        	if(Mode.mode.equals(Mode.Endless)||Mode.mode.equals(Mode.Times)) {
 	        		if(circle.getLayoutY()!=bottomZone.getLayoutY()-circle.getRadius()-2)timeline.play();
 	        	}
 				stage.close();
@@ -223,7 +223,7 @@ public abstract class BBtan implements Initializable {
 	public void startGameButtonAction(ActionEvent event) {
 
 		score.Reset();
-		if (Mode.mode.equals(Mode.FallingBricks)) {
+		if (Mode.mode.equals(Mode.Times)) {
 			
 			scene.getChildren().add(score);
 			ArrangeFallingBricks();
@@ -348,13 +348,13 @@ public abstract class BBtan implements Initializable {
 				deltaY *= -1;
 			}
 
-			audioManager.playMusic(Music.brickDestroy);
+			new AudioManager().playMusic(Music.brickDestroy);
 			
 			if (Mode.mode.equals(Mode.Simple)) {
 				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
 			}
 
-			if (Mode.mode.equals(Mode.FallingBricks)) {
+			if (Mode.mode.equals(Mode.Times)) {
 				
 				ballCountAnimation(brick.getLayoutX()+brick.getWidth() / 2, brick.getLayoutY(),BallCount);
 				
@@ -392,7 +392,7 @@ public abstract class BBtan implements Initializable {
 
 		if (circle.getBoundsInParent().intersects(bomb.getBoundsInParent())) {
 			
-			audioManager.playMusic(Music.boom);
+			new AudioManager().playMusic(Music.boom);
 
 			for (int i = 0; i < bricks.size(); i++) {
 				if (bricks.get(i).getLayoutY() == bomb.getLayoutY() - bomb.getRadius()) {
@@ -531,7 +531,7 @@ public abstract class BBtan implements Initializable {
             
             circle.setLayoutY(bottomZone.getLayoutY()-circle.getRadius()-2);  
             
-            if(Mode.mode.equals(Mode.FallingBricks)) {
+            if(Mode.mode.equals(Mode.Times)) {
             	FallingBricksDown();
             	BallCount++;
             	System.out.println("BallCount: "+BallCount);
@@ -539,8 +539,7 @@ public abstract class BBtan implements Initializable {
             	bricksBombsDown();
             }
             
-       }
-        
+       }     
         
         
 		
