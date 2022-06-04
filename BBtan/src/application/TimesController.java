@@ -7,6 +7,7 @@ import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,41 +17,54 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class EndlessController extends BBtan{
+public class TimesController extends BBtan {
 	
 	private AudioManager audioManager = new AudioManager();
 	
 	//game rule
 	@FXML
 	private Text text1;
-	
+		
 	@FXML
 	private Text text2;
-	
+		
 	@FXML
 	private Text text3;
-	
+		
 	@FXML
 	private Text text4;
-	
+		
 	@FXML
 	private Text text5;
-	
+		
 	@FXML
 	private Text text6;
-	
+		
 	@FXML
 	private Text text7;
 	
-	//the line to point to target
+	@FXML
+	private Text text8;
+	
+	@FXML
+	private Text text9;
+	
+	@FXML
+	private Text text10;
+
+	// the line to point to target
 	private Polyline polyline = new Polyline();
-	
-    private double x;
-    private double y;
-	
-	
-    //MouseEvent : Pressed, Dragged, Released
-    EventHandler<MouseEvent>eventHandler=new EventHandler<MouseEvent>(){
+
+	private double x;
+	private double y;
+
+
+
+	// circle will go up and down while waiting for the user to start the game
+	private TranslateTransition translateTransition = new TranslateTransition();
+
+	// MouseEvent : Pressed, Dragged, Released
+	EventHandler<MouseEvent>eventHandler=new EventHandler<MouseEvent>(){
     	@Override
     	public void handle(MouseEvent event) {
     		
@@ -153,51 +167,55 @@ public class EndlessController extends BBtan{
     		
     	}
     }
-    
-    //draw the sight line
-    Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
-           	
-    	@Override
-        public void handle(ActionEvent actionEvent) {    
-    		
-    		//refer to 
-    		//https://stackoverflow.com/questions/36589770/customize-the-stroke-of-a-javafx-polyline
-    		polyline.setStroke(Color.ROYALBLUE);
-    		polyline.setStrokeWidth(3);
-    	    polyline.getStrokeDashArray().add(10d);
-    		polyline.getPoints().addAll(x,y);    		
-            
-    		x+=1000*deltaX;
-            y+=1000*deltaY;   
-            
-            
-            //reference
-            //https://stackoverflow.com/questions/36406408/exception-in-thread-javafx-application-thread-duplicate-children-added
-            
-        }
-    }));
-    
-    
-	   
-    //initialize the timeline, checkGameOver, mode: SightLine
-    @Override
-    public void initialize() {
-    	
-    	pauseBtn.setVisible(false);
-    	
-    	Mode.mode=Mode.Endless;
-        
-        drawLine.setCycleCount(Animation.INDEFINITE);   
-        checkGameOver.setCycleCount(Animation.INDEFINITE); 
-                
-        
-    }
 
-    
-    //set the scene of the game and called in startGameButtonAction
-    public void startGame(){
-    	audioManager.playMusic(Music.startgame);
-    	//game rule disappear
+	// draw the sight line
+	Timeline drawLine = new Timeline(new KeyFrame(Duration.ONE, new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent actionEvent) {
+
+			// refer to
+			// https://stackoverflow.com/questions/36589770/customize-the-stroke-of-a-javafx-polyline
+			polyline.setStroke(Color.SEAGREEN);
+			polyline.setStrokeWidth(3);
+			polyline.getStrokeDashArray().add(10d);
+			polyline.getPoints().addAll(x, y);
+
+			x += 300 * deltaX;
+			y += 300 * deltaY;
+
+		}
+	}));
+
+	// initialize the timeline, checkGameOver, mode: SightLine
+	@Override
+	public void initialize() {
+		
+		deltaX = 0;
+		deltaY = -1;
+		
+		pauseBtn.setVisible(false);
+
+		Mode.mode = Mode.Times;
+
+		drawLine.setCycleCount(Animation.INDEFINITE);
+		checkGameOver.setCycleCount(Animation.INDEFINITE);
+
+		translateTransition.setNode(circle);
+		translateTransition.setDuration(Duration.millis(300));
+		translateTransition.setFromY(scene.getLayoutBounds().getMaxY());
+		translateTransition.setToY(scene.getLayoutBounds().getMaxY() - 50);
+		translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+		translateTransition.setAutoReverse(true);
+		// translateTransition.play();
+
+	}
+
+	// set the scene of the game and called in startGameButtonAction
+	public void startGame() {
+		
+		audioManager.playMusic(Music.startgame);
+		//game rule disappear
     	text1.setVisible(false);
      	text2.setVisible(false);
      	text3.setVisible(false);
@@ -205,22 +223,54 @@ public class EndlessController extends BBtan{
      	text5.setVisible(false);
      	text6.setVisible(false);
      	text7.setVisible(false);
-    	
-        drawLine.stop();      
-                
-        scene.addEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
-        scene.addEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);
-        scene.addEventFilter(MouseEvent.MOUSE_RELEASED,eventHandler);        
+     	text8.setVisible(false);
+     	text9.setVisible(false);
+     	text10.setVisible(false);
+
+		drawLine.stop();
+		translateTransition.stop();
+
+		scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
+		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);
+		scene.addEventFilter(MouseEvent.MOUSE_RELEASED, eventHandler);
+
+	}
+
+	// after game over, reset the game
+	@Override
+	public void Reset() {
+
+		timeline.stop();
+		checkGameOver.stop();
+		drawLine.stop();
+		
+		deltaX = 0;
+		deltaY = -1;
+
+
+        scene.getChildren().removeAll(bricks);
+        scene.getChildren().removeAll(bombs);
         
-    }
-  
-    //after game over, reset the game
-    @Override
-    public void Reset(){
-    	
-    	startBtn.setVisible(true);
-        menuBtn.setVisible(true);
-        pauseBtn.setVisible(false);
+        //reference
+        //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
+        //use iterator to clear arraylist instead of arrylist.clear()
+        Iterator<Brick> br = bricks.iterator();        
+        while (br.hasNext()) {  
+        	br.next();
+        }        
+        
+        Iterator<Bomb>bo = bombs.iterator(); 
+        while (bo.hasNext()) {    
+        	bo.next(); 
+        }
+        
+		scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
+		scene.removeEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);
+		scene.removeEventFilter(MouseEvent.MOUSE_RELEASED, eventHandler);
+
+		startBtn.setVisible(true);
+		menuBtn.setVisible(true);
+		pauseBtn.setVisible(false);
         
         //game rule appear
         text1.setVisible(true);
@@ -230,41 +280,9 @@ public class EndlessController extends BBtan{
         text5.setVisible(true);
         text6.setVisible(true);
         text7.setVisible(true);
-    	
-    	timeline.stop();    
-    	checkGameOver.stop();
-    	drawLine.stop();
-        
-        deltaX = 0;
-        deltaY = -1;
-       
-        
-        scene.getChildren().removeAll(bricks);
-        scene.getChildren().removeAll(bombs);
-        
-        scene.getChildren().removeIf(node->node.getClass().getName().equals("javafx.scene.Group"));
-        
-        //reference
-        //https://stackoverflow.com/questions/37104215/error-exception-in-thread-javafx-application-thread
-        //use iterator to clear arraylist instead of arrylist.clear()
-        Iterator<Brick> br = bricks.iterator();        
-        while (br.hasNext()) {  
-        	br.next();
-        }         
-        Iterator<Bomb>bo = bombs.iterator(); 
-        while (bo.hasNext()) {  
-        	bo.next(); 
-        }
+        text8.setVisible(true);
+        text9.setVisible(true);
+        text10.setVisible(true);
+	}
 
-        
-        scene.removeEventFilter(MouseEvent.MOUSE_DRAGGED,eventHandler);
-        scene.removeEventFilter(MouseEvent.MOUSE_PRESSED,eventHandler);
-        scene.removeEventFilter(MouseEvent.MOUSE_RELEASED,eventHandler);
-                
-        startBtn.setVisible(true);        
-        menuBtn.setVisible(true);
-    	
-    }
-    
-    
 }

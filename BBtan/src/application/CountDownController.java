@@ -3,29 +3,18 @@ package application;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -76,7 +65,7 @@ public class CountDownController extends BBtan {
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
 			
-			if(bricks.isEmpty()) {
+			if(bricks.isEmpty()||pauseBtn.isPressed()) {
             	paddleTimeline.stop();
             }
             else {
@@ -206,17 +195,8 @@ public class CountDownController extends BBtan {
 	public void checkTimer() {
 		if(totalSec < 0)
 		{
-			timeline.stop();
-			bricks.forEach(brick -> scene.getChildren().remove(brick));
-			bricks.clear();
-			startBtn.setVisible(true);
 
-			paddle.setWidth(paddleStartSize);
-
-			deltaX = -1;
-			deltaY = -2;
-
-			
+			Reset();			
 			System.out.println("Game over!");				
 		}
 	}
@@ -225,7 +205,7 @@ public class CountDownController extends BBtan {
 		min = TimeUnit.SECONDS.toMinutes(totalSec);
 		sec = totalSec - (min*60);
 		totalSec--;
-		//System.out.println("min: "+format(min)+" sec: "+format(sec));
+		
 	}
 	private String format(long value)
 	{

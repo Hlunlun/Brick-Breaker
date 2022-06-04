@@ -1,15 +1,11 @@
 .root{
-	-fx-background-image: url("../Image/endless2.jpg");
+	-fx-background-image: url("../Image/fallingbrick2.jpg");
 	-fx-background-size: 620px 600px;
 	
 }
 
-.circle{
-	
-}
-
 .button{
-	-fx-background-color:#EB79DE;
+	-fx-background-color:#DB8131;
 	-fx-text-fill:'white';
 	-fx-background-radius: 40px;
 	-fx-cursor: hand;
@@ -19,7 +15,7 @@
 }
 
 .button: hover{
-	-fx-background-color: #ED4ADB;
+	-fx-background-color: #E95923;
 	-fx-opacity: 1;
 }
 
@@ -35,14 +31,11 @@
 	-fx-font-size: 21px;
 }
 
-#text2, #text3, #text4, #text5, #text6{
+#text2, #text3, #text4, #text5, #text6, #text7, #text8, #text10{
 	-fx-font-weight: bold;
-	-fx-font-size: 24px;
+	-fx-font-size: 22px;
 	-fx-font-family: "Comic Sans MS";
 }
-
-
-
 
 
 

@@ -25,7 +25,7 @@ public class MenuController implements Initializable {
 	private Button countDownBtn;
 	
 	@FXML
-	private Button fallingBtn;
+	private Button timesBtn;
 	
 	@FXML
 	private Label topic;
@@ -62,10 +62,10 @@ public class MenuController implements Initializable {
 		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.CountDown.getPath());
 	}
-	public void fallingBricksMode(ActionEvent event) throws IOException {
+	public void timesMode(ActionEvent event) throws IOException {
 		
 		audioManager.playMusic(Music.click);
-		sceneController.switchScene(event, Mode.FallingBricks.getPath());
+		sceneController.switchScene(event, Mode.Times.getPath());
 	}
 
 	public void backToHome(ActionEvent event) throws IOException {
