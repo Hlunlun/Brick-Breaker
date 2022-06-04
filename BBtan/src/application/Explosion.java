@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Explosion{
 	
-	private static final int CNT=100;
+	private final int CNT=100;
 	private ArrayList<Rectangle>fragments=new ArrayList<>();
 	private final double[]ang=new double[CNT];
 	private final long[] start=new long[CNT];
