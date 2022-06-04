@@ -5,6 +5,7 @@ package application;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Animation.Status;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,9 +47,12 @@ public class SimpleController extends BBtan{
         @Override
         public void handle(ActionEvent actionEvent) {
             
+        	if(timeline.getStatus().equals(Status.STOPPED))paddleTimeline.stop();
+        	
+        	
         	movePaddle();
             checkCollisionPaddle(paddle);
-                                 
+                          
             
         }
     }));
@@ -150,6 +154,10 @@ public class SimpleController extends BBtan{
 	@Override
 	public void Reset() {
 		
+		timeline.stop();
+		paddleTimeline.stop();
+		paddle.setWidth(paddleStartSize);
+		
 		bricks.clear();
 		
         startBtn.setVisible(true);
@@ -161,9 +169,6 @@ public class SimpleController extends BBtan{
         text3.setVisible(true);
         text4.setVisible(true);
         text5.setVisible(true);
-        
-        paddle.setWidth(paddleStartSize);
-        paddleTimeline.stop();
 
         deltaX = 1;
         deltaY = -1;

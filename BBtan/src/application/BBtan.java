@@ -107,10 +107,9 @@ public abstract class BBtan implements Initializable {
 			}else{            	
 				
 				if(Mode.mode.equals(Mode.Simple)||Mode.mode.equals(Mode.CountDown)) {
-					
-					timeline.stop();					
+									
+					Reset();
 					try {
-						
 						sceneController.switchScene(scene,Mode.Win.getPath());
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -146,7 +145,7 @@ public abstract class BBtan implements Initializable {
 		
 	public void pauseButtonAction(ActionEvent event) throws IOException {
 		
-		timeline.stop();
+		timeline.pause();
 		scene.setDisable(true);
 		
 		
@@ -543,9 +542,7 @@ public abstract class BBtan implements Initializable {
             	bricksBombsDown();
             }
             
-       }     
-        
-        
+       }    
 		
     }
 	   
