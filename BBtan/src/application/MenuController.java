@@ -1,17 +1,14 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-public class MenuController {
+public class MenuController{
 	
 	private AudioManager audioManager = new AudioManager();
 	
@@ -35,6 +32,7 @@ public class MenuController {
 	
 	
 	private SceneController sceneController=new SceneController();
+	
 	
 	public void simpleMode(ActionEvent event) throws IOException {
 		
@@ -64,4 +62,6 @@ public class MenuController {
 		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, Mode.Homepage.getPath());
 	}
+
+	
 }

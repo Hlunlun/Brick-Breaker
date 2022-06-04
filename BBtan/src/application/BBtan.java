@@ -163,6 +163,7 @@ public abstract class BBtan implements Initializable {
 		pauseController.menuBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
 	        
 	        if (pressed) {
+	        	Reset();
 	        	try {
 	        		audioManager.playMusic(Music.click);
 	        		scene.setDisable(false);
@@ -176,6 +177,7 @@ public abstract class BBtan implements Initializable {
 		pauseController.restartBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
 	        
 	        if (pressed) {
+	        	Reset();
 	        	try {
 	        		audioManager.playMusic(Music.click);
 	        		scene.setDisable(false);
@@ -188,7 +190,7 @@ public abstract class BBtan implements Initializable {
 	    });
 		pauseController.continueBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
 	        
-	        if (pressed) {
+	        if (pressed) {	        	
 	        	audioManager.playMusic(Music.click);
 	        	scene.setDisable(false);
 	        	if(Mode.mode.equals(Mode.Simple))timeline.play();

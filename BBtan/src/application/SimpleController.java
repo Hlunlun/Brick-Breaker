@@ -41,18 +41,14 @@ public class SimpleController extends BBtan{
 
     //1 Frame every 10 millisecond, which means 100 FPS
     Timeline paddleTimeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+    	
+    	
         @Override
         public void handle(ActionEvent actionEvent) {
             
         	movePaddle();
             checkCollisionPaddle(paddle);
-            
-            if(bricks.isEmpty()||Mode.mode.equals(Mode.Win)) {
-            	paddleTimeline.stop();
-            }
-            else {
-            	paddleTimeline.play();
-            }
+                                 
             
         }
     }));

@@ -63,12 +63,6 @@ public class CountDownController extends BBtan {
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
 			
-			if(bricks.isEmpty()||Mode.mode.equals(Mode.Win)) {
-            	paddleTimeline.stop();
-            }
-            else {
-            	paddleTimeline.play();
-            }
 		}
 	}));
 
