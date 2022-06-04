@@ -47,7 +47,7 @@ public class SimpleController extends BBtan{
         	movePaddle();
             checkCollisionPaddle(paddle);
             
-            if(bricks.isEmpty()||pauseBtn.isPressed()||Mode.mode.equals(Mode.Win)) {
+            if(bricks.isEmpty()||Mode.mode.equals(Mode.Win)) {
             	paddleTimeline.stop();
             }
             else {

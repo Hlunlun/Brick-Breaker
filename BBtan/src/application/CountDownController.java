@@ -21,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 public class CountDownController extends BBtan {
 	
-	private AudioManager audioManager = new AudioManager();
-	
 	//game rule
 	@FXML
 	private Text text1;
@@ -65,7 +63,7 @@ public class CountDownController extends BBtan {
 			checkTimer();
 			Showtime.setText(format(min)+":"+format(sec));
 			
-			if(bricks.isEmpty()||pauseBtn.isPressed()) {
+			if(bricks.isEmpty()||Mode.mode.equals(Mode.Win)) {
             	paddleTimeline.stop();
             }
             else {
@@ -82,7 +80,7 @@ public class CountDownController extends BBtan {
 		Mode.mode=Mode.CountDown;
 		
 		deltaX = -1;
-		deltaY = -2;
+		deltaY = -3;
 		
 		paddleTimeline.setCycleCount(Animation.INDEFINITE);
 		
@@ -91,7 +89,6 @@ public class CountDownController extends BBtan {
 
 	@Override
 	public void startGame() {
-		audioManager.playMusic(Music.startgame);
 		
 		pauseBtn.setVisible(false);
 		
@@ -192,8 +189,8 @@ public class CountDownController extends BBtan {
 	public void checkTimer() {
 		if(totalSec < 0)
 		{
-
-			Reset();			
+			Reset();
+			
 			System.out.println("Game over!");				
 		}
 	}
@@ -231,7 +228,7 @@ public class CountDownController extends BBtan {
 		paddle.setWidth(paddleStartSize);
 
 		deltaX = -1;
-		deltaY = -2;
+		deltaY = -3;
 		
 		circle.setLayoutX(scene.getLayoutBounds().getCenterX());
         circle.setLayoutY(paddle.getLayoutY()-circle.getRadius()-10);
