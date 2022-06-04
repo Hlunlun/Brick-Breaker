@@ -12,7 +12,6 @@ public enum Music {
 	startgame("src/audio/startgame.mp3"),
 	background("src/audio/BGM.mp3"),
 	boom("src/audio/boom.mp3");
-
 	
 	private String path;
 	

@@ -44,7 +44,4 @@ public class WinController implements Initializable{
     	sceneController.switchScene(event,Mode.Menu.getPath());
     }
 
-	
-	
-
 }

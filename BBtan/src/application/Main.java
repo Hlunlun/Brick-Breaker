@@ -32,26 +32,8 @@ public class Main extends Application {
 	
 	public static void main(String[] args){
 		
-		//https://www.796t.com/content/1542293253.html
-
-		launch(args);//
+		launch(args);		
 		
-		System.out.println("");
-		
-		
-	}
-	
-	@Override
-    public void init(){
-        System.out.println("");
-
-     }
-	@Override    
-    public void stop() throws Exception {
-		super.stop();
-
-		System.out.println("");
-
 	}
 }
 

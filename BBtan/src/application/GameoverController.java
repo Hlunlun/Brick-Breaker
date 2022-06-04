@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 
 public class GameoverController {
 	
-	private AudioManager audioManager = new AudioManager();
-	
 	@FXML
 	private Label score;
 	
@@ -21,6 +19,10 @@ public class GameoverController {
 	private Button againBtn;
 	
 	private SceneController sceneController=new SceneController();
+	
+
+	private AudioManager audioManager = new AudioManager();
+	
 	
    @FXML
     private void again(ActionEvent event) throws IOException {

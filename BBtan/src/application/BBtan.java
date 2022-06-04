@@ -424,6 +424,7 @@ public abstract class BBtan implements Initializable {
 	// reset the game after game over in derived class
 	public abstract void Reset();
 
+	
 	/// private class
 
 	// go back to menu
@@ -442,6 +443,7 @@ public abstract class BBtan implements Initializable {
 			if(checkBrickHeight(bricks.get(i)))break;
 		}
 	}
+	
 	private boolean checkBrickHeight(Brick brick){	
 		
 		
@@ -545,7 +547,7 @@ public abstract class BBtan implements Initializable {
 		
     }
 	   
-    //after circle go back to bottomZone, bricks fall down
+    //after circle go back to bottomZone, bricks and bombs fall down
     private void bricksBombsDown() {
     	
     	

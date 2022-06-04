@@ -12,8 +12,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
-public class BallCount extends Label{
-	
+public class BallCount extends Label{	
 	
 	private ParallelTransition parTransition=new ParallelTransition();
 	

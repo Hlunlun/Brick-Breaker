@@ -45,7 +45,4 @@ public class Flash extends Rectangle{
 		
 	}
 
-
-	
-
 }

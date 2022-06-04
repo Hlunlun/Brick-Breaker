@@ -168,11 +168,7 @@ public class EndlessController extends BBtan{
     		polyline.getPoints().addAll(x,y);    		
             
     		x+=1000*deltaX;
-            y+=1000*deltaY;   
-            
-            
-            //reference
-            //https://stackoverflow.com/questions/36406408/exception-in-thread-javafx-application-thread-duplicate-children-added
+            y+=1000*deltaY;               
             
         }
     }));
@@ -188,8 +184,7 @@ public class EndlessController extends BBtan{
     	Mode.mode=Mode.Endless;
         
         drawLine.setCycleCount(Animation.INDEFINITE);   
-        checkGameOver.setCycleCount(Animation.INDEFINITE); 
-                
+        checkGameOver.setCycleCount(Animation.INDEFINITE);                 
         
     }
 

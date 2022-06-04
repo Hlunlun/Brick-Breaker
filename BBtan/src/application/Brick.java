@@ -29,11 +29,9 @@ public class Brick extends Label{
 		setBorder(border);
 		
 		setPrefHeight(40);
-		setPrefWidth(40);
-		
+		setPrefWidth(40);		
 
 		setStyle("-fx-background-color: transparent");
-
         
 	}
 	
@@ -42,12 +40,10 @@ public class Brick extends Label{
 		BorderStroke borderStroke = new BorderStroke(Color.hsb(random.nextInt(360), 0.8, 1), BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
                 new BorderWidths(borderWidth));
         Border border = new Border(borderStroke);
-		setBorder(border);
-		
+		setBorder(border);		
 		
 		setPrefHeight(40);
-		setPrefWidth(40);
-		
+		setPrefWidth(40);		
 
 		setStyle("-fx-background-color: transparent");
 

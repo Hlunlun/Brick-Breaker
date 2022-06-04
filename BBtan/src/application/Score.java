@@ -24,8 +24,7 @@ public class Score extends Label {
 		BorderStroke borderStroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  CornerRadii.EMPTY,
                 new BorderWidths(borderWidth));
         Border border = new Border(borderStroke);
-		setBorder(border);
-		
+		setBorder(border);		
 		
 		setPrefHeight(40);
 		setPrefWidth(100);

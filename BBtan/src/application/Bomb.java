@@ -7,12 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class Bomb extends Circle{
-	
+public class Bomb extends Circle{	
 	
 	private Random random=new Random();
-	
-	
 	
 	public Bomb() {	
 		
@@ -21,14 +18,12 @@ public class Bomb extends Circle{
 		Image rowBomb =new Image("file:src/Image/bomb/bomb.png");
 		
 		//bomb path
-		//https://www.codegrepper.com/code-examples/java/javafx+image+path
-		
+		//https://www.codegrepper.com/code-examples/java/javafx+image+path		
 		setRadius(20);
 		setStroke(Color.hsb(random.nextInt(360), 1, 0.9));
 		setStrokeWidth(4);
-		setFill(new ImagePattern(rowBomb));
-		
-        //setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKSEAGREEN));
+		setFill(new ImagePattern(rowBomb));		
+       
 	
 	}
 	

@@ -27,9 +27,7 @@ public class Explosion{
 	
 	private double opacity=1;
 	
-	private boolean stopExplosion=false;
-	
-	
+	private boolean stopExplosion=false;	
 	
     private void createFragments() {
 

@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 
-public class HomepageController implements Initializable{
+public class HomepageController{
 	
 	private AudioManager audioManager = new AudioManager();
 	
@@ -20,20 +20,12 @@ public class HomepageController implements Initializable{
 	@FXML
 	private Button startButton;
 	
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-	        
-	}
-
-	
 	private SceneController sceneController = new SceneController();
 	
 	public void intomenu(ActionEvent event) throws IOException {
 		
 		audioManager.playMusic(Music.click);
 		sceneController.switchScene(event, "Loadingpage.fxml");
-		//AudioClip buzzer = new AudioClip(getClass().getResource("../sound/click.mp3").toExternalForm());
-		//buzzer.play();
 	}
 	
 	

@@ -13,7 +13,6 @@ public enum Mode {
 	Pause("Pause.fxml"),
 	Win("Win.fxml"),
 	Gameover("Gameover.fxml");
-
 	
 	public static Mode mode;
 	

@@ -116,9 +116,6 @@ public class CountDownController extends BBtan {
 			@Override
 			public void run() {
 				Platform.runLater(()->{
-						//Showtime.setText("min: "+format(min)+" sec: "+format(sec));
-						//Showtime.setText(format(min)+":"+format(sec));
-						//System.out.println("After 1 sec");
 						convertTime();
 						if(totalSec < 0)
 						{

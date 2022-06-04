@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-public class MenuController implements Initializable {
+public class MenuController {
 	
 	private AudioManager audioManager = new AudioManager();
 	
@@ -33,15 +33,6 @@ public class MenuController implements Initializable {
 	@FXML
 	private AnchorPane scene;
 	
-	
-	
-	//	private TranslateTransition translate=new TranslateTransition();
-	
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-	    
-	        
-	}
 	
 	private SceneController sceneController=new SceneController();
 	

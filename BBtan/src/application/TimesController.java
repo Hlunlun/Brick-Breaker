@@ -283,6 +283,7 @@ public class TimesController extends BBtan {
         text8.setVisible(true);
         text9.setVisible(true);
         text10.setVisible(true);
+        
 	}
 
 }

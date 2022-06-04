@@ -181,13 +181,3 @@ public class SimpleController extends BBtan{
    
 
 }
-
-
-//timeline
-//https://vimsky.com/zh-tw/examples/detail/java-class-javafx.animation.Timeline.html
-
-
-
-
-
-
