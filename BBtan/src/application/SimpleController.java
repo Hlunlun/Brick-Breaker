@@ -154,9 +154,10 @@ public class SimpleController extends BBtan{
 	@Override
 	public void Reset() {
 		
-		timeline.stop();
+		
 		paddleTimeline.stop();
 		paddle.setWidth(paddleStartSize);
+		timeline.stop();
 		
 		bricks.clear();
 		

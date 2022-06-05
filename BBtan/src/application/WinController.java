@@ -1,16 +1,13 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class WinController implements Initializable{
+public class WinController {
 	
 	private AudioManager audioManager = new AudioManager();
 	
@@ -25,12 +22,6 @@ public class WinController implements Initializable{
 	
 	private SceneController sceneController=new SceneController();
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		Mode.mode=Mode.Win;
-		
-	}
 	
    @FXML
     private void again(ActionEvent event) throws IOException {

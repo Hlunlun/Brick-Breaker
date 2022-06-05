@@ -109,11 +109,25 @@ public abstract class BBtan implements Initializable {
 				if(Mode.mode.equals(Mode.Simple)||Mode.mode.equals(Mode.CountDown)) {
 									
 					Reset();
+					
+					FXMLLoader loader=new FXMLLoader(getClass().getResource(Mode.Win.getPath()));
 					try {
-						sceneController.switchScene(scene,Mode.Win.getPath());
+						Parent root = loader.load();
+						Scene win=new Scene(root);
+						Stage stage=new Stage();
+						Image iconImage = new Image("file:src/Image/icon-PhotoRoom.png");
+						stage.getIcons().add(iconImage);
+						stage.setResizable(false);
+						stage.setTitle("BRICK BREAKER");
+						stage.setScene(win);
+						stage.show();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}				
+							
+					Stage stage = (Stage)scene.getScene().getWindow();
+					stage.close();
+									
 					
 					
 				}				
@@ -352,7 +366,7 @@ public abstract class BBtan implements Initializable {
 			new AudioManager().playMusic(Music.brickDestroy);
 			
 			if (Mode.mode.equals(Mode.Simple)) {
-				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
+				//paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
 			}
 
 			if (Mode.mode.equals(Mode.Times)) {
