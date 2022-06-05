@@ -366,7 +366,7 @@ public abstract class BBtan implements Initializable {
 			new AudioManager().playMusic(Music.brickDestroy);
 			
 			if (Mode.mode.equals(Mode.Simple)) {
-				//paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
+				paddle.setWidth(paddle.getWidth() - (0.10 * paddle.getWidth()));
 			}
 
 			if (Mode.mode.equals(Mode.Times)) {
